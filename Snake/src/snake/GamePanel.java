@@ -92,14 +92,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
 @Override
 public void run() {
-
     long beforeTime, timeDiff, sleep;
-
     beforeTime = System.currentTimeMillis();
 
     while (inGame) {
-    	
-    	fruit.checkFruit(snake);
+//    	fruit.checkFruit(snake);
+    	collision.checkFruitCollision(fruit, snake);
     	if(!collision.checkCollision(snake)) {
     		inGame = false;
     	}
@@ -116,13 +114,10 @@ public void run() {
         try {
             Thread.sleep(sleep);
         } catch (InterruptedException e) {
-            
             String msg = String.format("Thread interrupted: %s", e.getMessage());
-            
             JOptionPane.showMessageDialog(this, msg, "Error", 
                     JOptionPane.ERROR_MESSAGE);
             }
-
         	beforeTime = System.currentTimeMillis();
         }
     }

@@ -1,5 +1,7 @@
 package snake;
 
+import java.awt.Rectangle;
+
 public class Collision {
 	
 	public Collision() {
@@ -44,6 +46,14 @@ public class Collision {
         return true;
     }
 	
-//	public check
+	public void checkFruitCollision(FruitSprite fruit, SnakeSprite snake) {
+		Rectangle fruitArea = fruit.getBounds();
+		Rectangle snakeArea = snake.getBounds();
+		
+		if(snakeArea.intersects(fruitArea)) {
+			snake.setBodySize(1);
+			fruit.generateFruit();
+		}
+	}
 
 }
