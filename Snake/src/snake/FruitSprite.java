@@ -39,14 +39,14 @@ public class FruitSprite {
 //        POS_Y = r;
     }
     
-//    public void checkFruit(SnakeSprite snake) {
-//        if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
-//
-////          dots++;
-//      	snake.setBodySize(1);
-//      	generateFruit();
-//      }
-//    }
+    public void checkFruit(SnakeSprite snake) {
+        if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
+
+//          dots++;
+      	snake.setBodySize(1);
+      	generateFruit();
+      }
+    }
     
     public Image getFruitImage() {
     	return fruit_image;

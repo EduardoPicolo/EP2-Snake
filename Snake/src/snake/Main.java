@@ -1,5 +1,6 @@
 package snake;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
@@ -9,15 +10,12 @@ public class Main extends JFrame {
 	public static final int SCREEN_HEIGHT = 300;
 	
 	public Main() {
-//		GamePanel gamePanel = new GamePanel();
-		
 		setTitle("Snake");
-//		setContentPane(gamePanel);
+		setPreferredSize(new Dimension(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT));
 		add(new GamePanel());
 		setResizable(false);
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//		setPreferredSize(new Dimension(GamePanel.WIDTH, GamePanel.HEIGHT));
 		setLocationRelativeTo(null);
 		
 	}
@@ -26,7 +24,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFrame frame = new Main();
+					Main frame = new Main();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

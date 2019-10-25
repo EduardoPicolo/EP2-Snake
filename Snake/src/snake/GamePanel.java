@@ -14,12 +14,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
-	
-	SnakeSprite snake;
-	FruitSprite fruit;
-	Collision collision;
-
     private final int DELAY = 100;
+    
+	private SnakeSprite snake;
+	private FruitSprite fruit;
 
     private boolean inGame = true;
 
@@ -33,20 +31,21 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	inGame = true;
     	snake = new SnakeSprite();
     	fruit = new FruitSprite();
-    	collision = new Collision();
     	addKeyListener(this);
         setBackground(Color.black);
         setFocusable(true);
         setPreferredSize(new Dimension(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT));
+    	animator = new Thread(this);
+    	animator.start();
     }
     
-    @Override
-    public void addNotify() {
-        super.addNotify();
-
-        animator = new Thread(this);
-        animator.start();
-    }
+//    @Override
+//    public void addNotify() {
+//        super.addNotify();
+//
+//        animator = new Thread(this);
+//        animator.start();
+//    }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -54,28 +53,25 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         
         if(inGame)
         	doDrawing(g);
-        else
+        else {
         	gameOver(g);
+        	initGame();
+        }
+        
     }
     
     private void doDrawing(Graphics g) {
-        
-        if (inGame) {
-            g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
-            
-            for (int z = 0; z < snake.getBodySize(); z++) {
-                if (z == 0) {
-                    g.drawImage(snake.getSnakeHead_Image(), snake.getPOS_X()[z], snake.getPOS_Y()[z], this);
-                } else {
-                    g.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[z], snake.getPOS_Y()[z], this);
-                }
-            }
-
-            Toolkit.getDefaultToolkit().sync();
-
-        } else {
-            gameOver(g);
-        }        
+	    g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+	    
+	    for (int i = 0; i < snake.getBodySize(); i++) {
+	        if (i == 0) {
+	            g.drawImage(snake.getSnakeHead_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
+	        } else {
+	            g.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
+	        }
+	    }
+	
+	    Toolkit.getDefaultToolkit().sync(); 
     }
 
     private void gameOver(Graphics g) {
@@ -87,45 +83,44 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (Main.SCREEN_WIDTH - metr.stringWidth(msg)) / 2, Main.SCREEN_HEIGHT / 2);
-        animator.interrupt();
+        animator.stop();
     }
 
-@Override
-public void run() {
-    long beforeTime, timeDiff, sleep;
-    beforeTime = System.currentTimeMillis();
-
-    while (inGame) {
-//    	fruit.checkFruit(snake);
-    	collision.checkFruitCollision(fruit, snake);
-    	if(!collision.checkCollision(snake)) {
-    		inGame = false;
-    	}
-    	snake.move();
-        repaint();
-
-        timeDiff = System.currentTimeMillis() - beforeTime;
-        sleep = DELAY - timeDiff;
-
-        if (sleep < 0) {
-            sleep = 2;
+	@Override
+	public void run() {
+	    long beforeTime, timeDiff, sleep;
+	
+	    while (inGame) {
+	    	beforeTime = System.currentTimeMillis();
+	    	snake.move();
+	    	fruit.checkFruit(snake);
+	    	if(!snake.checkCollision()) {
+	    		inGame = false;
+	    	}
+	        repaint();
+	
+	        timeDiff = System.currentTimeMillis() - beforeTime;
+	        sleep = DELAY - timeDiff;
+	
+	        if (sleep < 0) {
+	            sleep = 2;
+	        }
+	
+	        try {
+	            Thread.sleep(sleep);
+	        } catch (InterruptedException e) {
+	            String msg = String.format("Thread interrupted: %s", e.getMessage());
+	            JOptionPane.showMessageDialog(this, msg, "Error", 
+	                    JOptionPane.ERROR_MESSAGE);
+            	}
+//        	beforeTime = System.currentTimeMillis();
         }
+	}
 
-        try {
-            Thread.sleep(sleep);
-        } catch (InterruptedException e) {
-            String msg = String.format("Thread interrupted: %s", e.getMessage());
-            JOptionPane.showMessageDialog(this, msg, "Error", 
-                    JOptionPane.ERROR_MESSAGE);
-            }
-        	beforeTime = System.currentTimeMillis();
-        }
-    }
-
-@Override
-public void keyPressed(KeyEvent e) {
-	snake.setDirection(e);
-}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		snake.setDirection(e);
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -136,7 +131,6 @@ public void keyPressed(KeyEvent e) {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 }
 

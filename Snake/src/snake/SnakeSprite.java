@@ -9,11 +9,10 @@ import javax.swing.ImageIcon;
 public class SnakeSprite {
     protected final int POS_X[] = new int[Main.SCREEN_WIDTH*Main.SCREEN_HEIGHT];
     protected final int POS_Y[] = new int[Main.SCREEN_WIDTH*Main.SCREEN_HEIGHT];
-//    private final int SNAKE_IMAGE_BODY_SIZE = 10; //10px
     
     protected int body_size;
     protected boolean leftDirection = false;
-    protected boolean rightDirection = true;
+    protected boolean rightDirection = false;
     protected boolean upDirection = false;
     protected boolean downDirection = false;
     
@@ -28,8 +27,9 @@ public class SnakeSprite {
     	body_size = 3;
         for (int position = 0; position < body_size; position++) {
             POS_X[position] = 50 - position * 10;
-            POS_Y[position] = 50;
+            POS_Y[position] = Main.SCREEN_HEIGHT/2;
         }
+        rightDirection = true;
     }
     
     protected void loadImages() {
@@ -47,21 +47,44 @@ public class SnakeSprite {
             POS_Y[position] = POS_Y[(position - 1)];
         }
 
-        if (leftDirection) {
+        if(leftDirection) {
             POS_X[0] -= snake_image_width;
         }
 
-        if (rightDirection) {
+        else if(rightDirection) {
             POS_X[0] += snake_image_width;
         }
 
-        if (upDirection) {
+        else if(upDirection) {
             POS_Y[0] -= snake_image_height;
         }
 
-        if (downDirection) {
+        else if(downDirection) {
             POS_Y[0] += snake_image_height;
         }
+    }
+    
+    public boolean checkCollision() {
+    	for (int i = body_size; i > 0; i--) {
+            if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
+            	return false;
+            }
+        }
+
+        if (POS_Y[0] >= Main.SCREEN_HEIGHT) {
+        	return false;
+        }
+        else if (POS_Y[0] < 0) {
+        	return false;
+        }
+        else if (POS_X[0] >= Main.SCREEN_WIDTH) {
+        	return false;
+        }
+        else if (POS_X[0] < 0) {
+        	return false;
+        }
+        
+        return true;
     }
     
     public void setDirection(KeyEvent e) {
@@ -71,33 +94,34 @@ public class SnakeSprite {
             leftDirection = true;
             upDirection = false;
             downDirection = false;
-            
+            rightDirection = false;
         }
 
         if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
             rightDirection = true;
             upDirection = false;
             downDirection = false;
+            leftDirection = false;
         }
 
         if ((key == KeyEvent.VK_UP) && (!downDirection)) {
             upDirection = true;
             rightDirection = false;
             leftDirection = false;
+            downDirection = false;
         }
 
         if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
             downDirection = true;
             rightDirection = false;
             leftDirection = false;
+            upDirection = false;
         }
     }
     
 	public void setImageDimension() {
 		snake_image_width = snake_head_image.getWidth(null);
 		snake_image_height = snake_head_image.getHeight(null);
-//		snake_body_width = snake_body_image.getWidth(null);
-//		snake_body_height = snake_body_image.getHeight(null);
 	}
     
     public Image getSnakeHead_Image() {
@@ -122,7 +146,6 @@ public class SnakeSprite {
     public int[] getPOS_Y() {
     	return POS_Y;
     }
-    
     
     public Rectangle getBounds() {
     	return new Rectangle(POS_X[0], POS_Y[0], snake_image_width, snake_image_height);
