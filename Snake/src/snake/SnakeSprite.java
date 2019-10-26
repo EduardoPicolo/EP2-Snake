@@ -135,8 +135,8 @@ public class SnakeSprite {
     public int getBodySize() {
     	return body_size;
     }
-    public void setBodySize(int value) {
-    	body_size += value;
+    public void updateBodySize() {
+    	body_size += 1;
     }
     
     public int[] getPOS_X() {

@@ -32,18 +32,15 @@ public class FruitSprite {
     public void generateFruit() {
         int r = (int) (Math.random() * 29);
         POS_X = ((r * 10));
-//        POS_X = r;
 
         r = (int) (Math.random() * 29);
         POS_Y = ((r * 10));
-//        POS_Y = r;
     }
     
     public void checkFruit(SnakeSprite snake) {
         if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
 
-//          dots++;
-      	snake.setBodySize(1);
+      	snake.updateBodySize();
       	generateFruit();
       }
     }

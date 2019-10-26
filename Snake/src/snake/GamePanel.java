@@ -29,7 +29,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     private void initGame() {
     	inGame = true;
-    	snake = new SnakeSprite();
+//    	snake = new SnakeSprite();
+    	snake = new KittySnake();
     	fruit = new FruitSprite();
     	addKeyListener(this);
         setBackground(Color.black);
