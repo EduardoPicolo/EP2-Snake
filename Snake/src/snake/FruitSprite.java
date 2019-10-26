@@ -30,19 +30,26 @@ public class FruitSprite {
 	}
 	
     public void generateFruit() {
-        int r = (int) (Math.random() * 29);
-        POS_X = ((r * 10));
+        int randomNumber = (int)(Math.random() * (GamePanel.PLAYABLE_AREA_WIDTH - fruit_image_width));
+        randomNumber = randomNumber - (randomNumber % fruit_image_width);
+        POS_X = randomNumber;
 
-        r = (int) (Math.random() * 29);
-        POS_Y = ((r * 10));
+        randomNumber = (int)(Math.random() * (GamePanel.PLAYABLE_AREA_HEIGHT - fruit_image_height));
+        randomNumber = randomNumber - (randomNumber % fruit_image_height);
+        POS_Y = randomNumber;
     }
     
     public void checkFruit(SnakeSprite snake) {
-        if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
-
-      	snake.updateBodySize();
-      	generateFruit();
-      }
+//        if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
+//
+//      	snake.updateBodySize();
+//      	generateFruit();
+//      	}
+    	Rectangle r1 = snake.getBounds();
+        if (r1.intersects(this.getBounds())) {
+          	snake.updateBodySize();
+          	generateFruit();
+        }	
     }
     
     public Image getFruitImage() {

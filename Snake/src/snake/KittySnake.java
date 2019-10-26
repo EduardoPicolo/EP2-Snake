@@ -24,17 +24,17 @@ public class KittySnake extends SnakeSprite {
             }
         }
 
-        if (POS_Y[0] >= Main.SCREEN_HEIGHT) {
+        if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
         	POS_Y[0] = 0;
         }
         else if (POS_Y[0] < 0) {
-        	POS_Y[0] = Main.SCREEN_HEIGHT-(snake_image_height);
+        	POS_Y[0] = GamePanel.PLAYABLE_AREA_HEIGHT-(snake_image_height);
         }
-        else if (POS_X[0] >= Main.SCREEN_WIDTH) {
+        else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
         	POS_X[0] = 0;
         }
         else if (POS_X[0] < 0) {
-        	POS_X[0] = Main.SCREEN_WIDTH-(snake_image_width);
+        	POS_X[0] = GamePanel.PLAYABLE_AREA_WIDTH-(snake_image_width);
         }
         
         return true;

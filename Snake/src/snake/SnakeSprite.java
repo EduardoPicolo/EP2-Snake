@@ -27,7 +27,7 @@ public class SnakeSprite {
     	body_size = 3;
         for (int position = 0; position < body_size; position++) {
             POS_X[position] = 50 - position * 10;
-            POS_Y[position] = Main.SCREEN_HEIGHT/2;
+            POS_Y[position] = GamePanel.PLAYABLE_AREA_WIDTH/2;
         }
         rightDirection = true;
     }
@@ -71,13 +71,13 @@ public class SnakeSprite {
             }
         }
 
-        if (POS_Y[0] >= Main.SCREEN_HEIGHT) {
+        if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
         	return false;
         }
         else if (POS_Y[0] < 0) {
         	return false;
         }
-        else if (POS_X[0] >= Main.SCREEN_WIDTH) {
+        else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
         	return false;
         }
         else if (POS_X[0] < 0) {

@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
+	public static final int PLAYABLE_AREA_WIDTH = 300;
+	public static final int PLAYABLE_AREA_HEIGHT = 300;
+	
     private final int DELAY = 100;
     
 	private SnakeSprite snake;
@@ -33,9 +36,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	snake = new KittySnake();
     	fruit = new FruitSprite();
     	addKeyListener(this);
-        setBackground(Color.black);
+        setBackground(Color.DARK_GRAY);
         setFocusable(true);
-        setPreferredSize(new Dimension(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT));
+        requestFocus();
+        setPreferredSize(new Dimension(PLAYABLE_AREA_WIDTH, PLAYABLE_AREA_HEIGHT));
     	animator = new Thread(this);
     	animator.start();
     }
@@ -83,7 +87,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(msg, (Main.SCREEN_WIDTH - metr.stringWidth(msg)) / 2, Main.SCREEN_HEIGHT / 2);
+        g.drawString(msg, (PLAYABLE_AREA_WIDTH - metr.stringWidth(msg)) / 2, PLAYABLE_AREA_WIDTH / 2);
         animator.stop();
     }
 
@@ -92,7 +96,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    long beforeTime, timeDiff, sleep;
 	
 	    while (inGame) {
-	    	beforeTime = System.currentTimeMillis();
+//	    	beforeTime = System.currentTimeMillis();
+	    	beforeTime = System.nanoTime();
 	    	snake.move();
 	    	fruit.checkFruit(snake);
 	    	if(!snake.checkCollision()) {
@@ -100,8 +105,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    	}
 	        repaint();
 	
-	        timeDiff = System.currentTimeMillis() - beforeTime;
-	        sleep = DELAY - timeDiff;
+//	        timeDiff = System.currentTimeMillis() - beforeTime;
+	        timeDiff = System.nanoTime() - beforeTime;
+	        sleep = DELAY - timeDiff / 1000000;
 	
 	        if (sleep < 0) {
 	            sleep = 2;
