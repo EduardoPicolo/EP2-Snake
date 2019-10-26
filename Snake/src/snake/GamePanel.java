@@ -28,8 +28,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private FruitSprite fruit;
 	private JLabel scoreLabel;
 
-    private boolean inGame = true;
-    private int score;
+    private static boolean inGame = true;
+    private static int score;
     private Thread animator;
 
     public GamePanel() {
@@ -55,6 +55,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	snake = new SnakeSprite();
 //    	snake = new KittySnake();
     	fruit = new FruitSprite();
+//    	fruit = new BombFruit();
         
     	animator = new Thread(this);
     	animator.start();
@@ -76,7 +77,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         	doDrawing(g);
         else {
         	gameOver(g);
-        	initGame();
+//        	initGame();
         }
     }
     
@@ -103,7 +104,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (PLAYABLE_AREA_WIDTH - metr.stringWidth(msg)) / 2, PLAYABLE_AREA_WIDTH / 2);
-        animator.stop();
     }
 
 	@Override
@@ -112,13 +112,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	    while (inGame) {
 	    	beforeTime = System.nanoTime();
+	    	
 	    	snake.move();
-	    	if(fruit.checkFruit(snake)) {
-	    		score += 1;
-	    	}
-	    	if(!snake.checkCollision()) {
-	    		inGame = false;
-	    	}
+	    	snake.checkFruitCollision(fruit);
+	    	snake.checkCollision();
+
 	        repaint();
 	
 	        timeDiff = System.nanoTime() - beforeTime;
@@ -152,6 +150,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+	}
+	
+	public static void setScore(int value) {
+		score += value;
+	}
+	
+	public static void setInGame(boolean value) {
+		inGame = value;
 	}
 }
 

@@ -8,19 +8,19 @@ public class KittySnake extends SnakeSprite {
 	}
 	
 	@Override
-	protected void loadImages() {
+    protected void loadImages() {
         ImageIcon iid = new ImageIcon("dot.png");
         snake_body_image = iid.getImage();
 
         ImageIcon iih = new ImageIcon("head.png");
         snake_head_image = iih.getImage();
-	}
-	
+    }
+		
 	@Override
-	public boolean checkCollision() {
+	public void checkCollision() {
     	for (int i = body_size; i > 0; i--) {
             if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
-            	return false;
+            	return;
             }
         }
 
@@ -37,6 +37,5 @@ public class KittySnake extends SnakeSprite {
         	POS_X[0] = GamePanel.PLAYABLE_AREA_WIDTH-(snake_image_width);
         }
         
-        return true;
     }
 }

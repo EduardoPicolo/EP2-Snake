@@ -11,6 +11,7 @@ public class SnakeSprite {
     protected final int POS_Y[] = new int[Main.SCREEN_WIDTH*Main.SCREEN_HEIGHT];
     
     protected int body_size;
+    protected int score_multiplier;
     protected boolean leftDirection = false;
     protected boolean rightDirection = false;
     protected boolean upDirection = false;
@@ -25,7 +26,8 @@ public class SnakeSprite {
     	loadImages();
     	setImageDimension();
     	body_size = 3;
-        for (int position = 0; position < body_size; position++) {
+    	score_multiplier = 1;
+        for (int position = 0; position < this.body_size; position++) {
             POS_X[position] = 50 - position * 10;
             POS_Y[position] = GamePanel.PLAYABLE_AREA_WIDTH/2;
         }
@@ -64,28 +66,51 @@ public class SnakeSprite {
         }
     }
         
-    public boolean checkCollision() {
+    public void checkCollision() {
     	for (int i = body_size; i > 0; i--) {
             if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
-            	return false;
+//            	return false;
+            	GamePanel.setInGame(false);
+            	return;
             }
         }
     	
-
         if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
-        	return false;
+//        	return false;
+        	GamePanel.setInGame(false);
+        	return;
         }
         else if (POS_Y[0] < 0) {
-        	return false;
+//        	return false;
+        	GamePanel.setInGame(false);
+        	return;
         }
         else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
-        	return false;
+//        	return false;
+        	GamePanel.setInGame(false);
+        	return;
         }
         else if (POS_X[0] < 0) {
-        	return false;
+//        	return false;
+        	GamePanel.setInGame(false);
+        	return;
         }
-        
-        return true;
+//        return true;
+    }
+    
+    public void checkFruitCollision(FruitSprite fruit) {
+    	Rectangle fruit_area = fruit.getBounds();
+        if (fruit_area.intersects(this.getBounds())) {
+        	if(fruit.getScoreValue() == 0) {
+        		GamePanel.setInGame(false);
+        		return;
+        	}
+        	else {
+          	updateBodySize();
+          	GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
+          	fruit.generateFruit();
+        	}
+        }
     }
     
     public void setDirection(KeyEvent e) {

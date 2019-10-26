@@ -8,18 +8,20 @@ import javax.swing.ImageIcon;
 public class FruitSprite {
 	protected int POS_X;
 	protected int POS_Y;
+	protected int scoreValue;
 	
 	protected Image fruit_image;
 	protected int fruit_image_width;
 	protected int fruit_image_height;
 	
 	public FruitSprite() {
-		loadImages();
+		scoreValue = 1;
+		loadImage();
 		setDimension();
 		generateFruit();
 	}
 	
-	protected void loadImages() {
+	protected void loadImage() {
         ImageIcon iia = new ImageIcon("apple.png");
         fruit_image = iia.getImage();
 	}
@@ -39,14 +41,18 @@ public class FruitSprite {
         POS_Y = randomNumber;
     }
     
-    public boolean checkFruit(SnakeSprite snake) {
-    	Rectangle r1 = snake.getBounds();
-        if (r1.intersects(this.getBounds())) {
-          	snake.updateBodySize();
-          	generateFruit();
-          	return true;
-        }	
-        return false;
+//    public boolean checkFruit(SnakeSprite snake) {
+//    	Rectangle r1 = snake.getBounds();
+//        if (r1.intersects(this.getBounds())) {
+//          	snake.updateBodySize();
+//          	generateFruit();
+//          	return true;
+//        }	
+//        return false;
+//    }
+    
+    public int getScoreValue() {
+    	return scoreValue;
     }
     
     public Image getFruitImage() {
