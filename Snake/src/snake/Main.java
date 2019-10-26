@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 @SuppressWarnings("serial")
 public class Main extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
-	public static final int SCREEN_HEIGHT = 350;
+	public static final int SCREEN_HEIGHT = 300;
 	
 	public Main() {
 		setTitle("Snake");

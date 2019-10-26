@@ -63,13 +63,14 @@ public class SnakeSprite {
             POS_Y[0] += snake_image_height;
         }
     }
-    
+        
     public boolean checkCollision() {
     	for (int i = body_size; i > 0; i--) {
             if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
             	return false;
             }
         }
+    	
 
         if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
         	return false;

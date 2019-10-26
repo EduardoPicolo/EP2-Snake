@@ -39,17 +39,14 @@ public class FruitSprite {
         POS_Y = randomNumber;
     }
     
-    public void checkFruit(SnakeSprite snake) {
-//        if ((snake.getPOS_X()[0] == POS_X) && (snake.getPOS_Y()[0] == POS_Y)) {
-//
-//      	snake.updateBodySize();
-//      	generateFruit();
-//      	}
+    public boolean checkFruit(SnakeSprite snake) {
     	Rectangle r1 = snake.getBounds();
         if (r1.intersects(this.getBounds())) {
           	snake.updateBodySize();
           	generateFruit();
+          	return true;
         }	
+        return false;
     }
     
     public Image getFruitImage() {

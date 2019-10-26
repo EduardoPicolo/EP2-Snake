@@ -5,12 +5,17 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.border.TitledBorder;
+import java.awt.FlowLayout;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -21,25 +26,36 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     
 	private SnakeSprite snake;
 	private FruitSprite fruit;
+	private JLabel scoreLabel;
 
     private boolean inGame = true;
-
+    private int score;
     private Thread animator;
 
     public GamePanel() {
+    	addKeyListener(this);
+        setBackground(Color.BLACK);
+        setFocusable(true);
+        requestFocus();
+        setPreferredSize(new Dimension(PLAYABLE_AREA_WIDTH, PLAYABLE_AREA_HEIGHT));
+        setLayout(null);
+        
+        scoreLabel = new JLabel("Score: "+score);
+        scoreLabel.setBounds(12, 12, 55, 15);
+        scoreLabel.setForeground(Color.WHITE);
+        scoreLabel.setFont(new Font("Dialog", Font.BOLD, 12));
+        add(scoreLabel);
+        
         initGame();
     }
 
     private void initGame() {
     	inGame = true;
-//    	snake = new SnakeSprite();
-    	snake = new KittySnake();
+    	score = 0;
+    	snake = new SnakeSprite();
+//    	snake = new KittySnake();
     	fruit = new FruitSprite();
-    	addKeyListener(this);
-        setBackground(Color.DARK_GRAY);
-        setFocusable(true);
-        requestFocus();
-        setPreferredSize(new Dimension(PLAYABLE_AREA_WIDTH, PLAYABLE_AREA_HEIGHT));
+        
     	animator = new Thread(this);
     	animator.start();
     }
@@ -62,7 +78,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         	gameOver(g);
         	initGame();
         }
-        
     }
     
     private void doDrawing(Graphics g) {
@@ -75,7 +90,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	            g.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
 	        }
 	    }
-	
+	    scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }
 
@@ -96,16 +111,16 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    long beforeTime, timeDiff, sleep;
 	
 	    while (inGame) {
-//	    	beforeTime = System.currentTimeMillis();
 	    	beforeTime = System.nanoTime();
 	    	snake.move();
-	    	fruit.checkFruit(snake);
+	    	if(fruit.checkFruit(snake)) {
+	    		score += 1;
+	    	}
 	    	if(!snake.checkCollision()) {
 	    		inGame = false;
 	    	}
 	        repaint();
 	
-//	        timeDiff = System.currentTimeMillis() - beforeTime;
 	        timeDiff = System.nanoTime() - beforeTime;
 	        sleep = DELAY - timeDiff / 1000000;
 	
@@ -120,7 +135,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	            JOptionPane.showMessageDialog(this, msg, "Error", 
 	                    JOptionPane.ERROR_MESSAGE);
             	}
-//        	beforeTime = System.currentTimeMillis();
         }
 	}
 
