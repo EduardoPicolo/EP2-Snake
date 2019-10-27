@@ -3,6 +3,7 @@ package snake;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -28,9 +29,9 @@ public class SnakeSprite {
     	setImageDimension();
     	body_size = 3;
     	score_multiplier = 1;
-        for (int position = 0; position < this.body_size; position++) {
-            POS_X[position] = 50 - position * 10;
-            POS_Y[position] = GamePanel.PLAYABLE_AREA_WIDTH/2;
+        for (int i = 0; i < this.body_size; i++) {
+            POS_X[i] = 50 - i * 10;
+            POS_Y[i] = GamePanel.PLAYABLE_AREA_WIDTH/2;
         }
         rightDirection = true;
     }
@@ -68,12 +69,12 @@ public class SnakeSprite {
     }
         
     public void checkCollision() {
-    	for (int i = body_size; i > 0; i--) {
-            if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
-            	GamePanel.setInGame(false);
-            	return;
-            }
-        }
+    	for(int i=1 ; i<this.getBounds().size() ;i++) {
+    		if(this.getBounds().get(i).intersects(this.getBounds().get(0))) {
+				GamePanel.setInGame(false);
+				return;
+			}    		
+    	}
     	
         if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
         	GamePanel.setInGame(false);
@@ -96,24 +97,12 @@ public class SnakeSprite {
     public void checkFruitCollision(List<FruitSprite> fruits) {
     	for(int i=0; i<fruits.size() ; i++) {
     		Rectangle fruit_area = fruits.get(i).getBounds();
-    		if (this.getBounds().intersects(fruit_area)) {
+    		if (this.getBounds().get(0).intersects(fruit_area)) {
     			updateBodySize();
     			GamePanel.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
-//    			fruit.updateLocation();
     			fruits.remove(i);
     		}
     	}
-//ConcurrentModificationException!!!
-//    	for(FruitSprite fruit : fruits) {
-//    		Rectangle fruit_area = fruit.getBounds();
-//    		if (this.getBounds().intersects(fruit_area)) {
-//    			updateBodySize();
-//    			GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
-////    			fruit.updateLocation();
-//    			fruits.remove(fruit);
-////    			FruitSpawner.removeFruit(fruit);
-//    		}
-//    	}
     }
     
     public void setDirection(KeyEvent e) {
@@ -176,8 +165,13 @@ public class SnakeSprite {
     	return POS_Y;
     }
     
-    public Rectangle getBounds() {
-    	return new Rectangle(POS_X[0], POS_Y[0], snake_image_width, snake_image_height);
+    public List<Rectangle> getBounds() {
+    	List<Rectangle> snake_bounds;
+    	snake_bounds = new ArrayList<>();
+    	for(int i=0; i<body_size; i++){
+    		snake_bounds.add(new Rectangle(POS_X[i], POS_Y[i], snake_image_width, snake_image_height));
+    	}
+    	return snake_bounds;
     }
 
 }

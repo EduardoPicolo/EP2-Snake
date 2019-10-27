@@ -2,6 +2,7 @@ package snake;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
@@ -32,13 +33,12 @@ public class FruitSprite {
 	}
 	
     public void updateLocation() {
-        int randomNumber = (int)(Math.random() * (GamePanel.PLAYABLE_AREA_WIDTH - fruit_image_width));
-        randomNumber = randomNumber - (randomNumber % fruit_image_width);
-        POS_X = randomNumber;
-
-        randomNumber = (int)(Math.random() * (GamePanel.PLAYABLE_AREA_HEIGHT - fruit_image_height));
-        randomNumber = randomNumber - (randomNumber % fruit_image_height);
-        POS_Y = randomNumber;
+    	Random randomInt = new Random();
+    	POS_X = randomInt.nextInt(GamePanel.PLAYABLE_AREA_WIDTH-fruit_image_width);
+    	POS_Y = randomInt.nextInt(GamePanel.PLAYABLE_AREA_HEIGHT-fruit_image_height);
+    	
+    	POS_X = POS_X - (POS_X % fruit_image_width);
+    	POS_Y = POS_Y - (POS_Y % fruit_image_height);
     }
         
     public int getScoreValue() {

@@ -67,15 +67,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	new Thread(fruitSpawner).start();
     }
     
-//Start thread when GamePanel is added to Main Frame.
-//    @Override
-//    public void addNotify() {
-//        super.addNotify();
-//
-//        animator = new Thread(this);
-//        animator.start();
-//    }
-
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -157,6 +148,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
+	}
+	
+	public SnakeSprite getSnake() {
+		return snake;
 	}
 	
 	public static void setScore(int value) {
