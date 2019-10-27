@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -21,16 +23,18 @@ import javax.swing.SwingConstants;
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int PLAYABLE_AREA_WIDTH = 300;
 	public static final int PLAYABLE_AREA_HEIGHT = 300;
-	
+	private static boolean inGame = true;
     private final int DELAY = 100;
     
 	private SnakeSprite snake;
-	private FruitSprite fruit;
+//	private FruitSprite fruit;
+	
+	private List<FruitSprite> fruits;
 	private JLabel scoreLabel;
 
-    private static boolean inGame = true;
     private static int score;
     private Thread animator;
+//    private Thread fruitSpawn;
 
     public GamePanel() {
     	addKeyListener(this);
@@ -53,14 +57,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	inGame = true;
     	score = 0;
     	snake = new SnakeSprite();
+    	fruits = new ArrayList<>();
+    	for(int i=0; i<2; i++) {
+    		fruits.add(new FruitSprite());
+    	}
 //    	snake = new KittySnake();
-    	fruit = new FruitSprite();
+//    	fruit = new FruitSprite();
 //    	fruit = new BombFruit();
         
     	animator = new Thread(this);
     	animator.start();
     }
     
+//Start thread when GamePanel is added to Main Frame.
 //    @Override
 //    public void addNotify() {
 //        super.addNotify();
@@ -77,12 +86,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         	doDrawing(g);
         else {
         	gameOver(g);
-//        	initGame();
         }
     }
     
     private void doDrawing(Graphics g) {
-	    g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+//	    g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+    	for (FruitSprite fruit : fruits) {
+    		g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+    	}
 	    
 	    for (int i = 0; i < snake.getBodySize(); i++) {
 	        if (i == 0) {
@@ -114,16 +125,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    	beforeTime = System.nanoTime();
 	    	
 	    	snake.move();
-	    	snake.checkFruitCollision(fruit);
+//	    	snake.checkFruitCollision(fruit);
+	    	snake.checkFruitCollision(fruits);
 	    	snake.checkCollision();
 
 	        repaint();
 	
 	        timeDiff = System.nanoTime() - beforeTime;
-	        sleep = DELAY - timeDiff / 1000000;
+	        sleep = DELAY - timeDiff;
 	
 	        if (sleep < 0) {
-	            sleep = 2;
+	            sleep = 100;
 	        }
 	
 	        try {

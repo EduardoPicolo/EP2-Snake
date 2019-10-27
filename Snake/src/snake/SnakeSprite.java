@@ -3,6 +3,7 @@ package snake;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
@@ -98,19 +99,29 @@ public class SnakeSprite {
 //        return true;
     }
     
-    public void checkFruitCollision(FruitSprite fruit) {
-    	Rectangle fruit_area = fruit.getBounds();
-        if (fruit_area.intersects(this.getBounds())) {
-        	if(fruit.getScoreValue() == 0) {
-        		GamePanel.setInGame(false);
-        		return;
-        	}
-        	else {
-          	updateBodySize();
-          	GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
-          	fruit.generateFruit();
-        	}
-        }
+//    public void checkFruitCollision(FruitSprite fruit) {
+//    	Rectangle fruit_area = fruit.getBounds();
+//        if (fruit_area.intersects(this.getBounds())) {
+//        	if(fruit.getScoreValue() == 0) {
+//        		GamePanel.setInGame(false);
+//        		return;
+//        	}
+//        	else {
+//          	updateBodySize();
+//          	GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
+//          	fruit.generateFruit();
+//        	}
+//        }
+//    }
+    public void checkFruitCollision(List<FruitSprite> fruits) {
+    	for(FruitSprite fruit : fruits) {
+    		Rectangle fruit_area = fruit.getBounds();
+    		if (this.getBounds().intersects(fruit_area)) {
+    			updateBodySize();
+    			GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
+    			fruit.generateFruit();
+    		}
+    	}
     }
     
     public void setDirection(KeyEvent e) {
