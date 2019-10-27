@@ -44,7 +44,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setLayout(null);
         
         scoreLabel = new JLabel("Score: "+score);
-        scoreLabel.setBounds(12, 12, 55, 15);
+        scoreLabel.setBounds(12, 12, 100, 15);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Dialog", Font.BOLD, 12));
         add(scoreLabel);
