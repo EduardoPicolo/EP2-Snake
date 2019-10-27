@@ -23,18 +23,17 @@ import javax.swing.SwingConstants;
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int PLAYABLE_AREA_WIDTH = 300;
 	public static final int PLAYABLE_AREA_HEIGHT = 300;
-	private static boolean inGame = true;
+	private static boolean inGame;
     private final int DELAY = 100;
     
 	private SnakeSprite snake;
-//	private FruitSprite fruit;
+	private static List<FruitSprite> fruits;
 	
-	private List<FruitSprite> fruits;
+	private static int score;
 	private JLabel scoreLabel;
 
-    private static int score;
     private Thread animator;
-//    private Thread fruitSpawn;
+    private FruitSpawner fruitSpawner;
 
     public GamePanel() {
     	addKeyListener(this);
@@ -58,15 +57,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	score = 0;
     	snake = new SnakeSprite();
     	fruits = new ArrayList<>();
-    	for(int i=0; i<2; i++) {
-    		fruits.add(new FruitSprite());
-    	}
+    	animator = new Thread(this);
+    	fruitSpawner = new FruitSpawner();
 //    	snake = new KittySnake();
 //    	fruit = new FruitSprite();
 //    	fruit = new BombFruit();
         
-    	animator = new Thread(this);
     	animator.start();
+    	new Thread(fruitSpawner).start();
     }
     
 //Start thread when GamePanel is added to Main Frame.
@@ -90,7 +88,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
     
     private void doDrawing(Graphics g) {
-//	    g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
     	for (FruitSprite fruit : fruits) {
     		g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
     	}
@@ -107,7 +104,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     private void gameOver(Graphics g) {
-        
         String msg = "Game Over";
         Font small = new Font("Helvetica", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
@@ -125,7 +121,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    	beforeTime = System.nanoTime();
 	    	
 	    	snake.move();
-//	    	snake.checkFruitCollision(fruit);
 	    	snake.checkFruitCollision(fruits);
 	    	snake.checkCollision();
 
@@ -170,6 +165,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	public static void setInGame(boolean value) {
 		inGame = value;
+	}
+	public static boolean getInGame() {
+		return inGame;
+	}
+	
+	public static void setFruits(List<FruitSprite> fruitList) {
+		fruits = fruitList;
 	}
 }
 

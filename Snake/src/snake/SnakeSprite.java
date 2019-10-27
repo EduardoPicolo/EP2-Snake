@@ -70,58 +70,50 @@ public class SnakeSprite {
     public void checkCollision() {
     	for (int i = body_size; i > 0; i--) {
             if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
-//            	return false;
             	GamePanel.setInGame(false);
             	return;
             }
         }
     	
         if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
-//        	return false;
         	GamePanel.setInGame(false);
         	return;
         }
         else if (POS_Y[0] < 0) {
-//        	return false;
         	GamePanel.setInGame(false);
         	return;
         }
         else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
-//        	return false;
         	GamePanel.setInGame(false);
         	return;
         }
         else if (POS_X[0] < 0) {
-//        	return false;
         	GamePanel.setInGame(false);
         	return;
         }
-//        return true;
     }
     
-//    public void checkFruitCollision(FruitSprite fruit) {
-//    	Rectangle fruit_area = fruit.getBounds();
-//        if (fruit_area.intersects(this.getBounds())) {
-//        	if(fruit.getScoreValue() == 0) {
-//        		GamePanel.setInGame(false);
-//        		return;
-//        	}
-//        	else {
-//          	updateBodySize();
-//          	GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
-//          	fruit.generateFruit();
-//        	}
-//        }
-//    }
     public void checkFruitCollision(List<FruitSprite> fruits) {
-    	for(FruitSprite fruit : fruits) {
-    		Rectangle fruit_area = fruit.getBounds();
+    	for(int i=0; i<fruits.size() ; i++) {
+    		Rectangle fruit_area = fruits.get(i).getBounds();
     		if (this.getBounds().intersects(fruit_area)) {
     			updateBodySize();
-    			GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
-    			fruit.generateFruit();
+    			GamePanel.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
+//    			fruit.updateLocation();
+    			fruits.remove(i);
     		}
     	}
+//ConcurrentModificationException!!!
+//    	for(FruitSprite fruit : fruits) {
+//    		Rectangle fruit_area = fruit.getBounds();
+//    		if (this.getBounds().intersects(fruit_area)) {
+//    			updateBodySize();
+//    			GamePanel.setScore(this.score_multiplier * fruit.getScoreValue());
+////    			fruit.updateLocation();
+//    			fruits.remove(fruit);
+////    			FruitSpawner.removeFruit(fruit);
+//    		}
+//    	}
     }
     
     public void setDirection(KeyEvent e) {
