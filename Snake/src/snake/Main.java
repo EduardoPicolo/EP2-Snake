@@ -19,7 +19,6 @@ public class Main extends JFrame {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		
 	}
 
 	public static void main(String[] args) {

@@ -1,12 +1,16 @@
 package snake;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -14,13 +18,22 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.BoxLayout;
+import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, KeyListener {
+public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener {
 	public static final int PLAYABLE_AREA_WIDTH = 300;
 	public static final int PLAYABLE_AREA_HEIGHT = 300;
 	private static boolean inGame;
@@ -31,6 +44,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	
 	private static int score;
 	private JLabel scoreLabel;
+	private JPanel GAMEOVER;
 
     private Thread animator;
     private FruitSpawner fruitSpawner;
@@ -44,10 +58,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setLayout(null);
         
         scoreLabel = new JLabel("Score: "+score);
-        scoreLabel.setBounds(12, 12, 100, 15);
+        scoreLabel.setBounds(113, 5, 73, 15);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Dialog", Font.BOLD, 12));
         add(scoreLabel);
+        
+        GAMEOVER = new JPanel();
+        GAMEOVER.setBounds(12, 49, 276, 194);
+        GAMEOVER.setLayout(null);
+        
+        JLabel lblGameOver = new JLabel("GAME OVER");
+        lblGameOver.setFont(new Font("Dialog", Font.BOLD, 22));
+        lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
+        lblGameOver.setBounds(42, 49, 191, 33);
+        GAMEOVER.add(lblGameOver);
+        
+        JButton btnRestart = new JButton("RESTART");
+        btnRestart.setActionCommand("restart");
+        btnRestart.addActionListener(this);
+        btnRestart.setBounds(119, 157, 114, 25);
+        GAMEOVER.add(btnRestart);
         
         initGame();
     }
@@ -95,13 +125,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     }
 
     private void gameOver(Graphics g) {
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
-        FontMetrics metr = getFontMetrics(small);
-
-        g.setColor(Color.white);
-        g.setFont(small);
-        g.drawString(msg, (PLAYABLE_AREA_WIDTH - metr.stringWidth(msg)) / 2, PLAYABLE_AREA_WIDTH / 2);
+    	scoreLabel.setVisible(false);
+    	add(GAMEOVER);    	
     }
 
 	@Override
@@ -150,12 +175,25 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 		// TODO Auto-generated method stub
 	}
 	
+	@Override
+	public void actionPerformed(ActionEvent evt) {
+		if(evt.getActionCommand().equals("restart")) {
+			System.out.println("RESTART");
+			remove(GAMEOVER);
+			initGame();
+		}
+	}
+
+	
 	public SnakeSprite getSnake() {
 		return snake;
 	}
 	
 	public static void setScore(int value) {
 		score += value;
+	}
+	public static int getScore(){
+		return score;
 	}
 	
 	public static void setInGame(boolean value) {
@@ -168,5 +206,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static void setFruits(List<FruitSprite> fruitList) {
 		fruits = fruitList;
 	}
+	
 }
 
