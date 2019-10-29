@@ -30,12 +30,12 @@ public class FruitSpawner implements Runnable{
 			
 			GamePanel.setFruits(fruits);
 			
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(1000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			if(fruits.size() > AVERAGE_FRUITS_DISPLAY) {
 				try {

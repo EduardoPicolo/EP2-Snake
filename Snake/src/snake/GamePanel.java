@@ -7,11 +7,11 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,21 +19,12 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.border.TitledBorder;
 import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.BoxLayout;
-import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
-public class GamePanel extends JPanel implements Runnable, ActionListener, KeyListener {
+public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int PLAYABLE_AREA_WIDTH = 300;
 	public static final int PLAYABLE_AREA_HEIGHT = 300;
 	private static boolean inGame;
@@ -41,10 +32,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
     
 	private SnakeSprite snake;
 	private static List<FruitSprite> fruits;
+	private GameOverPanel gameOverPanel;
 	
 	private static int score;
 	private JLabel scoreLabel;
-	private JPanel GAMEOVER;
 
     private Thread animator;
     private FruitSpawner fruitSpawner;
@@ -61,34 +52,22 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
         scoreLabel.setBounds(113, 5, 73, 15);
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Dialog", Font.BOLD, 12));
-        add(scoreLabel);
-        
-        GAMEOVER = new JPanel();
-        GAMEOVER.setBounds(12, 49, 276, 194);
-        GAMEOVER.setLayout(null);
-        
-        JLabel lblGameOver = new JLabel("GAME OVER");
-        lblGameOver.setFont(new Font("Dialog", Font.BOLD, 22));
-        lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
-        lblGameOver.setBounds(42, 49, 191, 33);
-        GAMEOVER.add(lblGameOver);
-        
-        JButton btnRestart = new JButton("RESTART");
-        btnRestart.setActionCommand("restart");
-        btnRestart.addActionListener(this);
-        btnRestart.setBounds(119, 157, 114, 25);
-        GAMEOVER.add(btnRestart);
+//        add(scoreLabel);
+                
+        gameOverPanel = new GameOverPanel(this);
         
         initGame();
     }
 
-    private void initGame() {
+    public void initGame() {
     	inGame = true;
     	score = 0;
     	snake = new SnakeSprite();
     	fruits = new ArrayList<>();
     	animator = new Thread(this);
     	fruitSpawner = new FruitSpawner();
+    	add(scoreLabel);
+    	scoreLabel.setVisible(true);
 //    	snake = new KittySnake();
 //    	fruit = new FruitSprite();
 //    	fruit = new BombFruit();
@@ -104,29 +83,33 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
         if(inGame)
         	doDrawing(g);
         else {
-        	gameOver(g);
+        	gameOver();
         }
     }
     
     private void doDrawing(Graphics g) {
+    	Graphics2D g2d = (Graphics2D) g;
+    	
     	for (FruitSprite fruit : fruits) {
-    		g.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+    		g2d.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
     	}
 	    
 	    for (int i = 0; i < snake.getBodySize(); i++) {
 	        if (i == 0) {
-	            g.drawImage(snake.getSnakeHead_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
+	            g2d.drawImage(snake.getSnakeHead_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
 	        } else {
-	            g.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
+	            g2d.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
 	        }
 	    }
 	    scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }
 
-    private void gameOver(Graphics g) {
+    private void gameOver() {
     	scoreLabel.setVisible(false);
-    	add(GAMEOVER);    	
+    	remove(scoreLabel);
+    	add(gameOverPanel);
+    	gameOverPanel.setBounds( 25, 50, gameOverPanel.getWidth(), gameOverPanel.getHeight());
     }
 
 	@Override
@@ -139,11 +122,10 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	    	snake.move();
 	    	snake.checkFruitCollision(fruits);
 	    	snake.checkCollision();
-
 	        repaint();
 	
 	        timeDiff = System.nanoTime() - beforeTime;
-	        sleep = DELAY - timeDiff;
+	        sleep = DELAY - timeDiff/1000000;
 	
 	        if (sleep < 0) {
 	            sleep = 100;
@@ -174,17 +156,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener, KeyLi
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent evt) {
-		if(evt.getActionCommand().equals("restart")) {
-			System.out.println("RESTART");
-			remove(GAMEOVER);
-			initGame();
-		}
-	}
 
-	
 	public SnakeSprite getSnake() {
 		return snake;
 	}

@@ -6,13 +6,13 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
-public class Main extends JFrame {
+public class Snake extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
 	public static final int SCREEN_HEIGHT = 300;
 	
-	public Main() {
+	public Snake() {
 		setTitle("Snake");
-		setPreferredSize(new Dimension(Main.SCREEN_WIDTH, Main.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(Snake.SCREEN_WIDTH, Snake.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		setContentPane(new GamePanel());
 		setResizable(false);
@@ -25,7 +25,7 @@ public class Main extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					Snake frame = new Snake();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

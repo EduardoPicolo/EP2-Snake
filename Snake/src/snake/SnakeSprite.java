@@ -9,8 +9,8 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 public class SnakeSprite {
-    protected final int POS_X[] = new int[Main.SCREEN_WIDTH*Main.SCREEN_HEIGHT];
-    protected final int POS_Y[] = new int[Main.SCREEN_WIDTH*Main.SCREEN_HEIGHT];
+    protected final int POS_X[];
+    protected final int POS_Y[];
     
     protected int body_size;
     protected int score_multiplier;
@@ -27,6 +27,8 @@ public class SnakeSprite {
     public SnakeSprite() {
     	loadImages();
     	setImageDimension();
+    	POS_X = new int[(Snake.SCREEN_WIDTH*Snake.SCREEN_HEIGHT)/(snake_image_width*snake_image_height)];
+    	POS_Y = new int[(Snake.SCREEN_WIDTH*Snake.SCREEN_HEIGHT)/(snake_image_width*snake_image_height)];
     	body_size = 3;
     	score_multiplier = 1;
         for (int i = 0; i < this.body_size; i++) {
@@ -50,7 +52,7 @@ public class SnakeSprite {
             POS_X[position] = POS_X[(position - 1)];
             POS_Y[position] = POS_Y[(position - 1)];
         }
-
+        
         if(leftDirection) {
             POS_X[0] -= snake_image_width;
         }
@@ -66,6 +68,8 @@ public class SnakeSprite {
         else if(downDirection) {
             POS_Y[0] += snake_image_height;
         }
+        
+        
     }
         
     public void checkCollision() {
@@ -76,22 +80,10 @@ public class SnakeSprite {
 			}    		
     	}
     	
-        if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
-        	GamePanel.setInGame(false);
-        	return;
-        }
-        else if (POS_Y[0] < 0) {
-        	GamePanel.setInGame(false);
-        	return;
-        }
-        else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
-        	GamePanel.setInGame(false);
-        	return;
-        }
-        else if (POS_X[0] < 0) {
-        	GamePanel.setInGame(false);
-        	return;
-        }
+    	if(POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT || POS_Y[0] < 0 ||
+			POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH || POS_X[0] < 0) {
+    		GamePanel.setInGame(false);
+    	}
     }
     
     public void checkFruitCollision(List<FruitSprite> fruits) {
