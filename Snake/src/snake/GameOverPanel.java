@@ -4,28 +4,20 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
-import java.awt.Button;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class GameOverPanel extends JPanel implements ActionListener{
-	private GamePanel gamePanel;
+	private SnakeGame gameFrame;
 
-	public GameOverPanel(GamePanel gamePanel) {
+	public GameOverPanel(SnakeGame gameFrame) {
 		setSize(250, 200);
 		setBackground(Color.RED);
 		
@@ -62,8 +54,7 @@ public class GameOverPanel extends JPanel implements ActionListener{
 		);
 		setLayout(groupLayout);
 		
-		this.gamePanel = gamePanel;
-		
+		this.gameFrame = gameFrame;
 	}
 	
 	@Override
@@ -71,8 +62,7 @@ public class GameOverPanel extends JPanel implements ActionListener{
 		String action = e.getActionCommand();
 		if(action.equals("restart")) {
 			System.out.println("RESTART");
-			gamePanel.remove(this);
-			gamePanel.initGame();
+			gameFrame.startGame();
 		}
 	}
 	
