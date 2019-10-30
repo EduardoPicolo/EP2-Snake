@@ -4,15 +4,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Snake extends JFrame {
+public class SnakeGame extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
 	public static final int SCREEN_HEIGHT = 300;
 	
-	public Snake() {
+	public SnakeGame() {
 		setTitle("Snake");
-		setPreferredSize(new Dimension(Snake.SCREEN_WIDTH, Snake.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(SnakeGame.SCREEN_WIDTH, SnakeGame.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		setContentPane(new GamePanel());
 		setResizable(false);
@@ -25,7 +26,7 @@ public class Snake extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Snake frame = new Snake();
+					SnakeGame frame = new SnakeGame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

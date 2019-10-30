@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	public static final int PLAYABLE_AREA_HEIGHT = 300;
 	private static boolean inGame;
     private final int DELAY = 100;
+    private Graphics2D g2d;
     
 	private SnakeSprite snake;
 	private static List<FruitSprite> fruits;
@@ -79,29 +82,34 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         if(inGame)
-        	doDrawing(g);
+        	doDrawing();
         else {
         	gameOver();
         }
     }
     
-    private void doDrawing(Graphics g) {
-    	Graphics2D g2d = (Graphics2D) g;
+    private void doDrawing() {
     	
     	for (FruitSprite fruit : fruits) {
-    		g2d.drawImage(fruit.getFruitImage(), fruit.getPOS_X(), fruit.getPOS_Y(), this);
+    		g2d.drawImage(fruit.getFruitImage(), (int)fruit.getPosition().getX(), (int)fruit.getPosition().getY(), null);
     	}
 	    
-	    for (int i = 0; i < snake.getBodySize(); i++) {
-	        if (i == 0) {
-	            g2d.drawImage(snake.getSnakeHead_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
-	        } else {
-	            g2d.drawImage(snake.getSnakeBody_Image(), snake.getPOS_X()[i], snake.getPOS_Y()[i], this);
-	        }
-	    }
-	    scoreLabel.setText("Score: "+score);
+    	for(Point point : snake.getSnakeBody()) {
+    		if(point == snake.getSnakeBody().getFirst()) {
+    			g2d.drawImage(snake.getSnakeHead_Image(), (int) point.getX(), (int) point.getY(), null);
+    		}
+    		else {
+    			g2d.drawImage(snake.getSnakeBody_Image(), (int) point.getX(), (int) point.getY(), null);
+    		}
+    	}
+//		g2d.drawImage(snake.getSnakeHead_Image(), (int) snake.getSnakeBody().getFirst().getX(), (int) snake.getSnakeBody().getFirst().getY(), null);
+//    	g2d.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().getLast().getX(), (int) snake.getSnakeBody().getLast().getY(), null);
+
+    	scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }
 
@@ -120,12 +128,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	    	beforeTime = System.nanoTime();
 	    	
 	    	snake.move();
-	    	snake.checkFruitCollision(fruits);
 	    	snake.checkCollision();
+	    	snake.checkFruitCollision(fruits);
+//	    	snake.checkCollision();
 	        repaint();
 	
 	        timeDiff = System.nanoTime() - beforeTime;
-	        sleep = DELAY - timeDiff/1000000;
+	        sleep = DELAY - timeDiff;
 	
 	        if (sleep < 0) {
 	            sleep = 100;
