@@ -18,23 +18,18 @@ public class KittySnake extends SnakeSprite {
 		
 	@Override
 	public void checkCollision() {
-    	for (int i = body_size; i > 0; i--) {
-            if ((i > 4) && (POS_X[0] == POS_X[i]) && (POS_Y[0] == POS_Y[i])) {
-            	return;
-            }
-        }
 
-        if (POS_Y[0] >= GamePanel.PLAYABLE_AREA_HEIGHT) {
-        	POS_Y[0] = 0;
+        if (getHeadPosition().getY() >= GamePanel.PLAYABLE_AREA_HEIGHT) {
+        	setHeadPosition((int)getHeadPosition().getX(), 0);
         }
-        else if (POS_Y[0] < 0) {
-        	POS_Y[0] = GamePanel.PLAYABLE_AREA_HEIGHT-(snake_image_height);
+        else if (getHeadPosition().getY() < 0) {
+        	setHeadPosition((int)getHeadPosition().getX(), GamePanel.PLAYABLE_AREA_HEIGHT);
         }
-        else if (POS_X[0] >= GamePanel.PLAYABLE_AREA_WIDTH) {
-        	POS_X[0] = 0;
+        else if (getHeadPosition().getX() >= GamePanel.PLAYABLE_AREA_WIDTH) {
+        	setHeadPosition(0, (int)getHeadPosition().getY());
         }
-        else if (POS_X[0] < 0) {
-        	POS_X[0] = GamePanel.PLAYABLE_AREA_WIDTH-(snake_image_width);
+        else if (getHeadPosition().getX() < 0) {
+        	setHeadPosition(GamePanel.PLAYABLE_AREA_WIDTH, (int)getHeadPosition().getY());    
         }
         
     }

@@ -160,6 +160,14 @@ public class SnakeSprite {
     	return snakeBody;
     }
     
+    public Point getHeadPosition() {
+    	return snakeBody.getFirst().getLocation();
+    }
+    
+    public void setHeadPosition(int X, int Y) {
+    	snakeBody.getFirst().setLocation(X, Y);
+    }
+    
     public void updateBodySize() {
     	body_size += 1;
     }
