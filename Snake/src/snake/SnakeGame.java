@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 public class SnakeGame extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
 	public static final int SCREEN_HEIGHT = 300;
+	
+	private MainMenu mainMenu;
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
 	private JPanel content;
@@ -29,6 +31,8 @@ public class SnakeGame extends JFrame {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+	
+		mainMenu = new MainMenu(this);
 		gamePanel = new GamePanel(this);
 		gameOverPanel = new GameOverPanel(this);
 		
@@ -36,21 +40,27 @@ public class SnakeGame extends JFrame {
 	}
 	
 	public void mainMenu() {
-		
-		
-		startGame();
+		content.removeAll();
+		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		content.add(mainMenu);
+		content.validate();
+		content.repaint();
 	}
 	
 	public void startGame() {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		content.add(gamePanel);
+		content.validate();
+		content.repaint();
 	}
 
 	public void gameOver() {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(50, 25, 50, 25));
 		content.add(gameOverPanel);
+		content.validate();
+		content.repaint();
 	}
 	
 	public static void main(String[] args) {
