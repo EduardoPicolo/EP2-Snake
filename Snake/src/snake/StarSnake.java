@@ -1,5 +1,7 @@
 package snake;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 
 public class StarSnake extends SnakeSprite {
@@ -18,7 +20,8 @@ public class StarSnake extends SnakeSprite {
     }
 	
 	@Override
-	public void updateBodySize() {
-		body_size += 2;
+	public void increaseBody() {
+		snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
+		snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
 	}
 }

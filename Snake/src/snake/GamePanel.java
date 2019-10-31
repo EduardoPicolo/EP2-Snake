@@ -29,7 +29,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	private static List<FruitSprite> fruits;
 	
 	private SnakeGame gameFrame;
-//	private GameOverPanel gameOverPanel;
 	
 	private static int score;
 	private JLabel scoreLabel;
@@ -52,27 +51,31 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 //        add(scoreLabel);
                 
         this.gameFrame = gameFrame;
-//        gameOverPanel = new GameOverPanel(this);
-        
-//        initGame();
     }
 
     public void initGame() {
     	inGame = true;
     	score = 0;
-    	snake = new SnakeSprite();
     	fruits = new ArrayList<>();
     	animator = new Thread(this);
     	fruitSpawner = new FruitSpawner();
     	add(scoreLabel);
     	scoreLabel.setVisible(true);
     	requestFocus();
+    	switch(SnakeSelection.selectedSnake) {
+    		case 1:
+    			snake = new ClassicSnake();
+    			break;
+    		case 2:
+    			snake = new StarSnake();
+    			break;
+    		case 3:
+    			snake = new KittySnake();
+    			break;
+    	}
 //    	snake = new KittySnake();
 //    	fruit = new FruitSprite();
 //    	fruit = new BombFruit();
-        
-//    	animator.start();
-//    	new Thread(fruitSpawner).start();
     }
     
   @Override
@@ -114,18 +117,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     			g2d.drawImage(snake.getSnakeBody_Image(), (int) point.getX(), (int) point.getY(), null);
     		}
     	}
-//		g2d.drawImage(snake.getSnakeHead_Image(), (int) snake.getSnakeBody().getFirst().getX(), (int) snake.getSnakeBody().getFirst().getY(), null);
-//    	g2d.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().getLast().getX(), (int) snake.getSnakeBody().getLast().getY(), null);
 
     	scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }
 
     private void gameOver() {
-//    	scoreLabel.setVisible(false);
-//    	remove(scoreLabel);
-//    	add(gameOverPanel);
-//    	gameOverPanel.setBounds( 25, 50, gameOverPanel.getWidth(), gameOverPanel.getHeight());
     	gameFrame.gameOver();
     }
 
@@ -166,7 +163,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

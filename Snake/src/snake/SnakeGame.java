@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -15,15 +16,17 @@ public class SnakeGame extends JFrame {
 	public static final int SCREEN_HEIGHT = 300;
 	
 	private MainMenu mainMenu;
+	private SnakeSelection snakeSelection;
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
-	private JPanel content;
+	private JComponent content;
 	
 	public SnakeGame() {
 		setTitle("Snake");
 		setPreferredSize(new Dimension(SnakeGame.SCREEN_WIDTH, SnakeGame.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		content = new JPanel();
+		content.setOpaque(true);
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
 		content.setBackground(Color.BLACK);
 		setContentPane(content);
@@ -33,6 +36,7 @@ public class SnakeGame extends JFrame {
 		setLocationRelativeTo(null);
 	
 		mainMenu = new MainMenu(this);
+		snakeSelection = new SnakeSelection(this);
 		gamePanel = new GamePanel(this);
 		gameOverPanel = new GameOverPanel(this);
 		
@@ -43,6 +47,14 @@ public class SnakeGame extends JFrame {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		content.add(mainMenu);
+		content.validate();
+		content.repaint();
+	}
+	
+	public void snakeSelection() {
+		content.removeAll();
+		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		content.add(snakeSelection);
 		content.validate();
 		content.repaint();
 	}

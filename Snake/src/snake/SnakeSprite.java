@@ -48,26 +48,18 @@ public class SnakeSprite {
         Point headPosition = snakeBody.getFirst().getLocation();
         
         if(leftDirection) {
-//        	nextHeadPosition_X -= snake_image_width;
-//        	headPosition.setLocation(headPosition.getX()-snake_image_width, headPosition.getY());
         	headPosition.translate(-snake_image_width, 0);
         }
 
         else if(rightDirection) {
-//        	nextHeadPosition_X += snake_image_width;
-//        	headPosition.setLocation(headPosition.getX()+snake_image_width, headPosition.getY());
         	headPosition.translate(snake_image_width, 0);
         }
 
         else if(upDirection) {
-//            nextHeadPosition_Y -= snake_image_height;
-//        	headPosition.setLocation(headPosition.getX(), headPosition.getY()-snake_image_height);
         	headPosition.translate(0, -snake_image_height);
         }
 
         else if(downDirection) {
-//            nextHeadPosition_Y += snake_image_height;
-//        	headPosition.setLocation(headPosition.getX(), headPosition.getY()+snake_image_height);
         	headPosition.translate(0, snake_image_height);
         }
         
@@ -91,18 +83,16 @@ public class SnakeSprite {
     
     public void checkFruitCollision(List<FruitSprite> fruits) {
     	for(int i=0; i<fruits.size() ; i++) {
-//    		Rectangle fruit_area = fruits.get(i).getBounds();
-//    		if (this.getBounds().get(0).intersects(fruit_area)) {
-//    			updateBodySize();
-//    			GamePanel.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
-//    			fruits.remove(i);
-//    		}
     		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
-    			snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
+    			increaseBody();
     			GamePanel.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
     			fruits.remove(i);
     		}
     	}
+    }
+    
+    public void increaseBody() {
+    	snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
     }
     
     public void setDirection(KeyEvent e) {
@@ -151,7 +141,7 @@ public class SnakeSprite {
     }
     
     public int getBodySize() {
-    	return body_size;
+    	return snakeBody.size();
     }
     
     public Deque<Point> getSnakeBody(){

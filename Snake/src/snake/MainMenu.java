@@ -67,7 +67,8 @@ public class MainMenu extends JPanel implements ActionListener{
 		switch(e.getActionCommand()) {
 			case "PLAY":
 				System.out.println("PLAY");
-				gameFrame.startGame();
+//				gameFrame.startGame();
+				gameFrame.snakeSelection();
 			break;
 			case "EXIT":
 				System.out.println("EXIT");
