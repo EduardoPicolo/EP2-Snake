@@ -84,6 +84,8 @@ public class SnakeSprite {
     public void checkFruitCollision(List<FruitSprite> fruits) {
     	for(int i=0; i<fruits.size() ; i++) {
     		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
+    			fruits.get(i).isCollision();
+    			fruits.get(i).specialEffect();
     			increaseBody();
     			GamePanel.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
     			fruits.remove(i);

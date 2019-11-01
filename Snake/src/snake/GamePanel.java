@@ -40,7 +40,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	addKeyListener(this);
         setBackground(Color.BLACK);
         setFocusable(true);
-//        requestFocus();
         setPreferredSize(new Dimension(PLAYABLE_AREA_WIDTH, PLAYABLE_AREA_HEIGHT));
         setLayout(null);
         
@@ -57,11 +56,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     	inGame = true;
     	score = 0;
     	fruits = new ArrayList<>();
-    	animator = new Thread(this);
-    	fruitSpawner = new FruitSpawner();
+    	
     	add(scoreLabel);
     	scoreLabel.setVisible(true);
-    	requestFocus();
     	switch(SnakeSelection.selectedSnake) {
     		case 1:
     			snake = new ClassicSnake();
@@ -73,9 +70,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     			snake = new KittySnake();
     			break;
     	}
-//    	snake = new KittySnake();
-//    	fruit = new FruitSprite();
-//    	fruit = new BombFruit();
     }
     
   @Override
@@ -84,9 +78,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
       
       initGame();
       
-  	  new Thread(fruitSpawner).start();
       animator = new Thread(this);
+      fruitSpawner = new FruitSpawner();
+  	  new Thread(fruitSpawner).start();
       animator.start();
+      requestFocus();
   }
 
     
@@ -96,8 +92,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        if(inGame)
+        if(inGame) {
         	doDrawing();
+        }
         else {
         	gameOver();
         }
@@ -139,10 +136,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 	        repaint();
 	
 	        timeDiff = System.nanoTime() - beforeTime;
-	        sleep = DELAY - timeDiff;
+	        sleep = DELAY - timeDiff/1000000;
 	
 	        if (sleep < 0) {
-	            sleep = 100;
+	            sleep = 50;
 	        }
 	
 	        try {

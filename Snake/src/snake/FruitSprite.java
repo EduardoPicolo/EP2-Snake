@@ -7,10 +7,9 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 
-public class FruitSprite {
-	protected int POS_X;
-	protected int POS_Y;
+public abstract class FruitSprite {
 	protected Point position;
+	protected boolean collision;
 	protected int scoreValue;
 	
 	protected Image fruit_image;
@@ -19,6 +18,7 @@ public class FruitSprite {
 	
 	public FruitSprite() {
 		scoreValue = 1;
+		collision = false;
 		position = new Point();
 		loadImage();
 		setDimension();
@@ -37,15 +37,10 @@ public class FruitSprite {
 	
     public void generateLocation() {
     	Random randomInt = new Random();
-//    	POS_X = randomInt.nextInt(GamePanel.PLAYABLE_AREA_WIDTH-fruit_image_width);
-//    	POS_Y = randomInt.nextInt(GamePanel.PLAYABLE_AREA_HEIGHT-fruit_image_height);
     	
     	int X = randomInt.nextInt(GamePanel.PLAYABLE_AREA_WIDTH/fruit_image_width)*fruit_image_width;
     	int Y = randomInt.nextInt(GamePanel.PLAYABLE_AREA_HEIGHT/fruit_image_height)*fruit_image_height;
     	position.setLocation(X,Y);
-    	
-//    	POS_X = POS_X - (POS_X % fruit_image_width);
-//    	POS_Y = POS_Y - (POS_Y % fruit_image_height);
     }
     
     public Point getPosition() {
@@ -61,15 +56,21 @@ public class FruitSprite {
     }
     
     public int getPOS_X() {
-    	return POS_X;
+    	return (int)position.getX();
     }
     
     public int getPOS_Y() {
-    	return POS_Y;
+    	return (int)position.getY();
     }
     
     public Rectangle getBounds() {
-    	return new Rectangle(POS_X, POS_Y, fruit_image_width, fruit_image_height);
+    	return new Rectangle((int)position.getX(), (int)position.getY(), fruit_image_width, fruit_image_height);
     }
+    
+    public void isCollision() {
+    	collision = true;
+    }
+    
+    public abstract void specialEffect();
 	
 }

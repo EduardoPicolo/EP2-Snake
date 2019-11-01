@@ -13,4 +13,10 @@ public class BombFruit extends FruitSprite {
         ImageIcon iia = new ImageIcon("head.png");
         fruit_image = iia.getImage();
 	}
+	
+	@Override
+	public void specialEffect() {
+		scoreValue = 0;
+		GamePanel.setInGame(false);
+	}
 }
