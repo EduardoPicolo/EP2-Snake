@@ -12,7 +12,7 @@ public class KittySnake extends SnakeSprite {
         ImageIcon iid = new ImageIcon("./src/assets/dot.png");
         snake_body_image = iid.getImage();
 
-        ImageIcon iih = new ImageIcon("./src/assets/headpx.png");
+        ImageIcon iih = new ImageIcon("./src/assets/head.png");
         snake_head_image = iih.getImage();
     }
 		
