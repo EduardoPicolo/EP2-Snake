@@ -25,10 +25,7 @@ public abstract class FruitSprite {
 		generateLocation();
 	}
 	
-	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("apple.png");
-        fruit_image = iia.getImage();
-	}
+	protected abstract void loadImage();
 	
 	protected void setDimension() {
 		fruit_image_width = fruit_image.getWidth(null);

@@ -10,7 +10,7 @@ public class BombFruit extends FruitSprite {
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("head.png");
+        ImageIcon iia = new ImageIcon("./src/assets/BombFruit10px.png");
         fruit_image = iia.getImage();
 	}
 	

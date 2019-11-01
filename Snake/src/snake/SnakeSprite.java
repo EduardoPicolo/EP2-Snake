@@ -82,8 +82,10 @@ public class SnakeSprite {
     }
     
     public void checkFruitCollision(List<FruitSprite> fruits) {
+//    	Rectangle r1 = this.getBounds();
     	for(int i=0; i<fruits.size() ; i++) {
     		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
+//    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
     			fruits.get(i).isCollision();
     			fruits.get(i).specialEffect();
     			increaseBody();

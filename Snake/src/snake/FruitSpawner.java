@@ -1,17 +1,21 @@
 package snake;
 
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class FruitSpawner implements Runnable{
 	private final int SPECIAL_FRUIT_TIME = 10000;
+	
 	private LinkedList<FruitSprite> fruits;
 	private Timer specialTimer;
+	private Random random;
 	
 	public FruitSpawner() {
 		fruits = new LinkedList<>();
 		specialTimer = new Timer();
+		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
 		GamePanel.setFruits(fruits);
@@ -25,12 +29,26 @@ public class FruitSpawner implements Runnable{
 					fruits.removeLast();
 				}
 				else {
-//					fruits.add(new FruitSprite());
-					fruits.addLast(new BombFruit());
+					switch(random.nextInt(4)+1) {
+						case 1:
+							fruits.addLast(new SimpleFruit());
+						break;
+						case 2:
+							fruits.addLast(new BigFruit());
+						break;
+						case 3: 
+							fruits.addLast(new BombFruit());
+						break;
+						case 4:
+							fruits.addLast(new DecreaseFruit());
+						break;				
+						default:
+							break;
+					}
 				}
 				GamePanel.setFruits(fruits);
 			}
-		}, 5000, SPECIAL_FRUIT_TIME);
+		}, 20000, SPECIAL_FRUIT_TIME);
 		
 		while(GamePanel.getInGame()) {
 			
