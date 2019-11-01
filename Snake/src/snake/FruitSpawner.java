@@ -29,17 +29,14 @@ public class FruitSpawner implements Runnable{
 					fruits.removeLast();
 				}
 				else {
-					switch(random.nextInt(4)+1) {
-						case 1:
-							fruits.addLast(new SimpleFruit());
-						break;
-						case 2:
+					switch(random.nextInt(3)) {
+						case 0:
 							fruits.addLast(new BigFruit());
 						break;
-						case 3: 
+						case 1: 
 							fruits.addLast(new BombFruit());
 						break;
-						case 4:
+						case 2:
 							fruits.addLast(new DecreaseFruit());
 						break;				
 						default:
@@ -48,7 +45,7 @@ public class FruitSpawner implements Runnable{
 				}
 				GamePanel.setFruits(fruits);
 			}
-		}, 20000, SPECIAL_FRUIT_TIME);
+		}, 15000, SPECIAL_FRUIT_TIME);
 		
 		while(GamePanel.getInGame()) {
 			

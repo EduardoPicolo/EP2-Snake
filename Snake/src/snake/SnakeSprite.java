@@ -14,7 +14,6 @@ import javax.swing.ImageIcon;
 public class SnakeSprite {
     protected Deque<Point> snakeBody;
     
-    protected int body_size;
     protected int score_multiplier;
     protected boolean leftDirection = false;
     protected boolean rightDirection = false;
@@ -31,7 +30,6 @@ public class SnakeSprite {
     	setImageDimension();
     	snakeBody = new ArrayDeque<>();
     	snakeBody.add(new Point(50,150));
-    	body_size = 1;
     	score_multiplier = 1;
         rightDirection = true;
     }
@@ -82,10 +80,9 @@ public class SnakeSprite {
     }
     
     public void checkFruitCollision(List<FruitSprite> fruits) {
-//    	Rectangle r1 = this.getBounds();
     	for(int i=0; i<fruits.size() ; i++) {
-    		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
-//    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
+//    		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
+    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
     			fruits.get(i).isCollision();
     			fruits.get(i).specialEffect();
     			increaseBody();
@@ -158,10 +155,6 @@ public class SnakeSprite {
     
     public void setHeadPosition(int X, int Y) {
     	snakeBody.getFirst().setLocation(X, Y);
-    }
-    
-    public void updateBodySize() {
-    	body_size += 1;
     }
     
     public List<Rectangle> getBounds() {
