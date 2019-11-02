@@ -26,7 +26,7 @@ public class GamePanel extends JPanel{
     private Graphics2D g2d;
     
 	private SnakeSprite snake;
-	private static List<FruitSprite> fruits;
+	private List<FruitSprite> fruits;
 	
 	private int score;
 	private JLabel scoreLabel;
@@ -89,8 +89,8 @@ public class GamePanel extends JPanel{
 		this.snake = snake;
 	}
 	
-	public void setScore(int value) {
-		score += value;
+	public void updateScore(int score) {
+		this.score = score;
 	}
 	
 	public void setFruits(List<FruitSprite> fruitList) {

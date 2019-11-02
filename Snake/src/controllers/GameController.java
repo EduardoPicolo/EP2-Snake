@@ -18,7 +18,7 @@ import views.SnakeSelection;
 public class GameController implements Runnable, KeyListener{
 	private final int DELAY = 100;
 	private static boolean running;
-	private static int score;
+	private int score;
 	
 	private SnakeSprite snake;
 	private static List<FruitSprite> fruits;
@@ -37,6 +37,7 @@ public class GameController implements Runnable, KeyListener{
 	public void initGame() {
 		running = true;
 		score = 0;
+		gamePanel.updateScore(score);
 		
 		switch(SnakeSelection.selectedSnake) {
 			case 1:
@@ -64,8 +65,8 @@ public class GameController implements Runnable, KeyListener{
     			fruits.get(i).isCollision();
     			fruits.get(i).specialEffect();
     			snake.increaseBody();
-//    			GameController.setScore(snake.getScoreMultiplier() * fruits.get(i).getScoreValue());
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
+    			gamePanel.updateScore(score);
     			fruits.remove(i);
     		}
     	}
@@ -75,7 +76,6 @@ public class GameController implements Runnable, KeyListener{
 	public void run() {
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
-		gamePanel.setScore(score);
 		
 		long startTime, endTime, sleep;
 		
@@ -101,8 +101,6 @@ public class GameController implements Runnable, KeyListener{
 			}
 		}
 	}
-	
-	
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -129,8 +127,8 @@ public class GameController implements Runnable, KeyListener{
 		running = false;
 	}
 	
-	public static void setScore(int value) {
-		score = value;
+	public void setScore(int value) {
+		this.score = value;
 	}
 	
 	public static void setFruits(List<FruitSprite> fruitList) {
