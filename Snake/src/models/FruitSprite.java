@@ -1,4 +1,4 @@
-package snake;
+package models;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -6,6 +6,8 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+
+import views.GamePanel;
 
 public abstract class FruitSprite {
 	protected Point position;
@@ -35,8 +37,8 @@ public abstract class FruitSprite {
     public void generateLocation() {
     	Random randomInt = new Random();
     	
-    	int X = randomInt.nextInt(GamePanel.PLAYABLE_AREA_WIDTH/fruit_image_width)*fruit_image_width;
-    	int Y = randomInt.nextInt(GamePanel.PLAYABLE_AREA_HEIGHT/fruit_image_height)*fruit_image_height;
+    	int X = randomInt.nextInt((int)(GamePanel.PLAYABLE_AREA_WIDTH/fruit_image_width))*fruit_image_width;
+    	int Y = randomInt.nextInt((int)(GamePanel.PLAYABLE_AREA_HEIGHT/fruit_image_height))*fruit_image_height;
     	position.setLocation(X,Y);
     }
     

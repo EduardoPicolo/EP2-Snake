@@ -1,9 +1,15 @@
-package snake;
+package controllers;
 
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import models.BigFruit;
+import models.BombFruit;
+import models.DecreaseFruit;
+import models.FruitSprite;
+import models.SimpleFruit;
 
 public class FruitSpawner implements Runnable{
 	private final int SPECIAL_FRUIT_TIME = 10000;
@@ -18,7 +24,8 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
-		GamePanel.setFruits(fruits);
+//		GamePanel.setFruits(fruits);
+		GameController.setFruits(fruits);
 	}
 	
 	@Override
@@ -43,15 +50,17 @@ public class FruitSpawner implements Runnable{
 							break;
 					}
 				}
-				GamePanel.setFruits(fruits);
+//				GamePanel.setFruits(fruits);
+//				Game.setFruits(fruits);
 			}
 		}, 15000, SPECIAL_FRUIT_TIME);
 		
-		while(GamePanel.getInGame()) {
+		while(GameController.isRunning()) {
 			
 			if(!(fruits.stream().anyMatch(x -> x instanceof SimpleFruit))) {
 				fruits.addFirst(new SimpleFruit());
-				GamePanel.setFruits(fruits);
+//				GamePanel.setFruits(fruits);
+//				Game.setFruits(fruits);
 			}
 			
 			try {
@@ -62,6 +71,10 @@ public class FruitSpawner implements Runnable{
 			}
 		}
 		specialTimer.cancel();
+	}
+	
+	public LinkedList<FruitSprite> getFruits() {
+		return fruits;
 	}
 	
 }

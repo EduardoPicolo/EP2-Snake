@@ -1,4 +1,4 @@
-package snake;
+package views;
 
 import javax.swing.JPanel;
 
@@ -14,11 +14,13 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import controllers.PanelController;
+
 @SuppressWarnings("serial")
 public class GameOverPanel extends JPanel implements ActionListener{
-	private SnakeGame gameFrame;
+	private PanelController gameFrame;
 
-	public GameOverPanel(SnakeGame gameFrame) {
+	public GameOverPanel(PanelController gameFrame) {
 		setSize(250, 200);
 		setBackground(Color.RED);
 		

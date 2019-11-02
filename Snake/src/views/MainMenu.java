@@ -1,4 +1,4 @@
-package snake;
+package views;
 
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
@@ -12,11 +12,13 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import controllers.PanelController;
+
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel implements ActionListener{
-	private SnakeGame gameFrame;
+	private PanelController gameFrame;
 	
-	public MainMenu(SnakeGame gameFrame) {
+	public MainMenu(PanelController gameFrame) {
 		setBackground(Color.DARK_GRAY);
 		
 		JLabel lblSnake = new JLabel("SNAKE");

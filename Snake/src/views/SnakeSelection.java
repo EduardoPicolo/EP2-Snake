@@ -1,4 +1,4 @@
-package snake;
+package views;
 
 import javax.swing.JPanel;
 
@@ -16,6 +16,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import controllers.PanelController;
+
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
@@ -26,9 +29,9 @@ public class SnakeSelection extends JPanel implements ActionListener {
 	private static final int KITTY = 3;
 	public static int selectedSnake;
 	
-	private SnakeGame gameFrame;
+	private PanelController gameFrame;
 	
-	public SnakeSelection(SnakeGame gameFrame) {
+	public SnakeSelection(PanelController gameFrame) {
 		super(new BorderLayout());
 		
 		JRadioButton btnClassicSnake = new JRadioButton("Classic");

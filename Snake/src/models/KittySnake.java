@@ -1,6 +1,8 @@
-package snake;
+package models;
 
 import javax.swing.ImageIcon;
+
+import views.GamePanel;
 
 public class KittySnake extends SnakeSprite {
 	public KittySnake() {

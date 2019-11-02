@@ -1,6 +1,8 @@
-package snake;
+package models;
 
 import javax.swing.ImageIcon;
+
+import controllers.GameController;
 
 public class BombFruit extends FruitSprite {
 	public BombFruit() {
@@ -17,6 +19,7 @@ public class BombFruit extends FruitSprite {
 	@Override
 	public void specialEffect() {
 		scoreValue = 0;
-		GamePanel.setInGame(false);
+//		GamePanel.setInGame(false);
+		GameController.setGameOver();
 	}
 }

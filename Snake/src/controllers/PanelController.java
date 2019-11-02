@@ -1,4 +1,4 @@
-package snake;
+package controllers;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,20 +10,24 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import views.GameOverPanel;
+import views.MainMenu;
+import views.SnakeSelection;
+
 @SuppressWarnings("serial")
-public class SnakeGame extends JFrame {
+public class PanelController extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
 	public static final int SCREEN_HEIGHT = 300;
 	
+	private GameController game;
 	private MainMenu mainMenu;
 	private SnakeSelection snakeSelection;
-	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
 	
-	public SnakeGame() {
+	public PanelController() {
 		setTitle("Snake");
-		setPreferredSize(new Dimension(SnakeGame.SCREEN_WIDTH, SnakeGame.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(PanelController.SCREEN_WIDTH, PanelController.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		content = new JPanel();
 		content.setOpaque(true);
@@ -37,7 +41,7 @@ public class SnakeGame extends JFrame {
 	
 		mainMenu = new MainMenu(this);
 		snakeSelection = new SnakeSelection(this);
-		gamePanel = new GamePanel(this);
+		game = new GameController();
 		gameOverPanel = new GameOverPanel(this);
 		
 		mainMenu();
@@ -62,7 +66,9 @@ public class SnakeGame extends JFrame {
 	public void startGame() {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		content.add(gamePanel);
+		game.initGame();
+		content.add(game.getGamePanel());
+		game.getGamePanel().requestFocus();
 		content.validate();
 		content.repaint();
 	}
@@ -79,7 +85,7 @@ public class SnakeGame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SnakeGame frame = new SnakeGame();
+					PanelController frame = new PanelController();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
