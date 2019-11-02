@@ -14,13 +14,13 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import controllers.PanelController;
+import models.MainFrame;
 
 @SuppressWarnings("serial")
 public class GameOverPanel extends JPanel implements ActionListener{
-	private PanelController gameFrame;
+	private MainFrame gameFrame;
 
-	public GameOverPanel(PanelController gameFrame) {
+	public GameOverPanel(MainFrame gameFrame) {
 		setSize(250, 200);
 		setBackground(Color.RED);
 		

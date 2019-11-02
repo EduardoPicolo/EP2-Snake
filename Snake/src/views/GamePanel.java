@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import controllers.GameController;
 import models.FruitSprite;
+import models.MainFrame;
 import models.SnakeSprite;
 
 import javax.swing.JLabel;
@@ -29,8 +30,10 @@ public class GamePanel extends JPanel{
 	
 	private int score;
 	private JLabel scoreLabel;
-
-    public GamePanel() {
+	
+	private MainFrame frame;
+	
+    public GamePanel(MainFrame frame) {
         setBackground(Color.BLACK);
         setFocusable(true);
         setPreferredSize(new Dimension(PLAYABLE_AREA_WIDTH, PLAYABLE_AREA_HEIGHT));
@@ -41,6 +44,8 @@ public class GamePanel extends JPanel{
         scoreLabel.setForeground(Color.WHITE);
         scoreLabel.setFont(new Font("Dialog", Font.BOLD, 12));
         add(scoreLabel);
+        
+        this.frame = frame;
     }
     
     @Override
@@ -53,8 +58,8 @@ public class GamePanel extends JPanel{
         	doDrawing();
         }
         else {
-//        	gameOver();
         	System.out.println("GAMEOVER");
+        	frame.gameOver();
         }
     }
     

@@ -8,6 +8,8 @@ import java.util.List;
 import models.ClassicSnake;
 import models.FruitSprite;
 import models.KittySnake;
+import models.MainFrame;
+import models.SimpleFruit;
 import models.SnakeSprite;
 import models.StarSnake;
 import views.GamePanel;
@@ -25,12 +27,10 @@ public class GameController implements Runnable, KeyListener{
 	private GamePanel gamePanel;
 	private Thread loop;
 	
-	public GameController() {
-		gamePanel = new GamePanel();
+	public GameController(MainFrame frame) {
+		gamePanel = new GamePanel(frame);
 		fruits = new ArrayList<>();
 		snake = new SnakeSprite();
-		fruitSpawner = new FruitSpawner();
-		loop = new Thread(this);
 		gamePanel.addKeyListener(this);
 	}
 	
@@ -49,10 +49,10 @@ public class GameController implements Runnable, KeyListener{
 				snake = new KittySnake();
 				break;
 		}
+
+		loop = new Thread(this);
+		fruitSpawner = new FruitSpawner();
 		
-		gamePanel.setSnake(snake);
-		gamePanel.setFruits(fruits);
-		gamePanel.setScore(score);
 		new Thread(fruitSpawner).start();
 		loop.start();
 	}
@@ -64,7 +64,8 @@ public class GameController implements Runnable, KeyListener{
     			fruits.get(i).isCollision();
     			fruits.get(i).specialEffect();
     			snake.increaseBody();
-    			GameController.setScore(snake.getScoreMultiplier() * fruits.get(i).getScoreValue());
+//    			GameController.setScore(snake.getScoreMultiplier() * fruits.get(i).getScoreValue());
+    			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
     			fruits.remove(i);
     		}
     	}
@@ -72,13 +73,17 @@ public class GameController implements Runnable, KeyListener{
 
 	@Override
 	public void run() {
+		gamePanel.setSnake(snake);
+		gamePanel.setFruits(fruits);
+		gamePanel.setScore(score);
+		
 		long startTime, endTime, sleep;
+		
 		while(running) {
 			startTime = System.nanoTime();
 			
 			snake.move();
 			snake.checkCollision();
-//			snake.checkFruitCollision(fruits);
 			checkAteFruit();
 			gamePanel.repaint();
 			

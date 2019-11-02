@@ -1,4 +1,4 @@
-package controllers;
+package models;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,12 +10,13 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controllers.GameController;
 import views.GameOverPanel;
 import views.MainMenu;
 import views.SnakeSelection;
 
 @SuppressWarnings("serial")
-public class PanelController extends JFrame {
+public class MainFrame extends JFrame {
 	public static final int SCREEN_WIDTH = 300;
 	public static final int SCREEN_HEIGHT = 300;
 	
@@ -24,10 +25,10 @@ public class PanelController extends JFrame {
 	private SnakeSelection snakeSelection;
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
-	
-	public PanelController() {
+		
+	public MainFrame() {
 		setTitle("Snake");
-		setPreferredSize(new Dimension(PanelController.SCREEN_WIDTH, PanelController.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(MainFrame.SCREEN_WIDTH, MainFrame.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		content = new JPanel();
 		content.setOpaque(true);
@@ -38,10 +39,10 @@ public class PanelController extends JFrame {
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-	
+		
 		mainMenu = new MainMenu(this);
 		snakeSelection = new SnakeSelection(this);
-		game = new GameController();
+		game = new GameController(this);
 		gameOverPanel = new GameOverPanel(this);
 		
 		mainMenu();
@@ -85,7 +86,7 @@ public class PanelController extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanelController frame = new PanelController();
+					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

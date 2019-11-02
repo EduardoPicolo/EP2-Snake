@@ -12,13 +12,13 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import controllers.PanelController;
+import models.MainFrame;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel implements ActionListener{
-	private PanelController gameFrame;
+	private MainFrame gameFrame;
 	
-	public MainMenu(PanelController gameFrame) {
+	public MainMenu(MainFrame gameFrame) {
 		setBackground(Color.DARK_GRAY);
 		
 		JLabel lblSnake = new JLabel("SNAKE");
