@@ -19,7 +19,6 @@ public class BombFruit extends FruitSprite {
 	@Override
 	public void specialEffect() {
 		scoreValue = 0;
-//		GamePanel.setInGame(false);
 		GameController.setGameOver();
 	}
 }

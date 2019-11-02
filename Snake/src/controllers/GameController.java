@@ -56,6 +56,19 @@ public class GameController implements Runnable, KeyListener{
 		new Thread(fruitSpawner).start();
 		loop.start();
 	}
+	
+	public void checkAteFruit() {
+		for(int i=0; i<fruits.size() ; i++) {
+    		if(snake.getSnakeBody().getFirst().equals(fruits.get(i).getPosition())) {
+//    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
+    			fruits.get(i).isCollision();
+    			fruits.get(i).specialEffect();
+    			snake.increaseBody();
+    			GameController.setScore(snake.getScoreMultiplier() * fruits.get(i).getScoreValue());
+    			fruits.remove(i);
+    		}
+    	}
+	}
 
 	@Override
 	public void run() {
@@ -65,7 +78,8 @@ public class GameController implements Runnable, KeyListener{
 			
 			snake.move();
 			snake.checkCollision();
-			snake.checkFruitCollision(fruits);
+//			snake.checkFruitCollision(fruits);
+			checkAteFruit();
 			gamePanel.repaint();
 			
 			endTime = System.nanoTime() - startTime;

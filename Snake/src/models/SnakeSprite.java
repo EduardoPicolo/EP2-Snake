@@ -71,7 +71,6 @@ public class SnakeSprite {
     public void checkCollision() {
     	for(int i=1 ; i<this.getBounds().size() ;i++) {
     		if(this.getBounds().get(i).intersects(this.getBounds().get(0))) {
-//				GamePanel.setInGame(false);
     			GameController.setGameOver();
 				return;
 			}    		
@@ -79,21 +78,7 @@ public class SnakeSprite {
     	
     	if(snakeBody.getFirst().getY() >= GamePanel.PLAYABLE_AREA_HEIGHT || snakeBody.getFirst().getY() < 0 ||
     			snakeBody.getFirst().getX() >= GamePanel.PLAYABLE_AREA_WIDTH || snakeBody.getFirst().getX() < 0) {
-//    		GamePanel.setInGame(false);
     		GameController.setGameOver();
-    	}
-    }
-    
-    public void checkFruitCollision(List<FruitSprite> fruits) {
-    	for(int i=0; i<fruits.size() ; i++) {
-    		if(snakeBody.getFirst().equals(fruits.get(i).getPosition())) {
-//    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
-    			fruits.get(i).isCollision();
-    			fruits.get(i).specialEffect();
-    			increaseBody();
-    			GameController.setScore(this.score_multiplier * fruits.get(i).getScoreValue());
-    			fruits.remove(i);
-    		}
     	}
     }
     
@@ -148,6 +133,10 @@ public class SnakeSprite {
     
     public int getBodySize() {
     	return snakeBody.size();
+    }
+    
+    public int getScoreMultiplier() {
+    	return score_multiplier;
     }
     
     public Deque<Point> getSnakeBody(){

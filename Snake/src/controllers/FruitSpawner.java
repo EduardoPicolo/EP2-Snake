@@ -24,7 +24,6 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
-//		GamePanel.setFruits(fruits);
 		GameController.setFruits(fruits);
 	}
 	
@@ -50,8 +49,6 @@ public class FruitSpawner implements Runnable{
 							break;
 					}
 				}
-//				GamePanel.setFruits(fruits);
-//				Game.setFruits(fruits);
 			}
 		}, 15000, SPECIAL_FRUIT_TIME);
 		
@@ -59,8 +56,6 @@ public class FruitSpawner implements Runnable{
 			
 			if(!(fruits.stream().anyMatch(x -> x instanceof SimpleFruit))) {
 				fruits.addFirst(new SimpleFruit());
-//				GamePanel.setFruits(fruits);
-//				Game.setFruits(fruits);
 			}
 			
 			try {

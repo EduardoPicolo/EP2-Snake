@@ -5,8 +5,6 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
-
 import views.GamePanel;
 
 public abstract class FruitSprite {
