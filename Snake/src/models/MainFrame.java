@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 	public void startGame() {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		game.initGame();
+		game.initGame(snakeSelection.getSelectedSnake());
 		content.add(gamePanel);
 		content.validate();
 		content.repaint();

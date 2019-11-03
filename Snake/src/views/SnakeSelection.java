@@ -27,7 +27,7 @@ public class SnakeSelection extends JPanel implements ActionListener {
 	private static final int CLASSIC = 1;
 	private static final int STAR = 2;
 	private static final int KITTY = 3;
-	public static int selectedSnake;
+	private int selectedSnake;
 	
 	private MainFrame gameFrame;
 	
@@ -105,7 +105,10 @@ public class SnakeSelection extends JPanel implements ActionListener {
 			default:
 				break;
 		}
-		
+	}
+	
+	public int getSelectedSnake() {
+		return selectedSnake;
 	}
 	
 }

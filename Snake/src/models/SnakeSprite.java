@@ -4,19 +4,15 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 
 import controllers.GameController;
 import views.GamePanel;
 
 public abstract class SnakeSprite {
-//    protected Deque<Point> snakeBody;
 	protected LinkedList<Point> snakeBody;
     
     protected int score_multiplier;
@@ -33,11 +29,10 @@ public abstract class SnakeSprite {
     public SnakeSprite() {
     	loadImages();
     	setImageDimension();
-//    	snakeBody = new ArrayDeque<>();
     	snakeBody = new LinkedList<Point>();
     	snakeBody.add(new Point(50,150));
     	score_multiplier = 1;
-        rightDirection = true;
+//        rightDirection = true;
     }
     
     protected abstract void loadImages();

@@ -16,7 +16,7 @@ import views.GamePanel;
 import views.SnakeSelection;
 
 public class GameController implements Runnable, KeyListener{
-	private final int DELAY = 100;
+	private final int DELAY = 80;
 	private static boolean running;
 	private int score;
 	
@@ -36,12 +36,12 @@ public class GameController implements Runnable, KeyListener{
 		snake = new ClassicSnake();  //Initialize any snake to avoid possible compilation error
 	}
 	
-	public void initGame() {
+	public void initGame(int selectedSnake) {
 		running = true;
 		score = 0;
 		gamePanel.updateScore(score);
 		
-		switch(SnakeSelection.selectedSnake) {
+		switch(selectedSnake) {
 			case 1:
 				snake = new ClassicSnake();
 				break;
@@ -90,7 +90,7 @@ public class GameController implements Runnable, KeyListener{
 			endTime = System.nanoTime() - startTime;
 			sleep = DELAY - endTime/1000000;
 			if(sleep < 0) {
-				sleep = 50;
+				sleep = 70;
 			}
 			
 			try {
