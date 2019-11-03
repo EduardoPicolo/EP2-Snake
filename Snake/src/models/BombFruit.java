@@ -11,14 +11,14 @@ public class BombFruit extends FruitSprite {
 	}
 	
 	@Override
-	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/BombFruit10px.png");
-        fruit_image = iia.getImage();
+	public void specialEffect(SnakeSprite snake) {
+		scoreValue = 0;
+		GameController.setGameOver();
 	}
 	
 	@Override
-	public void specialEffect() {
-		scoreValue = 0;
-		GameController.setGameOver();
+	protected void loadImage() {
+        ImageIcon iia = new ImageIcon("./src/assets/BombFruit10px.png");
+        fruit_image = iia.getImage();
 	}
 }

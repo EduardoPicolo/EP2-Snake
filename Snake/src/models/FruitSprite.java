@@ -9,7 +9,6 @@ import views.GamePanel;
 
 public abstract class FruitSprite {
 	protected Point position;
-	protected boolean collision;
 	protected int scoreValue;
 	
 	protected Image fruit_image;
@@ -18,7 +17,6 @@ public abstract class FruitSprite {
 	
 	public FruitSprite() {
 		scoreValue = 1;
-		collision = false;
 		position = new Point();
 		loadImage();
 		setDimension();
@@ -64,10 +62,6 @@ public abstract class FruitSprite {
     	return new Rectangle((int)position.getX(), (int)position.getY(), fruit_image_width, fruit_image_height);
     }
     
-    public void isCollision() {
-    	collision = true;
-    }
-    
-    public abstract void specialEffect();
+    public abstract void specialEffect(SnakeSprite snake);
 	
 }

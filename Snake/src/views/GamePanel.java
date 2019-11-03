@@ -79,16 +79,6 @@ public class GamePanel extends JPanel{
     		g2d.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
-//Enhanced for-loop may throw 'ConcurrentModification exception.	
-//    	for(Point point : snake.getSnakeBody()) {
-//    		if(point == snake.getSnakeBody().getFirst()) {
-//    			g2d.drawImage(snake.getSnakeHead_Image(), (int) point.getX(), (int) point.getY(), this);
-//    		}
-//    		else {
-//    			g2d.drawImage(snake.getSnakeBody_Image(), (int) point.getX(), (int) point.getY(), this);
-//    		}
-//    	}
-
     	scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }

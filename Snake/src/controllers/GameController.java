@@ -62,11 +62,9 @@ public class GameController implements Runnable, KeyListener{
 	
 	public void checkAteFruit() {
 		for(int i=0; i<fruits.size() ; i++) {
-    		if(snake.getSnakeBody().getFirst().equals(fruits.get(i).getPosition())) {
+    		if(snake.getHeadPosition().equals(fruits.get(i).getPosition())) {
 //    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
-    			fruits.get(i).isCollision();
-    			fruits.get(i).specialEffect();
-    			snake.increaseBody();
+    			fruits.get(i).specialEffect(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
     			gamePanel.updateScore(score);
     			fruits.remove(i);

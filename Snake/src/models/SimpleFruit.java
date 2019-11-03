@@ -8,8 +8,9 @@ public class SimpleFruit extends FruitSprite{
 	}
 	
 	@Override
-	public void specialEffect() {
+	public void specialEffect(SnakeSprite snake) {
 		scoreValue = 1;
+		snake.increaseBody();
 	}
 	
 	@Override
