@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -14,8 +15,9 @@ import javax.swing.ImageIcon;
 import controllers.GameController;
 import views.GamePanel;
 
-public class SnakeSprite {
-    protected Deque<Point> snakeBody;
+public abstract class SnakeSprite {
+//    protected Deque<Point> snakeBody;
+	protected LinkedList<Point> snakeBody;
     
     protected int score_multiplier;
     protected boolean leftDirection = false;
@@ -31,19 +33,14 @@ public class SnakeSprite {
     public SnakeSprite() {
     	loadImages();
     	setImageDimension();
-    	snakeBody = new ArrayDeque<>();
+//    	snakeBody = new ArrayDeque<>();
+    	snakeBody = new LinkedList<Point>();
     	snakeBody.add(new Point(50,150));
     	score_multiplier = 1;
         rightDirection = true;
     }
     
-    protected void loadImages() {
-        ImageIcon iid = new ImageIcon("dot.png");
-        snake_body_image = iid.getImage();
-
-        ImageIcon iih = new ImageIcon("head.png");
-        snake_head_image = iih.getImage();
-    }
+    protected abstract void loadImages();
     
     public void move() {
         Point headPosition = snakeBody.getFirst().getLocation();
@@ -139,7 +136,7 @@ public class SnakeSprite {
     	return score_multiplier;
     }
     
-    public Deque<Point> getSnakeBody(){
+    public LinkedList<Point> getSnakeBody(){
     	return snakeBody;
     }
     

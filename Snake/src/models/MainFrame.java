@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import controllers.GameController;
 import views.GameOverPanel;
+import views.GamePanel;
 import views.MainMenu;
 import views.SnakeSelection;
 
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame {
 	private GameController game;
 	private MainMenu mainMenu;
 	private SnakeSelection snakeSelection;
+	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
 		
@@ -42,8 +44,9 @@ public class MainFrame extends JFrame {
 		
 		mainMenu = new MainMenu(this);
 		snakeSelection = new SnakeSelection(this);
-		game = new GameController(this);
+		gamePanel = new GamePanel(this);
 		gameOverPanel = new GameOverPanel(this);
+		game = new GameController(gamePanel);
 		
 		mainMenu();
 	}
@@ -68,8 +71,7 @@ public class MainFrame extends JFrame {
 		content.removeAll();
 		content.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		game.initGame();
-		content.add(game.getGamePanel());
-		game.getGamePanel().requestFocus();
+		content.add(gamePanel);
 		content.validate();
 		content.repaint();
 	}

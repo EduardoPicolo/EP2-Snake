@@ -27,11 +27,13 @@ public class GameController implements Runnable, KeyListener{
 	private GamePanel gamePanel;
 	private Thread loop;
 	
-	public GameController(MainFrame frame) {
-		gamePanel = new GamePanel(frame);
-		fruits = new ArrayList<>();
-		snake = new SnakeSprite();
+	public GameController(GamePanel gamePanel) {
+		this.gamePanel = gamePanel; 
 		gamePanel.addKeyListener(this);
+		fruits = new ArrayList<>();
+		fruitSpawner = new FruitSpawner();
+		loop = new Thread(this);
+		snake = new ClassicSnake();  //Initialize any snake to avoid possible compilation error
 	}
 	
 	public void initGame() {

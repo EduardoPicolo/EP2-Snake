@@ -49,6 +49,12 @@ public class GamePanel extends JPanel{
     }
     
     @Override
+    public void addNotify() {
+    	super.addNotify();
+    	requestFocus();
+    }
+    
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g2d = (Graphics2D) g;
@@ -65,17 +71,23 @@ public class GamePanel extends JPanel{
     
     private void doDrawing() {
     	for (FruitSprite fruit : fruits) {
-    		g2d.drawImage(fruit.getFruitImage(), (int)fruit.getPosition().getX(), (int)fruit.getPosition().getY(), null);
+    		g2d.drawImage(fruit.getFruitImage(), (int)fruit.getPosition().getX(), (int)fruit.getPosition().getY(), this);
+    	}
+    	
+    	g2d.drawImage(snake.getSnakeHead_Image(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
+    	for(int i=1; i<snake.getBodySize(); i++ ) {
+    		g2d.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
-    	for(Point point : snake.getSnakeBody()) {
-    		if(point == snake.getSnakeBody().getFirst()) {
-    			g2d.drawImage(snake.getSnakeHead_Image(), (int) point.getX(), (int) point.getY(), null);
-    		}
-    		else {
-    			g2d.drawImage(snake.getSnakeBody_Image(), (int) point.getX(), (int) point.getY(), null);
-    		}
-    	}
+//Enhanced for-loop may throw 'ConcurrentModification exception.	
+//    	for(Point point : snake.getSnakeBody()) {
+//    		if(point == snake.getSnakeBody().getFirst()) {
+//    			g2d.drawImage(snake.getSnakeHead_Image(), (int) point.getX(), (int) point.getY(), this);
+//    		}
+//    		else {
+//    			g2d.drawImage(snake.getSnakeBody_Image(), (int) point.getX(), (int) point.getY(), this);
+//    		}
+//    	}
 
     	scoreLabel.setText("Score: "+score);
 	    Toolkit.getDefaultToolkit().sync(); 
