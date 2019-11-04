@@ -10,16 +10,14 @@ import java.util.List;
 
 
 import controllers.GameController;
+import util.Directions;
 import views.GamePanel;
 
 public abstract class SnakeSprite {
 	protected LinkedList<Point> snakeBody;
     
     protected int score_multiplier;
-    protected boolean leftDirection = false;
-    protected boolean rightDirection = false;
-    protected boolean upDirection = false;
-    protected boolean downDirection = false;
+    protected Directions direction;
     
     protected Image snake_head_image;
     protected Image snake_body_image;
@@ -32,7 +30,7 @@ public abstract class SnakeSprite {
     	snakeBody = new LinkedList<Point>();
     	snakeBody.add(new Point(50,150));
     	score_multiplier = 1;
-//        rightDirection = true;
+//    	direction = Directions.RIGHT;
     }
     
     protected abstract void loadImages();
@@ -40,20 +38,35 @@ public abstract class SnakeSprite {
     public void move() {
         Point headPosition = snakeBody.getFirst().getLocation();
         
-        if(leftDirection) {
-        	headPosition.translate(-snake_image_width, 0);
-        }
-
-        else if(rightDirection) {
-        	headPosition.translate(snake_image_width, 0);
-        }
-
-        else if(upDirection) {
-        	headPosition.translate(0, -snake_image_height);
-        }
-
-        else if(downDirection) {
-        	headPosition.translate(0, snake_image_height);
+        if(this.direction == null)
+        	return;
+//        if((direction == Directions.LEFT)) {
+//        	headPosition.translate(-snake_image_width, 0);
+//        }
+//        else if(direction == Directions.RIGHT){
+//        	headPosition.translate(snake_image_width, 0);
+//        }
+//        else if(direction == Directions.UP) {
+//        	headPosition.translate(0, -snake_image_height);
+//        }
+//        else if(direction == Directions.DOWN) {
+//        	headPosition.translate(0, snake_image_height);
+//        }
+        switch(this.direction) {
+	        case LEFT:
+	        	headPosition.translate(-snake_image_width, 0);
+	    	break;
+	        case RIGHT:
+	        	headPosition.translate(snake_image_width, 0);
+        	break;
+	        case UP:
+	        	headPosition.translate(0, -snake_image_height);
+        	break;
+	        case DOWN:
+	        	headPosition.translate(0, snake_image_height);
+        	break;
+        	default:
+        		break;
         }
         
         snakeBody.removeLast();
@@ -78,36 +91,8 @@ public abstract class SnakeSprite {
     	snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
     }
     
-    public void setDirection(KeyEvent e) {
-    	int key = e.getKeyCode();
-
-        if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-            leftDirection = true;
-            upDirection = false;
-            downDirection = false;
-            rightDirection = false;
-        }
-
-        if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-            rightDirection = true;
-            upDirection = false;
-            downDirection = false;
-            leftDirection = false;
-        }
-
-        if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-            upDirection = true;
-            rightDirection = false;
-            leftDirection = false;
-            downDirection = false;
-        }
-
-        if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-            downDirection = true;
-            rightDirection = false;
-            leftDirection = false;
-            upDirection = false;
-        }
+    public void setDirection(Directions direction) {
+    	this.direction = direction;
     }
     
 	public void setImageDimension() {

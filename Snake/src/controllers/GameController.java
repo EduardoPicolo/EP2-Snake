@@ -12,6 +12,7 @@ import models.MainFrame;
 import models.SimpleFruit;
 import models.SnakeSprite;
 import models.StarSnake;
+import util.Directions;
 import views.GamePanel;
 import views.SnakeSelection;
 
@@ -23,6 +24,7 @@ public class GameController implements Runnable, KeyListener{
 	private SnakeSprite snake;
 	private static List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
+	private Directions direction;
 	
 	private GamePanel gamePanel;
 	private Thread loop;
@@ -104,7 +106,34 @@ public class GameController implements Runnable, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		snake.setDirection(e);
+		switch(e.getKeyCode()) {
+			case KeyEvent.VK_RIGHT:
+				if(direction != Directions.LEFT) {
+					direction = Directions.RIGHT;
+					snake.setDirection(direction);
+				}
+			break;
+			case KeyEvent.VK_LEFT:
+				if(direction != Directions.RIGHT) {
+					direction = Directions.LEFT;
+					snake.setDirection(direction);
+				}
+			break;
+			case KeyEvent.VK_UP:
+				if(direction != Directions.DOWN) {
+					direction = Directions.UP;
+					snake.setDirection(direction);
+				}
+			break;
+			case KeyEvent.VK_DOWN:
+				if(direction != Directions.UP) {
+					direction = Directions.DOWN;
+					snake.setDirection(direction);
+				}
+			break;
+			default:
+				break;
+		}
 //		System.out.println(KeyEvent.getKeyText( e.getKeyCode()));
 	}
 
