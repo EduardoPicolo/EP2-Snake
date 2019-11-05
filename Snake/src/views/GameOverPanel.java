@@ -14,13 +14,10 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import models.MainFrame;
-
 @SuppressWarnings("serial")
-public class GameOverPanel extends JPanel implements ActionListener{
-	private MainFrame gameFrame;
+public class GameOverPanel extends JPanel{
 
-	public GameOverPanel(MainFrame gameFrame) {
+	public GameOverPanel(ActionListener listener) {
 		setSize(250, 200);
 		setBackground(Color.RED);
 		
@@ -32,11 +29,11 @@ public class GameOverPanel extends JPanel implements ActionListener{
 		
 		JButton btnRestart = new JButton("RESTART");
 		btnRestart.setActionCommand("RESTART");
-		btnRestart.addActionListener(this);
+		btnRestart.addActionListener(listener);
 		
 		JButton btnMenu = new JButton("MENU");
 		btnMenu.setActionCommand("MENU");
-		btnMenu.addActionListener(this);
+		btnMenu.addActionListener(listener);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -64,24 +61,6 @@ public class GameOverPanel extends JPanel implements ActionListener{
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
-		
-		this.gameFrame = gameFrame;
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand()) {
-			case "MENU":
-				System.out.println("MENU");
-				gameFrame.mainMenu();
-			break;
-			case "RESTART":
-				System.out.println("RESTART");
-				gameFrame.startGame();
-			break;
-			default:
-			break;
-		}
 	}
 	
 }

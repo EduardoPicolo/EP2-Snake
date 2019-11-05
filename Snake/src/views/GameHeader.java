@@ -3,8 +3,6 @@ package views;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import models.MainFrame;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;

@@ -12,13 +12,13 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import models.MainFrame;
+import controllers.MenuController;
 
 @SuppressWarnings("serial")
-public class MainMenu extends JPanel implements ActionListener{
-	private MainFrame gameFrame;
+public class MainMenu extends JPanel{
+//	private MainFrame gameFrame;
 	
-	public MainMenu(MainFrame gameFrame) {
+	public MainMenu(ActionListener listener) {
 		setBackground(Color.DARK_GRAY);
 		
 		JLabel lblSnake = new JLabel("SNAKE");
@@ -26,11 +26,11 @@ public class MainMenu extends JPanel implements ActionListener{
 		lblSnake.setFont(new Font("Dialog", Font.BOLD, 20));
 		
 		JButton btnPlay = new JButton("PLAY");
-		btnPlay.addActionListener(this);
+		btnPlay.addActionListener(listener);
 		btnPlay.setActionCommand("PLAY");
 		
 		JButton btnExit = new JButton("EXIT");
-		btnExit.addActionListener(this);
+		btnExit.addActionListener(listener);
 		btnExit.setActionCommand("EXIT");
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -61,25 +61,25 @@ public class MainMenu extends JPanel implements ActionListener{
 		);
 		setLayout(groupLayout);
 		
-		this.gameFrame = gameFrame;
+//		this.gameFrame = gameFrame;
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand()) {
-			case "PLAY":
-				System.out.println("PLAY");
-//				gameFrame.startGame();
-				gameFrame.snakeSelection();
-			break;
-			case "EXIT":
-				System.out.println("EXIT");
-				System.exit(0);
-			break;
-			
-			default:
-			break;
-		}
-	}
+//	@Override
+//	public void actionPerformed(ActionEvent e) {
+//		switch(e.getActionCommand()) {
+//			case "PLAY":
+//				System.out.println("PLAY");
+////				gameFrame.startGame();
+//				gameFrame.snakeSelection();
+//			break;
+//			case "EXIT":
+//				System.out.println("EXIT");
+//				System.exit(0);
+//			break;
+//			
+//			default:
+//			break;
+//		}
+//	}
 
 }

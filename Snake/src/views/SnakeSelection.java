@@ -16,43 +16,33 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import models.MainFrame;
-
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
 @SuppressWarnings("serial")
-public class SnakeSelection extends JPanel implements ActionListener {
-	private static final int CLASSIC = 1;
-	private static final int STAR = 2;
-	private static final int KITTY = 3;
-	private int selectedSnake;
+public class SnakeSelection extends JPanel{
 	
-	private MainFrame gameFrame;
-	
-	public SnakeSelection(MainFrame gameFrame) {
+	public SnakeSelection(ActionListener listener) {
 		super(new BorderLayout());
 		
 		JRadioButton btnClassicSnake = new JRadioButton("Classic");
 		btnClassicSnake.setHorizontalAlignment(SwingConstants.LEFT);
 		btnClassicSnake.setActionCommand("CLASSIC");
-		btnClassicSnake.addActionListener(this);
+		btnClassicSnake.addActionListener(listener);
 		btnClassicSnake.setSelected(true);
-		selectedSnake = CLASSIC;
 		btnClassicSnake.setToolTipText("Classic snake");
 		
 		JRadioButton btnStar = new JRadioButton("Star");
 		btnStar.setHorizontalAlignment(SwingConstants.CENTER);
 		btnStar.setToolTipText("Star snake");
 		btnStar.setActionCommand("STAR");
-		btnStar.addActionListener(this);
+		btnStar.addActionListener(listener);
 				
 		JRadioButton btnKitty = new JRadioButton("Kitty");
 		btnKitty.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnStar.setToolTipText("Kitty snake");
 		btnKitty.setActionCommand("KITTY");
-		btnKitty.addActionListener(this);
+		btnKitty.addActionListener(listener);
 		
 		ButtonGroup group = new ButtonGroup();
 		group.add(btnClassicSnake);
@@ -73,42 +63,8 @@ public class SnakeSelection extends JPanel implements ActionListener {
 		
 		JButton btnConfirm = new JButton("CONFIRM");
 		btnConfirm.setActionCommand("CONFIRM");
-		btnConfirm.addActionListener(this);
-		add(btnConfirm, BorderLayout.PAGE_END);
-		
-		this.gameFrame = gameFrame;
-		
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		switch(e.getActionCommand()) {
-			case "CLASSIC":
-				System.out.println("CLASSIC");
-				selectedSnake = CLASSIC;
-			break;
-			
-			case "STAR":
-				System.out.println("STAR");
-				selectedSnake = STAR;
-			break;
-			
-			case "KITTY":
-				System.out.println("KITTY");
-				selectedSnake = KITTY;
-			break;
-			
-			case "CONFIRM":
-				System.out.println("CONFIRM: "+selectedSnake);
-				gameFrame.startGame();
-			break;
-			default:
-				break;
-		}
-	}
-	
-	public int getSelectedSnake() {
-		return selectedSnake;
+		btnConfirm.addActionListener(listener);
+		add(btnConfirm, BorderLayout.PAGE_END);		
 	}
 	
 }

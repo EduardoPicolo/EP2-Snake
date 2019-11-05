@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 
 import controllers.GameController;
 import models.FruitSprite;
-import models.MainFrame;
 import models.SnakeSprite;
 
 import javax.swing.BorderFactory;
@@ -33,11 +32,9 @@ public class GamePanel extends JPanel{
 	
 	private int score;
 	
-	private MainFrame frame;
 	private GameHeader header;
 	
-    public GamePanel(MainFrame frame) {
-    	this.frame = frame;
+    public GamePanel() {
     	header = new GameHeader();
         setBackground(Color.BLACK);
         setFocusable(true);
@@ -64,7 +61,7 @@ public class GamePanel extends JPanel{
         }
         else {
         	System.out.println("GAMEOVER");
-        	frame.gameOver();
+//        	frame.gameOver();
         }
     }
     

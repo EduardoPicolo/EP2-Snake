@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.Random;
 
 import views.GamePanel;
+import views.MainFrame;
 
 public abstract class FruitSprite {
 	protected Point position;

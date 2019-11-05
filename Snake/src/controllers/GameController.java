@@ -12,6 +12,7 @@ import models.KittySnake;
 import models.SnakeSprite;
 import models.StarSnake;
 import util.Directions;
+import views.GameOverPanel;
 import views.GamePanel;
 
 public class GameController implements Runnable, KeyListener{
@@ -27,8 +28,8 @@ public class GameController implements Runnable, KeyListener{
 	private GamePanel gamePanel;
 	private Thread loop;
 	
-	public GameController(GamePanel gamePanel) {
-		this.gamePanel = gamePanel; 
+	public GameController() {
+		gamePanel = new GamePanel();
 		gamePanel.addKeyListener(this);
 		fruits = new ArrayList<>();
 		fruitSpawner = new FruitSpawner();
@@ -102,6 +103,7 @@ public class GameController implements Runnable, KeyListener{
 				e.printStackTrace();
 			}
 		}
+		
 	}
 
 	@Override

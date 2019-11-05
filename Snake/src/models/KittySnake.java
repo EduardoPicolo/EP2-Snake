@@ -3,6 +3,7 @@ package models;
 import javax.swing.ImageIcon;
 
 import views.GamePanel;
+import views.MainFrame;
 
 public class KittySnake extends SnakeSprite {
 	public KittySnake() {
