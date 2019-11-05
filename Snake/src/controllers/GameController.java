@@ -1,6 +1,5 @@
 package controllers;
 
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -10,16 +9,13 @@ import models.ClassicSnake;
 import models.FruitSpawner;
 import models.FruitSprite;
 import models.KittySnake;
-import models.MainFrame;
-import models.SimpleFruit;
 import models.SnakeSprite;
 import models.StarSnake;
 import util.Directions;
 import views.GamePanel;
-import views.SnakeSelection;
 
 public class GameController implements Runnable, KeyListener{
-	private final int DELAY = 100;
+	private final int DELAY = 90;
 	private static boolean running;
 	private int score;
 	
@@ -80,8 +76,8 @@ public class GameController implements Runnable, KeyListener{
 	@Override
 	public void run() {
 		this.fruits = fruitSpawner.getFruits();
-		gamePanel.setFruits(fruits);
 		gamePanel.setSnake(snake);
+		gamePanel.setFruits(fruits);
 		
 		long startTime, endTime, sleep;
 		
@@ -94,9 +90,9 @@ public class GameController implements Runnable, KeyListener{
 			gamePanel.repaint();
 			
 			endTime = System.nanoTime() - startTime;
-			sleep = DELAY - endTime/1000000;
+			sleep = DELAY - endTime/1000000L;
 			if(sleep < 0) {
-				sleep = 70;
+				sleep = 1;
 			}
 			
 			try {

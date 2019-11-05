@@ -28,7 +28,7 @@ public abstract class SnakeSprite {
     	loadImages();
     	setImageDimension();
     	snakeBody = new LinkedList<Point>();
-    	snakeBody.add(new Point(50,150));
+    	snakeBody.add(new Point(100,150));
     	score_multiplier = 1;
 //    	direction = Directions.RIGHT;
     }
