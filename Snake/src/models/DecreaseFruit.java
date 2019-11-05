@@ -15,7 +15,7 @@ public class DecreaseFruit extends FruitSprite {
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/dot.png");
+        ImageIcon iia = new ImageIcon("./src/assets/DecreaseFruit10px.png");
         fruit_image = iia.getImage();
 	}
 }

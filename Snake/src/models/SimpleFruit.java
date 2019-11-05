@@ -15,7 +15,7 @@ public class SimpleFruit extends FruitSprite{
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/apple.png");
+        ImageIcon iia = new ImageIcon("./src/assets/SimpleFruit10px.png");
         fruit_image = iia.getImage();
 	}
 }

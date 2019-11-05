@@ -53,6 +53,8 @@ public class FruitSpawner implements Runnable{
 				fruits.addFirst(new SimpleFruit());
 			}
 			
+//			fruits.addLast(new BigFruit());
+			
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
