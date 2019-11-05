@@ -1,15 +1,11 @@
-package controllers;
+package models;
 
 import java.util.LinkedList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import models.BigFruit;
-import models.BombFruit;
-import models.DecreaseFruit;
-import models.FruitSprite;
-import models.SimpleFruit;
+import controllers.GameController;
 
 public class FruitSpawner implements Runnable{
 	private final int SPECIAL_FRUIT_TIME = 10000;
@@ -24,7 +20,6 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
-		GameController.setFruits(fruits);
 	}
 	
 	@Override

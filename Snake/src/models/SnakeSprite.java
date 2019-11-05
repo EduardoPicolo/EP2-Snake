@@ -40,18 +40,6 @@ public abstract class SnakeSprite {
         
         if(this.direction == null)
         	return;
-//        if((direction == Directions.LEFT)) {
-//        	headPosition.translate(-snake_image_width, 0);
-//        }
-//        else if(direction == Directions.RIGHT){
-//        	headPosition.translate(snake_image_width, 0);
-//        }
-//        else if(direction == Directions.UP) {
-//        	headPosition.translate(0, -snake_image_height);
-//        }
-//        else if(direction == Directions.DOWN) {
-//        	headPosition.translate(0, snake_image_height);
-//        }
         switch(this.direction) {
 	        case LEFT:
 	        	headPosition.translate(-snake_image_width, 0);
@@ -81,8 +69,8 @@ public abstract class SnakeSprite {
 			}    		
     	}
     	
-    	if(snakeBody.getFirst().getY() >= GamePanel.PLAYABLE_AREA_HEIGHT || snakeBody.getFirst().getY() < 0 ||
-    			snakeBody.getFirst().getX() >= GamePanel.PLAYABLE_AREA_WIDTH || snakeBody.getFirst().getX() < 0) {
+    	if(snakeBody.getFirst().getY() >= 300 || snakeBody.getFirst().getY() < 20 ||
+    			snakeBody.getFirst().getX() >= 300 || snakeBody.getFirst().getX() < 0) {
     		GameController.setGameOver();
     	}
     }

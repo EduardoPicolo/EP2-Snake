@@ -1,11 +1,13 @@
 package controllers;
 
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import models.ClassicSnake;
+import models.FruitSpawner;
 import models.FruitSprite;
 import models.KittySnake;
 import models.MainFrame;
@@ -17,12 +19,12 @@ import views.GamePanel;
 import views.SnakeSelection;
 
 public class GameController implements Runnable, KeyListener{
-	private final int DELAY = 80;
+	private final int DELAY = 100;
 	private static boolean running;
 	private int score;
 	
 	private SnakeSprite snake;
-	private static List<FruitSprite> fruits;
+	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
 	private Directions direction;
 	
@@ -41,6 +43,7 @@ public class GameController implements Runnable, KeyListener{
 	public void initGame(int selectedSnake) {
 		running = true;
 		score = 0;
+		direction = null;
 		gamePanel.updateScore(score);
 		
 		switch(selectedSnake) {
@@ -55,8 +58,8 @@ public class GameController implements Runnable, KeyListener{
 				break;
 		}
 
-		loop = new Thread(this);
 		fruitSpawner = new FruitSpawner();
+		loop = new Thread(this);
 		
 		new Thread(fruitSpawner).start();
 		loop.start();
@@ -76,8 +79,9 @@ public class GameController implements Runnable, KeyListener{
 
 	@Override
 	public void run() {
-		gamePanel.setSnake(snake);
+		this.fruits = fruitSpawner.getFruits();
 		gamePanel.setFruits(fruits);
+		gamePanel.setSnake(snake);
 		
 		long startTime, endTime, sleep;
 		
@@ -140,13 +144,11 @@ public class GameController implements Runnable, KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public static boolean isRunning() {
@@ -159,11 +161,7 @@ public class GameController implements Runnable, KeyListener{
 	public void setScore(int value) {
 		this.score = value;
 	}
-	
-	public static void setFruits(List<FruitSprite> fruitList) {
-		fruits = fruitList;
-	}
-	
+		
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}

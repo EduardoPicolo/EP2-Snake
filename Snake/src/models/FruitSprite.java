@@ -33,8 +33,9 @@ public abstract class FruitSprite {
     public void generateLocation() {
     	Random randomInt = new Random();
     	
-    	int X = randomInt.nextInt((int)(GamePanel.PLAYABLE_AREA_WIDTH/fruit_image_width))*fruit_image_width;
-    	int Y = randomInt.nextInt((int)(GamePanel.PLAYABLE_AREA_HEIGHT/fruit_image_height))*fruit_image_height;
+    	int X = randomInt.nextInt((int)(300/fruit_image_width))*fruit_image_width;
+    	int Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-20)/fruit_image_height))*fruit_image_height;
+    	Y += 20;
     	position.setLocation(X,Y);
     }
     

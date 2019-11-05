@@ -18,8 +18,8 @@ import views.SnakeSelection;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-	public static final int SCREEN_WIDTH = 300;
-	public static final int SCREEN_HEIGHT = 300;
+	private static final int SCREEN_WIDTH = 300;
+	private static final int SCREEN_HEIGHT = 300;
 	
 	private GameController game;
 	private MainMenu mainMenu;
@@ -82,6 +82,14 @@ public class MainFrame extends JFrame {
 		content.add(gameOverPanel);
 		content.validate();
 		content.repaint();
+	}
+	
+	public static int getFrameWidth() {
+		return SCREEN_WIDTH;
+	}
+	
+	public static int getFrameHeight() {
+		return SCREEN_HEIGHT;
 	}
 	
 	public static void main(String[] args) {
