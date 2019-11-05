@@ -1,5 +1,7 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -26,10 +28,14 @@ public class GameController implements Runnable, KeyListener{
 	private Directions direction;
 	
 	private GamePanel gamePanel;
+	private GameOverPanel gameOverPanel;
+
 	private Thread loop;
 	
-	public GameController() {
-		gamePanel = new GamePanel();
+	public GameController(GamePanel panel, GameOverPanel gameOverPanel) {
+//		gamePanel = new GamePanel();
+		this.gamePanel = panel;
+		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
 		fruits = new ArrayList<>();
 		fruitSpawner = new FruitSpawner();
@@ -65,7 +71,7 @@ public class GameController implements Runnable, KeyListener{
 	public void checkAteFruit() {
 		for(int i=0; i<fruits.size() ; i++) {
     		if(snake.getHeadPosition().equals(fruits.get(i).getPosition())) {
-//    		if(this.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
+//    		if(snake.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
     			fruits.get(i).specialEffect(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
     			gamePanel.updateScore(score);
@@ -103,7 +109,9 @@ public class GameController implements Runnable, KeyListener{
 				e.printStackTrace();
 			}
 		}
-		
+		gamePanel.add(gameOverPanel);
+		gamePanel.validate();
+		gamePanel.repaint();
 	}
 
 	@Override

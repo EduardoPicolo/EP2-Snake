@@ -41,12 +41,13 @@ public class GamePanel extends JPanel{
         setPreferredSize(new Dimension(MainFrame.getFrameWidth(), MainFrame.getFrameHeight()));
         setLayout(new BorderLayout());
                        
-	    add(header, BorderLayout.PAGE_START);
+//	    add(header, BorderLayout.PAGE_START);
     }
     
     @Override
     public void addNotify() {
     	super.addNotify();
+    	add(header, BorderLayout.PAGE_START);
     	requestFocus();
     }
     
@@ -61,7 +62,6 @@ public class GamePanel extends JPanel{
         }
         else {
         	System.out.println("GAMEOVER");
-//        	frame.gameOver();
         }
     }
     

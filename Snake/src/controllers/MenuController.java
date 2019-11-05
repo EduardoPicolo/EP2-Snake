@@ -22,12 +22,14 @@ public class MenuController implements ActionListener{
 	private MainFrame frame;
 	private MainMenu mainMenu;
 	private SnakeSelection snakeSelection;
+	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
 	
 	public MenuController() {
 		frame = new MainFrame();
 		mainMenu = new MainMenu(this);
 		snakeSelection = new SnakeSelection(this);
+		gamePanel = new GamePanel();
 		gameOverPanel = new GameOverPanel(this);
 		mainMenu();
 	}
@@ -50,13 +52,14 @@ public class MenuController implements ActionListener{
 	}
 	
 	public void startGame() {
-		GameController game = new GameController();
-		game.initGame(selectedSnake);
+		gamePanel.removeAll();
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(game.getGamePanel());
+		GameController game = new GameController(gamePanel, gameOverPanel);
+		frame.getContentPane().add(gamePanel);
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
+		game.initGame(selectedSnake);
 	}
 
 	public void gameOver() {
