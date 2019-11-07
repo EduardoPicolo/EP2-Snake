@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 import views.GameHeader;
 import views.GameOverPanel;
@@ -20,24 +21,15 @@ public class MenuController implements ActionListener{
 	private int selectedSnake;
 	
 	private MainFrame frame;
-	private MainMenu mainMenu;
-	private SnakeSelection snakeSelection;
-	private GamePanel gamePanel;
-	private GameOverPanel gameOverPanel;
 	
-	public MenuController() {
-		frame = new MainFrame();
-		mainMenu = new MainMenu(this);
-		snakeSelection = new SnakeSelection(this);
-		gamePanel = new GamePanel();
-		gameOverPanel = new GameOverPanel(this);
-		mainMenu();
+	public MenuController(MainFrame frame) {
+		this.frame = frame;
 	}
 	
 	public void mainMenu() {
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(mainMenu);
+		frame.getContentPane().add(frame.getMainMenu());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 	}
@@ -46,17 +38,17 @@ public class MenuController implements ActionListener{
 		selectedSnake = CLASSIC;
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(snakeSelection);
+		frame.getContentPane().add(frame.getSnakeSelection());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 	}
 	
 	public void startGame() {
-		gamePanel.removeAll();
+		frame.getGamePanel().removeAll();
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		GameController game = new GameController(gamePanel, gameOverPanel);
-		frame.getContentPane().add(gamePanel);
+		GameController game = new GameController(frame.getGamePanel(), frame.getGameOverPanel());
+		frame.getContentPane().add(frame.getGamePanel());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 		game.initGame(selectedSnake);
@@ -65,7 +57,7 @@ public class MenuController implements ActionListener{
 	public void gameOver() {
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(50, 25, 50, 25));
-		frame.getContentPane().add(gameOverPanel);
+		frame.getContentPane().add(frame.getGameOverPanel());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
 	}

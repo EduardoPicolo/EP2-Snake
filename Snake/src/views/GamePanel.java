@@ -40,7 +40,6 @@ public class GamePanel extends JPanel{
         setFocusable(true);
         setPreferredSize(new Dimension(MainFrame.getFrameWidth(), MainFrame.getFrameHeight()));
         setLayout(new BorderLayout());
-                       
 //	    add(header, BorderLayout.PAGE_START);
     }
     

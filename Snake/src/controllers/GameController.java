@@ -1,5 +1,6 @@
 package controllers;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -33,7 +34,6 @@ public class GameController implements Runnable, KeyListener{
 	private Thread loop;
 	
 	public GameController(GamePanel panel, GameOverPanel gameOverPanel) {
-//		gamePanel = new GamePanel();
 		this.gamePanel = panel;
 		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
@@ -109,7 +109,7 @@ public class GameController implements Runnable, KeyListener{
 				e.printStackTrace();
 			}
 		}
-		gamePanel.add(gameOverPanel);
+		gamePanel.add(gameOverPanel, BorderLayout.CENTER);
 		gamePanel.validate();
 		gamePanel.repaint();
 	}

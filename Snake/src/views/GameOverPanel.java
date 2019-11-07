@@ -4,6 +4,8 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -18,7 +20,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class GameOverPanel extends JPanel{
 
 	public GameOverPanel(ActionListener listener) {
-		setSize(250, 200);
+//		setSize(250, 200);
+		setPreferredSize(new Dimension(250,200));
 		setBackground(Color.RED);
 		
 		JLabel lblGameOver = new JLabel("GAME OVER");
