@@ -10,7 +10,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.Cursor;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.plaf.ColorChooserUI;
+
 
 import controllers.MenuController;
 
@@ -19,20 +23,28 @@ public class MainMenu extends JPanel{
 //	private MainFrame gameFrame;
 	
 	public MainMenu(ActionListener listener) {
-		setBackground(Color.DARK_GRAY);
+		setBackground(Color.BLACK);
 		
 		JLabel lblSnake = new JLabel("SNAKE");
-		lblSnake.setForeground(Color.BLACK);
+		lblSnake.setForeground(Color.GREEN);
 		lblSnake.setFont(new Font("Dialog", Font.BOLD, 20));
 		
 		JButton btnPlay = new JButton("PLAY");
 		btnPlay.addActionListener(listener);
+		btnPlay.setBackground(Color.CYAN);
 		btnPlay.setActionCommand("PLAY");
+		btnPlay.setForeground(Color.BLACK);
+		btnPlay.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnPlay.setFocusPainted(false);
 		
 		JButton btnExit = new JButton("EXIT");
 		btnExit.addActionListener(listener);
+		btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnExit.setActionCommand("EXIT");
-		
+		btnExit.setBackground(Color.RED);
+		btnExit.setForeground(Color.BLACK);
+		btnExit.setFocusPainted(false);
+	
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)

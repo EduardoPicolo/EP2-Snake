@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -20,12 +21,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class GameOverPanel extends JPanel{
 
 	public GameOverPanel(ActionListener listener) {
-//		setSize(250, 200);
 		setPreferredSize(new Dimension(250,200));
 		setBackground(Color.RED);
 		
 		JLabel lblGameOver = new JLabel("GAME OVER");
-		lblGameOver.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblGameOver.setForeground(Color.BLACK);
+		lblGameOver.setFont(new Font("Lato", Font.BOLD, 25));
 		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGameOver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblGameOver.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -33,10 +34,18 @@ public class GameOverPanel extends JPanel{
 		JButton btnRestart = new JButton("RESTART");
 		btnRestart.setActionCommand("RESTART");
 		btnRestart.addActionListener(listener);
+		btnRestart.setBackground(Color.WHITE);
+		btnRestart.setForeground(Color.BLACK);
+		btnRestart.setFocusPainted(false);
+		btnRestart.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		JButton btnMenu = new JButton("MENU");
 		btnMenu.setActionCommand("MENU");
 		btnMenu.addActionListener(listener);
+		btnMenu.setBackground(Color.white);
+		btnMenu.setForeground(Color.BLACK);
+		btnMenu.setFocusPainted(false);
+		btnMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
