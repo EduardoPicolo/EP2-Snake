@@ -17,6 +17,7 @@ import javax.swing.plaf.ColorChooserUI;
 
 
 import controllers.MenuController;
+import javax.swing.UIManager;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel{
@@ -26,12 +27,12 @@ public class MainMenu extends JPanel{
 		setBackground(Color.BLACK);
 		
 		JLabel lblSnake = new JLabel("SNAKE");
-		lblSnake.setForeground(Color.GREEN);
+		lblSnake.setForeground(UIManager.getColor("text"));
 		lblSnake.setFont(new Font("Dialog", Font.BOLD, 20));
 		
 		JButton btnPlay = new JButton("PLAY");
 		btnPlay.addActionListener(listener);
-		btnPlay.setBackground(Color.CYAN);
+		btnPlay.setBackground(new Color(0, 255, 0));
 		btnPlay.setActionCommand("PLAY");
 		btnPlay.setForeground(Color.BLACK);
 		btnPlay.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -51,24 +52,23 @@ public class MainMenu extends JPanel{
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-							.addGap(110))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
+					.addGap(96)
+					.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(113)
+					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(111))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
+					.addGap(54)
 					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-					.addGap(112)
+					.addGap(98)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnPlay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addComponent(btnPlay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(99))
 		);
 		setLayout(groupLayout);

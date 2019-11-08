@@ -37,10 +37,10 @@ public class GameController implements Runnable, KeyListener{
 		this.gamePanel = panel;
 		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
-		fruits = new ArrayList<>();
+		fruits = new ArrayList<FruitSprite>();
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
-		snake = new ClassicSnake();  //Initialize any snake to avoid possible compilation error
+		snake = new ClassicSnake();
 	}
 	
 	public void initGame(int selectedSnake) {
