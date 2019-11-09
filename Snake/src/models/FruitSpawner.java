@@ -57,7 +57,7 @@ public class FruitSpawner implements Runnable{
 				GameController.addOccupiedPosition(fruits.getFirst().getPosition());
 			}
 			
-//			fruits.addLast(new BombFruit());
+			fruits.addLast(new BombFruit());
 			
 			try {
 				Thread.sleep(100);
