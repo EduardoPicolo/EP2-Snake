@@ -78,7 +78,6 @@ public class MainFrame extends JFrame {
 				try {
 					MainFrame frame = new MainFrame();
 					frame.setVisible(true);
-//					new MenuController();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

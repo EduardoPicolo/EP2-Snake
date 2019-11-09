@@ -83,8 +83,6 @@ public class GamePanel extends JPanel{
     		g.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
-    	
-    	header.updateLabel(score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }
 	
@@ -97,6 +95,10 @@ public class GamePanel extends JPanel{
 	
 	public void updateScore(int score) {
 		this.score = score;
+	}
+	
+	public void updateHeader(int score, long time) {
+		header.updateLabel(score, time);
 	}
 	
 }

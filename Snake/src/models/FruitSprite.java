@@ -41,7 +41,7 @@ public abstract class FruitSprite {
     		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/fruit_image_height))*fruit_image_height;
     		Y += 26;
     		p = new Point(X,Y);
-    	}while(GameController.getOccupiedPositions().contains(p));
+    	}while(GameController.getOccupiedPositions().contains(p.getLocation()));
     	position.setLocation(X,Y);
     }
     
