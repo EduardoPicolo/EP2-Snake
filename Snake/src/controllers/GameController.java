@@ -47,7 +47,7 @@ public class GameController implements Runnable, KeyListener{
 		barrierPosition = new ArrayList<>();
 	}
 	
-	public void initGame(int selectedSnake) {
+	public void initGame(int chosenSnake) {
 		running = true;
 		score = 0;
 		direction = null;
@@ -57,7 +57,7 @@ public class GameController implements Runnable, KeyListener{
 		barrierPosition.add(new Rectangle(130, 247, 52, 13));
 		gamePanel.updateScore(score);
 		
-		switch(selectedSnake) {
+		switch(chosenSnake) {
 			case 1:
 				snake = new ClassicSnake();
 				break;
@@ -110,7 +110,8 @@ public class GameController implements Runnable, KeyListener{
 			startTime = System.nanoTime();
 			
 			snake.move();
-			snake.checkCollision();
+			if(snake.checkCollision())
+				setGameOver();
 			if(!(snake instanceof KittySnake)) {
 				checkBarrierCollision();
 			}
@@ -165,7 +166,6 @@ public class GameController implements Runnable, KeyListener{
 			default:
 				break;
 		}
-//		System.out.println(KeyEvent.getKeyText( e.getKeyCode()));
 	}
 
 	@Override

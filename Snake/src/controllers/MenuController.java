@@ -18,7 +18,7 @@ public class MenuController implements ActionListener{
 	private final int CLASSIC = 1;
 	private final int STAR = 2;
 	private final int KITTY = 3;
-	private int selectedSnake;
+	private int chosenSnake;
 	
 	private MainFrame frame;
 	
@@ -35,7 +35,7 @@ public class MenuController implements ActionListener{
 	}
 	
 	public void snakeSelection() {
-		selectedSnake = CLASSIC;
+		chosenSnake = CLASSIC;
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 		frame.getContentPane().add(frame.getSnakeSelection());
@@ -51,7 +51,7 @@ public class MenuController implements ActionListener{
 		frame.getContentPane().add(frame.getGamePanel());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
-		game.initGame(selectedSnake);
+		game.initGame(chosenSnake);
 	}
 
 	public void gameOver() {
@@ -76,21 +76,21 @@ public class MenuController implements ActionListener{
 			
 			case "CLASSIC":
 				System.out.println("CLASSIC");
-				selectedSnake = CLASSIC;
+				chosenSnake = CLASSIC;
 			break;
 			
 			case "STAR":
 				System.out.println("STAR");
-				selectedSnake = STAR;
+				chosenSnake = STAR;
 			break;
 			
 			case "KITTY":
 				System.out.println("KITTY");
-				selectedSnake = KITTY;
+				chosenSnake = KITTY;
 			break;
 			
 			case "CONFIRM":
-				System.out.println("CONFIRM: "+selectedSnake);
+				System.out.println("CONFIRM: "+chosenSnake);
 				startGame();
 			break;
 			
@@ -109,6 +109,6 @@ public class MenuController implements ActionListener{
 	}
 	
 	public int getSelectedSnake() {
-		return selectedSnake;
+		return chosenSnake;
 	}
 }

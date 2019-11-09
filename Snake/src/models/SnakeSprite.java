@@ -62,18 +62,18 @@ public abstract class SnakeSprite {
         snakeBody.addFirst(headPosition);       
     }
         
-    public void checkCollision() {
+    public boolean checkCollision() {
     	for(int i=1 ; i<this.getBounds().size() ;i++) {
     		if(this.getBounds().get(i).intersects(this.getBounds().get(0))) {
-    			GameController.setGameOver();
-				return;
+				return true;
 			}    		
     	}
     	
     	if(snakeBody.getFirst().getY() >= MainFrame.getFrameHeight() || snakeBody.getFirst().getY() < 20 ||
     			snakeBody.getFirst().getX() >= MainFrame.getFrameWidth() || snakeBody.getFirst().getX() < 0) {
-    		GameController.setGameOver();
+    		return true;
     	}
+    	return false;
     }
     
     public void increaseBody() {

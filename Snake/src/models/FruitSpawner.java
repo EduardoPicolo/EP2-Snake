@@ -20,7 +20,6 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
-//		GameController.addOccupiedPosition(fruits.getFirst().getPosition());
 	}
 	
 	@Override

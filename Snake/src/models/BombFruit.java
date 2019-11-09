@@ -12,6 +12,8 @@ public class BombFruit extends FruitSprite {
 	
 	@Override
 	public void specialEffect(SnakeSprite snake) {
+		ImageIcon iia = new ImageIcon("./src/assets/explosion13px.png");
+        fruit_image = iia.getImage();
 		GameController.setGameOver();
 	}
 	
