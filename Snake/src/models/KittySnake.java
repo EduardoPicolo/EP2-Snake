@@ -12,10 +12,10 @@ public class KittySnake extends SnakeSprite {
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/KittyBody10px.png");
+        ImageIcon iid = new ImageIcon("./src/assets/KittyBody13px.png");
         snake_body_image = iid.getImage();
 
-        ImageIcon iih = new ImageIcon("./src/assets/head10px.png");
+        ImageIcon iih = new ImageIcon("./src/assets/GreenHead13px.png");
         snake_head_image = iih.getImage();
     }
 		
@@ -23,16 +23,16 @@ public class KittySnake extends SnakeSprite {
 	public void checkCollision() {
 
         if (getHeadPosition().getY() >= MainFrame.getFrameHeight()) {
-        	setHeadPosition((int)getHeadPosition().getX(), 20);
+        	setHeadPosition((int)getHeadPosition().getX(), 26);
         }
-        else if (getHeadPosition().getY() < 20) {
+        else if (getHeadPosition().getY() < 26) {
         	setHeadPosition((int)getHeadPosition().getX(), MainFrame.getFrameHeight());
         }
-        else if (getHeadPosition().getX() >= 300) {
+        else if (getHeadPosition().getX() >= MainFrame.getFrameWidth()) {
         	setHeadPosition(0, (int)getHeadPosition().getY());
         }
         else if (getHeadPosition().getX() < 0) {
-        	setHeadPosition(300, (int)getHeadPosition().getY());    
+        	setHeadPosition(MainFrame.getFrameWidth(), (int)getHeadPosition().getY());    
         }
         
     }

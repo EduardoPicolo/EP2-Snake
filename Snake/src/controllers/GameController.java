@@ -2,8 +2,6 @@ package controllers;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -104,7 +102,7 @@ public class GameController implements Runnable, KeyListener{
 			endTime = System.nanoTime() - startTime;
 			sleep = DELAY - endTime/1000000L;
 			if(sleep < 0) {
-				sleep = 10;
+				sleep = 1;
 			}
 			
 			try {

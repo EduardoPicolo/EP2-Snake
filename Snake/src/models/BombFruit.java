@@ -17,7 +17,7 @@ public class BombFruit extends FruitSprite {
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/BombFruit10px.png");
+        ImageIcon iia = new ImageIcon("./src/assets/BombFruit13px.png");
         fruit_image = iia.getImage();
 	}
 }

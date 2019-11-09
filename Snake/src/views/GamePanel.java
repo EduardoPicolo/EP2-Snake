@@ -75,11 +75,11 @@ public class GamePanel extends JPanel{
     	}
 	    
     	g2d.setColor(Color.YELLOW);
-    	g2d.fillRect(200, 120, 10, 30);
-    	g2d.fillRect(170, 110, 40, 10);
+    	g2d.fillRect(247, 156, 13, 39);
+    	g2d.fillRect(208, 143, 52, 13);
     	
-    	g2d.fillRect(100, 160, 10, 30);
-    	g2d.fillRect(100, 190, 40, 10);
+    	g2d.fillRect(130, 208, 13, 39);
+    	g2d.fillRect(130, 247, 52, 13);
     	
     	header.updateLabel(score);
 	    Toolkit.getDefaultToolkit().sync(); 

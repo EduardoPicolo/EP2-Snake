@@ -12,6 +12,7 @@ import java.util.List;
 import controllers.GameController;
 import util.Directions;
 import views.GamePanel;
+import views.MainFrame;
 
 public abstract class SnakeSprite {
 	protected LinkedList<Point> snakeBody;
@@ -28,7 +29,7 @@ public abstract class SnakeSprite {
     	loadImages();
     	setImageDimension();
     	snakeBody = new LinkedList<Point>();
-    	snakeBody.add(new Point(100,150));
+    	snakeBody.add(new Point(169,169));
     	score_multiplier = 1;
 //    	direction = Directions.RIGHT;
     }
@@ -69,8 +70,8 @@ public abstract class SnakeSprite {
 			}    		
     	}
     	
-    	if(snakeBody.getFirst().getY() >= 300 || snakeBody.getFirst().getY() < 20 ||
-    			snakeBody.getFirst().getX() >= 300 || snakeBody.getFirst().getX() < 0) {
+    	if(snakeBody.getFirst().getY() >= MainFrame.getFrameHeight() || snakeBody.getFirst().getY() < 20 ||
+    			snakeBody.getFirst().getX() >= MainFrame.getFrameWidth() || snakeBody.getFirst().getX() < 0) {
     		GameController.setGameOver();
     	}
     }

@@ -15,8 +15,8 @@ import controllers.MenuController;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
-	private static final int SCREEN_WIDTH = 300;
-	private static final int SCREEN_HEIGHT = 300;
+	private static final int SCREEN_WIDTH = 377;
+	private static final int SCREEN_HEIGHT = 377;
 	
 	private MenuController controller;
 	private MainMenu mainMenu;

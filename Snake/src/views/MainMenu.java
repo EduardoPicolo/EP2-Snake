@@ -18,15 +18,16 @@ import javax.swing.plaf.ColorChooserUI;
 
 import controllers.MenuController;
 import javax.swing.UIManager;
+import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel{
-//	private MainFrame gameFrame;
 	
 	public MainMenu(ActionListener listener) {
 		setBackground(Color.BLACK);
 		
 		JLabel lblSnake = new JLabel("SNAKE");
+		lblSnake.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSnake.setForeground(UIManager.getColor("text"));
 		lblSnake.setFont(new Font("Dialog", Font.BOLD, 20));
 		
@@ -51,47 +52,26 @@ public class MainMenu extends JPanel{
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-					.addGap(96)
+					.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
 					.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(113)
+					.addGap(115)
 					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(111))
+					.addGap(109))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(54)
+					.addGap(52)
 					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-					.addGap(98)
+					.addGap(137)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnPlay, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(99))
+						.addComponent(btnPlay)
+						.addComponent(btnExit))
+					.addGap(62))
 		);
 		setLayout(groupLayout);
-		
-//		this.gameFrame = gameFrame;
 	}
-	
-//	@Override
-//	public void actionPerformed(ActionEvent e) {
-//		switch(e.getActionCommand()) {
-//			case "PLAY":
-//				System.out.println("PLAY");
-////				gameFrame.startGame();
-//				gameFrame.snakeSelection();
-//			break;
-//			case "EXIT":
-//				System.out.println("EXIT");
-//				System.exit(0);
-//			break;
-//			
-//			default:
-//			break;
-//		}
-//	}
-
 }

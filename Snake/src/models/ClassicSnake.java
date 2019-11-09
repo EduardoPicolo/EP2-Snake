@@ -9,10 +9,10 @@ public class ClassicSnake extends SnakeSprite {
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/dot.png");
+        ImageIcon iid = new ImageIcon("./src/assets/body13px.png");
         snake_body_image = iid.getImage();
 
-        ImageIcon iih = new ImageIcon("./src/assets/head10px.png");
+        ImageIcon iih = new ImageIcon("./src/assets/GreenHead13px.png");
         snake_head_image = iih.getImage();
     }
 }

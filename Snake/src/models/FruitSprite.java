@@ -38,8 +38,8 @@ public abstract class FruitSprite {
     	Point p;
     	do {
     		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/fruit_image_width))*fruit_image_width;
-    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-20)/fruit_image_height))*fruit_image_height;
-    		Y += 20;
+    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/fruit_image_height))*fruit_image_height;
+    		Y += 26;
     		p = new Point(X,Y);
     	}while(GameController.getOccupiedPositions().contains(p));
     	position.setLocation(X,Y);

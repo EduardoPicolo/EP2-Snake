@@ -16,7 +16,7 @@ public class BigFruit extends FruitSprite {
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/BigFruit10px.png");
+        ImageIcon iia = new ImageIcon("./src/assets/BigFruit13px.png");
         fruit_image = iia.getImage();
 	}
 }
