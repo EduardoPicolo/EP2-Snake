@@ -88,7 +88,7 @@ public class SnakeSelection extends JPanel{
 		btnConfirm.setActionCommand("CONFIRM");
 		btnConfirm.addActionListener(listener);
 		btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnConfirm.setBackground(Color.CYAN);
+		btnConfirm.setBackground(new Color(0, 255, 0));
 		btnConfirm.setForeground(Color.black);
 		add(btnConfirm);		
 	}

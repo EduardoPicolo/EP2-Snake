@@ -1,6 +1,7 @@
 package controllers;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -26,6 +27,7 @@ public class GameController implements Runnable, KeyListener{
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
+	private static List<Point> occupiedPositions;
 	private Directions direction;
 	
 	private GamePanel gamePanel;
@@ -38,6 +40,7 @@ public class GameController implements Runnable, KeyListener{
 		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
 		fruits = new ArrayList<FruitSprite>();
+		occupiedPositions = new ArrayList<Point>();
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		snake = new ClassicSnake();
@@ -60,7 +63,8 @@ public class GameController implements Runnable, KeyListener{
 				snake = new KittySnake();
 				break;
 		}
-
+		
+//		occupiedPositions = snake.getSnakeBody();
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		
@@ -75,6 +79,7 @@ public class GameController implements Runnable, KeyListener{
     			fruits.get(i).specialEffect(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
     			gamePanel.updateScore(score);
+    			occupiedPositions.remove(fruits.get(i).getPosition());
     			fruits.remove(i);
     		}
     	}
@@ -99,7 +104,7 @@ public class GameController implements Runnable, KeyListener{
 			endTime = System.nanoTime() - startTime;
 			sleep = DELAY - endTime/1000000L;
 			if(sleep < 0) {
-				sleep = 1;
+				sleep = 10;
 			}
 			
 			try {
@@ -162,6 +167,16 @@ public class GameController implements Runnable, KeyListener{
 	}
 	public static void setGameOver() {
 		running = false;
+	}
+	
+	public static List<Point> getOccupiedPositions(){
+		return occupiedPositions;
+	}
+	public static void addOccupiedPosition(Point p) {
+		occupiedPositions.add(p);
+	}
+	public static void removeOccupiedPosition(Point p) {
+		occupiedPositions.remove(p);
 	}
 	
 	public void setScore(int value) {

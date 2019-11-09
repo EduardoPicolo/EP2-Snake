@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.Random;
 
+import controllers.GameController;
 import views.GamePanel;
 import views.MainFrame;
 
@@ -33,10 +34,14 @@ public abstract class FruitSprite {
 	
     public void generateLocation() {
     	Random randomInt = new Random();
-    	
-    	int X = randomInt.nextInt((int)(300/fruit_image_width))*fruit_image_width;
-    	int Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-20)/fruit_image_height))*fruit_image_height;
-    	Y += 20;
+    	int X,Y;
+    	Point p;
+    	do {
+    		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/fruit_image_width))*fruit_image_width;
+    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-20)/fruit_image_height))*fruit_image_height;
+    		Y += 20;
+    		p = new Point(X,Y);
+    	}while(GameController.getOccupiedPositions().contains(p));
     	position.setLocation(X,Y);
     }
     

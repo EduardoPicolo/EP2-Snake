@@ -57,23 +57,30 @@ public class GamePanel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         if(GameController.isRunning()) {
-        	doDrawing();
+        	doDrawing(g2d);
         }
         else {
         	System.out.println("GAMEOVER");
         }
     }
     
-    private void doDrawing() {
+    private void doDrawing(Graphics2D g) {
     	for(int i=0; i<fruits.size(); i++) {
-    		g2d.drawImage(fruits.get(i).getFruitImage(), (int)fruits.get(i).getPosition().getX(), (int)fruits.get(i).getPosition().getY(), this);
+    		g.drawImage(fruits.get(i).getFruitImage(), (int)fruits.get(i).getPosition().getX(), (int)fruits.get(i).getPosition().getY(), this);
     	}
     	
-    	g2d.drawImage(snake.getSnakeHead_Image(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
+    	g.drawImage(snake.getSnakeHead_Image(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
     	for(int i=1; i<snake.getBodySize(); i++ ) {
-    		g2d.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
+    		g.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
+    	g2d.setColor(Color.YELLOW);
+    	g2d.fillRect(200, 120, 10, 30);
+    	g2d.fillRect(170, 110, 40, 10);
+    	
+    	g2d.fillRect(100, 160, 10, 30);
+    	g2d.fillRect(100, 190, 40, 10);
+    	
     	header.updateLabel(score);
 	    Toolkit.getDefaultToolkit().sync(); 
     }

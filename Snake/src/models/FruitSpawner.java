@@ -20,6 +20,7 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		
 		fruits.addFirst(new SimpleFruit());
+//		GameController.addOccupiedPosition(fruits.getFirst().getPosition());
 	}
 	
 	@Override
@@ -27,6 +28,7 @@ public class FruitSpawner implements Runnable{
 		specialTimer.scheduleAtFixedRate(new TimerTask(){
 			public void run() {
 				if(fruits.size() > 1) {
+					GameController.removeOccupiedPosition(fruits.getLast().getPosition());
 					fruits.removeLast();
 				}
 				else {
@@ -43,6 +45,7 @@ public class FruitSpawner implements Runnable{
 						default:
 							break;
 					}
+					GameController.addOccupiedPosition(fruits.getLast().getPosition());
 				}
 			}
 		}, 15000, SPECIAL_FRUIT_TIME);
@@ -51,6 +54,7 @@ public class FruitSpawner implements Runnable{
 			
 			if(!(fruits.stream().anyMatch(x -> x instanceof SimpleFruit))) {
 				fruits.addFirst(new SimpleFruit());
+				GameController.addOccupiedPosition(fruits.getFirst().getPosition());
 			}
 			
 //			fruits.addLast(new BombFruit());

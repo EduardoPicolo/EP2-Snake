@@ -42,13 +42,12 @@ public class MainFrame extends JFrame {
 		content = new JPanel();
 		content.setOpaque(true);
 		content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));
-		content.setBackground(Color.BLACK);
 		setContentPane(content);
 		setResizable(false);
 		pack();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-//		setVisible(true);
+		setVisible(true);
 	}
 	
 	public static int getFrameWidth() {
