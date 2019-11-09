@@ -2,6 +2,7 @@ package controllers;
 
 import java.awt.BorderLayout;
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class GameController implements Runnable, KeyListener{
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
 	private static List<Point> occupiedPositions;
+	private List<Rectangle> barrierPosition;
 	private Directions direction;
 	
 	private GamePanel gamePanel;
@@ -42,12 +44,17 @@ public class GameController implements Runnable, KeyListener{
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		snake = new ClassicSnake();
+		barrierPosition = new ArrayList<>();
 	}
 	
 	public void initGame(int selectedSnake) {
 		running = true;
 		score = 0;
 		direction = null;
+		barrierPosition.add(new Rectangle(247, 143, 13, 39));
+		barrierPosition.add(new Rectangle(208, 130, 52, 13));
+		barrierPosition.add(new Rectangle(130, 208, 13, 39));
+		barrierPosition.add(new Rectangle(130, 247, 52, 13));
 		gamePanel.updateScore(score);
 		
 		switch(selectedSnake) {
@@ -82,6 +89,14 @@ public class GameController implements Runnable, KeyListener{
     		}
     	}
 	}
+	
+	public void checkBarrierCollision() {
+		for(Rectangle r : barrierPosition) {
+			if(snake.getBounds().get(0).intersects(r)) {
+				setGameOver();
+			}
+		}
+	}
 
 	@Override
 	public void run() {
@@ -96,6 +111,9 @@ public class GameController implements Runnable, KeyListener{
 			
 			snake.move();
 			snake.checkCollision();
+			if(!(snake instanceof KittySnake)) {
+				checkBarrierCollision();
+			}
 			checkAteFruit();
 			gamePanel.repaint();
 			
@@ -170,6 +188,7 @@ public class GameController implements Runnable, KeyListener{
 	public static List<Point> getOccupiedPositions(){
 		return occupiedPositions;
 	}
+	
 	public static void addOccupiedPosition(Point p) {
 		occupiedPositions.add(p);
 	}

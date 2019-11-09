@@ -65,8 +65,17 @@ public class GamePanel extends JPanel{
     }
     
     private void doDrawing(Graphics2D g) {
-    	for(int i=0; i<fruits.size(); i++) {
-    		g.drawImage(fruits.get(i).getFruitImage(), (int)fruits.get(i).getPosition().getX(), (int)fruits.get(i).getPosition().getY(), this);
+    	g2d.setColor(Color.YELLOW);
+    	g2d.fillRect(247, 143, 13, 39);
+    	g2d.fillRect(208, 130, 52, 13);
+    	
+    	g2d.fillRect(130, 208, 13, 39);
+    	g2d.fillRect(130, 247, 52, 13);
+    	
+    	if(!fruits.isEmpty()) {
+	    	for(int i=0; i<fruits.size(); i++) {
+	    		g.drawImage(fruits.get(i).getFruitImage(), (int)fruits.get(i).getPosition().getX(), (int)fruits.get(i).getPosition().getY(), this);
+	    	}
     	}
     	
     	g.drawImage(snake.getSnakeHead_Image(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
@@ -74,12 +83,6 @@ public class GamePanel extends JPanel{
     		g.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
-    	g2d.setColor(Color.YELLOW);
-    	g2d.fillRect(247, 156, 13, 39);
-    	g2d.fillRect(208, 143, 52, 13);
-    	
-    	g2d.fillRect(130, 208, 13, 39);
-    	g2d.fillRect(130, 247, 52, 13);
     	
     	header.updateLabel(score);
 	    Toolkit.getDefaultToolkit().sync(); 
