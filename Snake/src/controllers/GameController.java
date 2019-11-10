@@ -105,8 +105,8 @@ public class GameController implements Runnable, KeyListener{
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
 		
-		long loopStartTime, loopElapsedTime, sleep, currentTime;
-		currentTime = System.currentTimeMillis();
+		long loopStartTime, loopElapsedTime, sleep, startTime;
+		startTime = System.currentTimeMillis();
 		
 		while(running) {
 			loopStartTime = System.nanoTime();
@@ -118,7 +118,7 @@ public class GameController implements Runnable, KeyListener{
 				checkBarrierCollision();
 			}
 			checkAteFruit();
-			gamePanel.updateHeader(score, currentTime);
+			gamePanel.updateHeader(score, startTime);
 			gamePanel.repaint();
 			
 			loopElapsedTime = System.nanoTime() - loopStartTime;
