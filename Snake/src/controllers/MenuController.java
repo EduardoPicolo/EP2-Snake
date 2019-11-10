@@ -7,6 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import models.Menus;
 import views.GameHeader;
 import views.GameOverPanel;
 import views.GamePanel;
@@ -20,38 +21,10 @@ public class MenuController implements ActionListener{
 	private final int KITTY = 3;
 	private int chosenSnake;
 	
-	private MainFrame frame;
+	private Menus menu;
 	
-	public MenuController(MainFrame frame) {
-		this.frame = frame;
-	}
-	
-	public void mainMenu() {
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(frame.getMainMenu());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
-	}
-	
-	public void snakeSelection() {
-		chosenSnake = CLASSIC;
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(frame.getSnakeSelection());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
-	}
-	
-	public void startGame() {
-		frame.getGamePanel().removeAll();
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		GameController game = new GameController(frame.getGamePanel(), frame.getGameOverPanel());
-		frame.getContentPane().add(frame.getGamePanel());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
-		game.initGame(chosenSnake);
+	public MenuController(Menus menu) {
+		this.menu = menu;
 	}
 
 	@Override
@@ -59,7 +32,7 @@ public class MenuController implements ActionListener{
 		switch(e.getActionCommand()) {
 			case "PLAY":
 				System.out.println("PLAY");
-				snakeSelection();
+				menu.snakeSelection();
 			break;
 			case "EXIT":
 				System.out.println("EXIT");
@@ -83,16 +56,16 @@ public class MenuController implements ActionListener{
 			
 			case "CONFIRM":
 				System.out.println("CONFIRM: "+chosenSnake);
-				startGame();
+				menu.gamePanel(chosenSnake);
 			break;
 			
 			case "MENU":
 				System.out.println("MENU");
-				mainMenu();
+				menu.mainMenu();
 			break;
 			case "RESTART":
 				System.out.println("RESTART");
-				startGame();
+				menu.gamePanel(chosenSnake);
 			break;
 			
 			default:

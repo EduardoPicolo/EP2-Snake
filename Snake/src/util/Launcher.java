@@ -2,7 +2,7 @@ package util;
 
 import java.awt.EventQueue;
 
-import views.MainFrame;
+import models.Menus;
 
 public class Launcher {
 
@@ -10,8 +10,7 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
+					new Menus();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

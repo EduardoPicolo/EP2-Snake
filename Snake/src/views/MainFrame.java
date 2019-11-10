@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import controllers.GameController;
 import controllers.MenuController;
+import models.Menus;
 
 @SuppressWarnings("serial")
 public class MainFrame extends JFrame {
@@ -25,15 +26,13 @@ public class MainFrame extends JFrame {
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
 		
-	public MainFrame() {
+	public MainFrame(Menus menu) {
 		initFrame();
-		controller = new MenuController(this);
+		controller = new MenuController(menu);
 		mainMenu = new MainMenu(controller);
 		snakeSelection = new SnakeSelection(controller);
 		gamePanel = new GamePanel();
 		gameOverPanel = new GameOverPanel(controller);
-
-		controller.mainMenu();
 	}
 	private void initFrame() {
 		setTitle("Snake");
