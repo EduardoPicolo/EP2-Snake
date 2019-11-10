@@ -26,7 +26,7 @@ public class GameController implements Runnable, KeyListener{
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
-	private static List<Point> occupiedPositions;
+	private static List<Rectangle> occupiedPositions;
 	private List<Rectangle> obstacles;
 	private Directions direction;
 	
@@ -40,7 +40,7 @@ public class GameController implements Runnable, KeyListener{
 		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
 		fruits = new ArrayList<FruitSprite>();
-		occupiedPositions = new ArrayList<Point>();
+		occupiedPositions = new ArrayList<Rectangle>();
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		snake = new ClassicSnake();
@@ -69,7 +69,7 @@ public class GameController implements Runnable, KeyListener{
 		}
 		
 		for(Rectangle r : obstacles) {
-			occupiedPositions.add(r.getLocation());
+			occupiedPositions.add(r);
 		}
 		
 		fruitSpawner = new FruitSpawner();
@@ -85,7 +85,7 @@ public class GameController implements Runnable, KeyListener{
 //    		if(snake.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
     			fruits.get(i).skill(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
-    			occupiedPositions.remove(fruits.get(i).getPosition());
+    			occupiedPositions.remove(fruits.get(i).getBounds());
     			fruits.remove(i);
     		}
     	}
@@ -188,14 +188,14 @@ public class GameController implements Runnable, KeyListener{
 		running = false;
 	}
 	
-	public static List<Point> getOccupiedPositions(){
+	public static List<Rectangle> getOccupiedPositions(){
 		return occupiedPositions;
 	}
 	
-	public static void addOccupiedPosition(Point p) {
+	public static void addOccupiedPosition(Rectangle p) {
 		occupiedPositions.add(p);
 	}
-	public static void removeOccupiedPosition(Point p) {
+	public static void removeOccupiedPosition(Rectangle p) {
 		occupiedPositions.remove(p);
 	}
 	

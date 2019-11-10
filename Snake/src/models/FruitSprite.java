@@ -3,6 +3,7 @@ package models;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.util.ConcurrentModificationException;
 import java.util.Random;
 
 import controllers.GameController;
@@ -35,13 +36,24 @@ public abstract class FruitSprite implements SpecialSkill{
     public void generateLocation() {
     	Random randomInt = new Random();
     	int X,Y;
-    	Point p;
+    	Point[] p = {new Point(0,0)};
+    	boolean occupiedPos = false;
     	do {
     		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/image_width))*image_width;
     		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/image_height))*image_height;
     		Y += 26;
-    		p = new Point(X,Y);
-    	}while(GameController.getOccupiedPositions().contains(p.getLocation()));
+    		p[0] = new Point(X,Y);
+    		try {
+	    		if(GameController.getOccupiedPositions().stream()
+    				.anyMatch(rect -> rect.intersects(new Rectangle((int)p[0].getX(), (int)p[0].getY(), image_width, image_height))))
+	    			occupiedPos = true;
+	    		else 
+	    			occupiedPos = false;
+    		}catch(ConcurrentModificationException e) {
+    			System.out.println("Concurrent Modification, ignore.");
+    			continue;
+    		}
+    	}while(occupiedPos);
     	position.setLocation(X,Y);
     }
     

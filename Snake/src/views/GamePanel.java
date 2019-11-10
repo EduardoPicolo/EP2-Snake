@@ -55,12 +55,18 @@ public class GamePanel extends JPanel{
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        if(GameController.isRunning()) {
-        	doDrawing(g2d);
+        try {
+        	if(GameController.isRunning()) {
+        		doDrawing(g2d);
+        	}
+        	else {
+        		System.out.println("GAMEOVER");
+        	}
+        }catch(NullPointerException e) {
+        	System.out.println("Failed to load/draw image!");
+        	e.printStackTrace();
         }
-        else {
-        	System.out.println("GAMEOVER");
-        }
+        
     }
     
     private void doDrawing(Graphics2D g) {
