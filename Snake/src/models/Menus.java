@@ -9,46 +9,46 @@ import util.Snakes;
 import views.Display;
 
 public class Menus {
-	private Display frame;
+	private Display display;
 	
 	public Menus() {
-		frame = new Display(this);
+		display = new Display(this);
 		mainMenu();
 	}
 	
 	public void mainMenu() {
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(frame.getMainMenu());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
+		display.getContentPane().removeAll();
+		((JComponent)display.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		display.getContentPane().add(display.getMainMenu());
+		display.getContentPane().validate();
+		display.getContentPane().repaint();
 	}
 	
 	public void snakeSelection() {
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		frame.getContentPane().add(frame.getSnakeSelection());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
+		display.getContentPane().removeAll();
+		((JComponent)display.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		display.getContentPane().add(display.getSnakeSelection());
+		display.getContentPane().validate();
+		display.getContentPane().repaint();
 	}
 	
 	public void gamePanel(Snakes chosenSnake, Difficulties chosenDifficulty) {
-		frame.getGamePanel().removeAll();
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		GameController game = new GameController(frame.getGamePanel(), frame.getGameOverPanel());
-		frame.getContentPane().add(frame.getGamePanel());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
+		display.getGamePanel().removeAll();
+		display.getContentPane().removeAll();
+		((JComponent)display.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		GameController game = new GameController(display.getGamePanel(), display.getGameOverPanel());
+		display.getContentPane().add(display.getGamePanel());
+		display.getContentPane().validate();
+		display.getContentPane().repaint();
 		game.setDifficulty(chosenDifficulty);
 		game.initGame(chosenSnake);
 	}
 	
 	public void clearSelections() {
-		frame.getSnakeSelection().clearSelections();
+		display.getSnakeSelection().clearSelections();
 	}
 	
 	public Display getDisplay() {
-		return frame;
+		return display;
 	}
 }

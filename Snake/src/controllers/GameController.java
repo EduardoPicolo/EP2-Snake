@@ -11,6 +11,7 @@ import models.ClassicSnake;
 import models.FruitSpawner;
 import models.FruitSprite;
 import models.KittySnake;
+import models.BarrierCreator;
 import models.SnakeSprite;
 import models.StarSnake;
 import util.Difficulties;
@@ -27,8 +28,9 @@ public class GameController implements Runnable, KeyListener{
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
+	private BarrierCreator barrierCreator;
 	private static List<Rectangle> occupiedPositions;
-	private List<Rectangle> obstacles;
+	private List<Rectangle> barrier;
 	private Directions direction;
 	private Difficulties difficulty;
 	
@@ -43,10 +45,11 @@ public class GameController implements Runnable, KeyListener{
 		gamePanel.addKeyListener(this);
 		snake = new ClassicSnake();
 		fruits = new ArrayList<FruitSprite>();
+		barrierCreator = new BarrierCreator();
+		barrier = new ArrayList<Rectangle>();
 		occupiedPositions = new ArrayList<Rectangle>();
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
-		obstacles = new ArrayList<Rectangle>();
 	}
 	
 	public void initGame(Snakes chosenSnake) {
@@ -74,11 +77,11 @@ public class GameController implements Runnable, KeyListener{
 				break;
 			case NORMAL: 
 				DELAY = 85;
-				addObstacles();
+				addBarrier();
 				break;
 			case HARD:
 				DELAY = 65;
-				addObstacles();
+				addBarrier();
 				break;
 			default:
 				DELAY = 100;
@@ -92,20 +95,26 @@ public class GameController implements Runnable, KeyListener{
 		loop.start();
 	}
 	
-	public void addObstacles() {
-		obstacles.add(new Rectangle(247, 143, 13, 39));
-		obstacles.add(new Rectangle(208, 130, 52, 13));
-		obstacles.add(new Rectangle(130, 208, 13, 39));
-		obstacles.add(new Rectangle(130, 247, 52, 13));
-		for(Rectangle r : obstacles) {
+	public void addBarrier() {
+		switch(difficulty) {
+			case NORMAL:
+				barrierCreator.createHalfBarrier();
+			break;
+			case HARD:
+				barrierCreator.createFullBarrier();
+			break;
+			default:
+				break;
+		}
+		for(Rectangle r : barrierCreator.getBarrier()) {
 			occupiedPositions.add(r);
+			barrier.add(r);
 		}
 	}
 	
 	public void checkAteFruit() {
 		for(int i=0; i<fruits.size() ; i++) {
     		if(snake.getHeadPosition().equals(fruits.get(i).getPosition())) {
-//    		if(snake.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
     			fruits.get(i).skill(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
     			occupiedPositions.remove(fruits.get(i).getBounds());
@@ -115,7 +124,7 @@ public class GameController implements Runnable, KeyListener{
 	}
 	
 	public void checkBarrierCollision() {
-		for(Rectangle r : obstacles) {
+		for(Rectangle r : barrier) {
 			if(snake.getBounds().get(0).intersects(r)) {
 				setGameOver();
 			}
@@ -127,7 +136,7 @@ public class GameController implements Runnable, KeyListener{
 		this.fruits = fruitSpawner.getFruits();
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
-		gamePanel.setObstacles(obstacles);
+		gamePanel.setBarrier(barrier);
 		gamePanel.setHeaderDifficulty(difficulty.toString());
 		
 		long loopStartTime, loopElapsedTime, sleep, startTime;
@@ -148,14 +157,11 @@ public class GameController implements Runnable, KeyListener{
 			
 			loopElapsedTime = System.nanoTime() - loopStartTime;
 			sleep = DELAY - loopElapsedTime/1000000L;
-			if(sleep < 0) {
-				sleep = 0;
-			}
+			if(sleep < 0) sleep = 0;
 			
 			try {
 				Thread.sleep(sleep);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

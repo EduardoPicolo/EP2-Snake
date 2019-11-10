@@ -21,7 +21,7 @@ public class GamePanel extends JPanel{
     
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
-	private List<Rectangle> obstacles;
+	private List<Rectangle> barrier;
 	
 	private GameHeader header;
 	
@@ -63,7 +63,7 @@ public class GamePanel extends JPanel{
     
     private void doDrawing(Graphics2D g) {
     	g2d.setColor(Color.YELLOW);
-    	for(Rectangle r : obstacles) {
+    	for(Rectangle r : barrier) {
     		g2d.fill(r);
     	}
     	
@@ -87,8 +87,8 @@ public class GamePanel extends JPanel{
 	public void setFruits(List<FruitSprite> fruitList) {
 		fruits = fruitList;
 	}
-	public void setObstacles(List<Rectangle> obstacles) {
-		this.obstacles = obstacles;
+	public void setBarrier(List<Rectangle> barrier) {
+		this.barrier = barrier;
 	}
 	
 	public void updateHeader(int score, long time) {
