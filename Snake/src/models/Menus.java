@@ -40,7 +40,8 @@ public class Menus {
 		frame.getContentPane().add(frame.getGamePanel());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
-		game.initGame(chosenSnake, chosenDifficulty);
+		game.setDifficulty(chosenDifficulty);
+		game.initGame(chosenSnake);
 	}
 	
 	public void clearSelections() {

@@ -30,6 +30,7 @@ public class GameController implements Runnable, KeyListener{
 	private static List<Rectangle> occupiedPositions;
 	private List<Rectangle> obstacles;
 	private Directions direction;
+	private Difficulties difficulty;
 	
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
@@ -48,7 +49,7 @@ public class GameController implements Runnable, KeyListener{
 		obstacles = new ArrayList<Rectangle>();
 	}
 	
-	public void initGame(Snakes chosenSnake, Difficulties difficulty) {
+	public void initGame(Snakes chosenSnake) {
 		running = true;
 		score = 0;
 		direction = null;
@@ -127,6 +128,7 @@ public class GameController implements Runnable, KeyListener{
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
 		gamePanel.setObstacles(obstacles);
+		gamePanel.setHeaderDifficulty(difficulty.toString());
 		
 		long loopStartTime, loopElapsedTime, sleep, startTime;
 		startTime = System.currentTimeMillis();
@@ -210,11 +212,14 @@ public class GameController implements Runnable, KeyListener{
 	public static void setGameOver() {
 		running = false;
 	}
+	public void setDifficulty(Difficulties dif) {
+		this.difficulty = dif;
+	}
+	
 	
 	public static List<Rectangle> getOccupiedPositions(){
 		return occupiedPositions;
 	}
-	
 	public static void addOccupiedPosition(Rectangle p) {
 		occupiedPositions.add(p);
 	}

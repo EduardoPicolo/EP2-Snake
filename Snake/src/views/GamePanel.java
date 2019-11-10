@@ -92,7 +92,11 @@ public class GamePanel extends JPanel{
 	}
 	
 	public void updateHeader(int score, long time) {
-		header.updateLabel(score, time);
+		header.updateHeader(score, time);
+	}
+	
+	public void setHeaderDifficulty(String difficulty) {
+		header.setLblDifficulty(difficulty);
 	}
 	
 }
