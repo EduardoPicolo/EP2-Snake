@@ -23,8 +23,9 @@ import views.GamePanel;
 public class GameController implements Runnable, KeyListener{
 	private static int DELAY = 100;
 	private static boolean running;
-	private int score;
+	private boolean isPaused;
 	
+	private int score;
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
@@ -33,10 +34,8 @@ public class GameController implements Runnable, KeyListener{
 	private List<Rectangle> barrier;
 	private Directions direction;
 	private Difficulties difficulty;
-	
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
-
 	private Thread loop;
 	
 	public GameController(GamePanel panel, GameOverPanel gameOverPanel) {
@@ -54,6 +53,7 @@ public class GameController implements Runnable, KeyListener{
 	
 	public void initGame(Snakes chosenSnake) {
 		running = true;
+		isPaused = false;
 		score = 0;
 		direction = null;
 		switch(chosenSnake) {
@@ -187,6 +187,17 @@ public class GameController implements Runnable, KeyListener{
 					snake.setDirection(direction);
 				}
 			break;
+			case KeyEvent.VK_P:
+				System.out.println("OKOK");
+				if(isPaused) {
+					loop.resume();
+					isPaused = false;
+				}
+				else {
+					loop.suspend();
+					isPaused = true;
+				}
+				break;
 			default:
 				break;
 		}
