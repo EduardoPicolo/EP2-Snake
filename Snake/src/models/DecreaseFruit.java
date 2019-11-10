@@ -8,7 +8,7 @@ public class DecreaseFruit extends FruitSprite {
 	}
 	
 	@Override
-	public void specialEffect(SnakeSprite snake) {
+	public void skill(SnakeSprite snake) {
 		scoreValue = 0;
 		snake.getSnakeBody().subList(1, snake.getBodySize()).clear();
 	}
@@ -16,6 +16,6 @@ public class DecreaseFruit extends FruitSprite {
 	@Override
 	protected void loadImage() {
         ImageIcon iia = new ImageIcon("./src/assets/DecreaseFruit13px.png");
-        fruit_image = iia.getImage();
+        image = iia.getImage();
 	}
 }

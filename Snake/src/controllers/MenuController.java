@@ -54,14 +54,6 @@ public class MenuController implements ActionListener{
 		game.initGame(chosenSnake);
 	}
 
-	public void gameOver() {
-		frame.getContentPane().removeAll();
-		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(50, 25, 50, 25));
-		frame.getContentPane().add(frame.getGameOverPanel());
-		frame.getContentPane().validate();
-		frame.getContentPane().repaint();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {

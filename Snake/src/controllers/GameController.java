@@ -27,7 +27,7 @@ public class GameController implements Runnable, KeyListener{
 	private List<FruitSprite> fruits;
 	private FruitSpawner fruitSpawner;
 	private static List<Point> occupiedPositions;
-	private List<Rectangle> obstacle;
+	private List<Rectangle> obstacles;
 	private Directions direction;
 	
 	private GamePanel gamePanel;
@@ -44,17 +44,17 @@ public class GameController implements Runnable, KeyListener{
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		snake = new ClassicSnake();
-		obstacle = new ArrayList<>();
+		obstacles = new ArrayList<>();
 	}
 	
 	public void initGame(int chosenSnake) {
 		running = true;
 		score = 0;
 		direction = null;
-		obstacle.add(new Rectangle(247, 143, 13, 39));
-		obstacle.add(new Rectangle(208, 130, 52, 13));
-		obstacle.add(new Rectangle(130, 208, 13, 39));
-		obstacle.add(new Rectangle(130, 247, 52, 13));
+		obstacles.add(new Rectangle(247, 143, 13, 39));
+		obstacles.add(new Rectangle(208, 130, 52, 13));
+		obstacles.add(new Rectangle(130, 208, 13, 39));
+		obstacles.add(new Rectangle(130, 247, 52, 13));
 		
 		switch(chosenSnake) {
 			case 1:
@@ -68,11 +68,10 @@ public class GameController implements Runnable, KeyListener{
 				break;
 		}
 		
-		for(Rectangle r : obstacle) {
+		for(Rectangle r : obstacles) {
 			occupiedPositions.add(r.getLocation());
 		}
 		
-		gamePanel.updateScore(score);
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 		
@@ -84,9 +83,8 @@ public class GameController implements Runnable, KeyListener{
 		for(int i=0; i<fruits.size() ; i++) {
     		if(snake.getHeadPosition().equals(fruits.get(i).getPosition())) {
 //    		if(snake.getBounds().get(0).intersects(fruits.get(i).getBounds())) {
-    			fruits.get(i).specialEffect(snake);
+    			fruits.get(i).skill(snake);
     			score += snake.getScoreMultiplier() * fruits.get(i).getScoreValue();
-    			gamePanel.updateScore(score);
     			occupiedPositions.remove(fruits.get(i).getPosition());
     			fruits.remove(i);
     		}
@@ -94,7 +92,7 @@ public class GameController implements Runnable, KeyListener{
 	}
 	
 	public void checkBarrierCollision() {
-		for(Rectangle r : obstacle) {
+		for(Rectangle r : obstacles) {
 			if(snake.getBounds().get(0).intersects(r)) {
 				setGameOver();
 			}
@@ -120,6 +118,7 @@ public class GameController implements Runnable, KeyListener{
 				checkBarrierCollision();
 			}
 			checkAteFruit();
+			gamePanel.updateHeader(score, currentTime);
 			gamePanel.repaint();
 			
 			loopElapsedTime = System.nanoTime() - loopStartTime;
@@ -134,7 +133,6 @@ public class GameController implements Runnable, KeyListener{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			gamePanel.updateHeader(score, currentTime);
 		}
 		gamePanel.add(gameOverPanel, BorderLayout.CENTER);
 		gamePanel.validate();
@@ -201,11 +199,4 @@ public class GameController implements Runnable, KeyListener{
 		occupiedPositions.remove(p);
 	}
 	
-	public void setScore(int value) {
-		this.score = value;
-	}
-		
-	public GamePanel getGamePanel() {
-		return gamePanel;
-	}
 }

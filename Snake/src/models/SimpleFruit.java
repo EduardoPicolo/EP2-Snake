@@ -8,15 +8,14 @@ public class SimpleFruit extends FruitSprite{
 	}
 	
 	@Override
-	public void specialEffect(SnakeSprite snake) {
+	public void skill(SnakeSprite snake) {
 		scoreValue = 1;
 		snake.increaseBody();
 	}
 	
 	@Override
 	protected void loadImage() {
-//        ImageIcon iia = new ImageIcon("./src/assets/SimpleFruit10px.png");
 		ImageIcon iia = new ImageIcon("./src/assets/SimpleFruit13px.png");
-        fruit_image = iia.getImage();
+        image = iia.getImage();
 	}
 }

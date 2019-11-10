@@ -9,13 +9,13 @@ import controllers.GameController;
 import views.GamePanel;
 import views.MainFrame;
 
-public abstract class FruitSprite {
+public abstract class FruitSprite implements SpecialSkill{
 	protected Point position;
 	protected int scoreValue;
 	
-	protected Image fruit_image;
-	protected int fruit_image_width;
-	protected int fruit_image_height;
+	protected Image image;
+	protected int image_width;
+	protected int image_height;
 	
 	public FruitSprite() {
 		scoreValue = 1;
@@ -28,8 +28,8 @@ public abstract class FruitSprite {
 	protected abstract void loadImage();
 	
 	protected void setDimension() {
-		fruit_image_width = fruit_image.getWidth(null);
-		fruit_image_height = fruit_image.getHeight(null);
+		image_width = image.getWidth(null);
+		image_height = image.getHeight(null);
 	}
 	
     public void generateLocation() {
@@ -37,8 +37,8 @@ public abstract class FruitSprite {
     	int X,Y;
     	Point p;
     	do {
-    		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/fruit_image_width))*fruit_image_width;
-    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/fruit_image_height))*fruit_image_height;
+    		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/image_width))*image_width;
+    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/image_height))*image_height;
     		Y += 26;
     		p = new Point(X,Y);
     	}while(GameController.getOccupiedPositions().contains(p.getLocation()));
@@ -54,7 +54,7 @@ public abstract class FruitSprite {
     }
     
     public Image getFruitImage() {
-    	return fruit_image;
+    	return image;
     }
     
     public int getPOS_X() {
@@ -66,9 +66,7 @@ public abstract class FruitSprite {
     }
     
     public Rectangle getBounds() {
-    	return new Rectangle((int)position.getX(), (int)position.getY(), fruit_image_width, fruit_image_height);
+    	return new Rectangle((int)position.getX(), (int)position.getY(), image_width, image_height);
     }
-    
-    public abstract void specialEffect(SnakeSprite snake);
 	
 }

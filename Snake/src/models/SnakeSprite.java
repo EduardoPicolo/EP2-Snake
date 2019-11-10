@@ -15,21 +15,21 @@ import views.GamePanel;
 import views.MainFrame;
 
 public abstract class SnakeSprite {
-	protected LinkedList<Point> snakeBody;
+	protected LinkedList<Point> body;
     
     protected int score_multiplier;
     protected Directions direction;
     
-    protected Image snake_head_image;
-    protected Image snake_body_image;
-    protected int snake_image_width;
-    protected int snake_image_height;
+    protected Image head_image;
+    protected Image body_image;
+    protected int snake_width;
+    protected int snake_height;
     
     public SnakeSprite() {
     	loadImages();
-    	setImageDimension();
-    	snakeBody = new LinkedList<Point>();
-    	snakeBody.add(new Point(130, 104));
+    	setDimensions();
+    	body = new LinkedList<Point>();
+    	body.add(new Point(130, 104));
     	score_multiplier = 1;
 //    	direction = Directions.RIGHT;
     }
@@ -37,29 +37,29 @@ public abstract class SnakeSprite {
     protected abstract void loadImages();
     
     public void move() {
-        Point headPosition = snakeBody.getFirst().getLocation();
+        Point headPosition = body.getFirst().getLocation();
         
         if(this.direction == null)
         	return;
         switch(this.direction) {
 	        case LEFT:
-	        	headPosition.translate(-snake_image_width, 0);
+	        	headPosition.translate(-snake_width, 0);
 	    	break;
 	        case RIGHT:
-	        	headPosition.translate(snake_image_width, 0);
+	        	headPosition.translate(snake_width, 0);
         	break;
 	        case UP:
-	        	headPosition.translate(0, -snake_image_height);
+	        	headPosition.translate(0, -snake_height);
         	break;
 	        case DOWN:
-	        	headPosition.translate(0, snake_image_height);
+	        	headPosition.translate(0, snake_height);
         	break;
         	default:
         		break;
         }
         
-        snakeBody.removeLast();
-        snakeBody.addFirst(headPosition);       
+        body.removeLast();
+        body.addFirst(headPosition);       
     }
         
     public boolean checkCollision() {
@@ -69,36 +69,36 @@ public abstract class SnakeSprite {
 			}    		
     	}
     	
-    	if(snakeBody.getFirst().getY() >= MainFrame.getFrameHeight() || snakeBody.getFirst().getY() < 20 ||
-    			snakeBody.getFirst().getX() >= MainFrame.getFrameWidth() || snakeBody.getFirst().getX() < 0) {
+    	if(body.getFirst().getY() >= MainFrame.getFrameHeight() || body.getFirst().getY() < 20 ||
+    			body.getFirst().getX() >= MainFrame.getFrameWidth() || body.getFirst().getX() < 0) {
     		return true;
     	}
     	return false;
     }
     
     public void increaseBody() {
-    	snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
+    	body.addLast(new Point((int)body.getLast().getX(), (int)body.getLast().getY()));
     }
     
     public void setDirection(Directions direction) {
     	this.direction = direction;
     }
     
-	public void setImageDimension() {
-		snake_image_width = snake_head_image.getWidth(null);
-		snake_image_height = snake_head_image.getHeight(null);
+	public void setDimensions() {
+		snake_width = head_image.getWidth(null);
+		snake_height = head_image.getHeight(null);
 	}
     
-    public Image getSnakeHead_Image() {
-    	return snake_head_image;
+    public Image getHeadImage() {
+    	return head_image;
     }
     
-    public Image getSnakeBody_Image() {
-    	return snake_body_image;
+    public Image getBodyImage() {
+    	return body_image;
     }
     
     public int getBodySize() {
-    	return snakeBody.size();
+    	return body.size();
     }
     
     public int getScoreMultiplier() {
@@ -106,23 +106,23 @@ public abstract class SnakeSprite {
     }
     
     public LinkedList<Point> getSnakeBody(){
-    	return snakeBody;
+    	return body;
     }
     
     public Point getHeadPosition() {
-    	return snakeBody.getFirst().getLocation();
+    	return body.getFirst().getLocation();
     }
     
     public void setHeadPosition(int X, int Y) {
-    	snakeBody.getFirst().setLocation(X, Y);
+    	body.getFirst().setLocation(X, Y);
     }
     
     public List<Rectangle> getBounds() {
-    	List<Rectangle> snake_bounds = new ArrayList<>();
-    	for(Point point : snakeBody) {
-    		snake_bounds.add(new Rectangle((int)point.getX(), (int)point.getY(), snake_image_width, snake_image_height));
+    	List<Rectangle> bounds = new ArrayList<Rectangle>();
+    	for(Point point : body) {
+    		bounds.add(new Rectangle((int)point.getX(), (int)point.getY(), snake_width, snake_height));
     	}
-    	return snake_bounds;
+    	return bounds;
     }
 
 }

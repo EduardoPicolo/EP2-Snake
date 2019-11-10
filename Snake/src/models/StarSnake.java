@@ -13,15 +13,15 @@ public class StarSnake extends SnakeSprite {
 	@Override
     protected void loadImages() {
         ImageIcon iid = new ImageIcon("./src/assets/head13px.png");
-        snake_body_image = iid.getImage();
+        body_image = iid.getImage();
 
         ImageIcon iih = new ImageIcon("./src/assets/head13px.png");
-        snake_head_image = iih.getImage();
+        head_image = iih.getImage();
     }
 	
 	@Override
 	public void increaseBody() {
-		snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
-		snakeBody.addLast(new Point((int)snakeBody.getLast().getX(), (int)snakeBody.getLast().getY()));
+		body.addLast(new Point((int)body.getLast().getX(), (int)body.getLast().getY()));
+		body.addLast(new Point((int)body.getLast().getX(), (int)body.getLast().getY()));
 	}
 }

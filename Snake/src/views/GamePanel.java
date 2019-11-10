@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -29,8 +30,6 @@ public class GamePanel extends JPanel{
     
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
-	
-	private int score;
 	
 	private GameHeader header;
 	
@@ -78,9 +77,9 @@ public class GamePanel extends JPanel{
 	    	}
     	}
     	
-    	g.drawImage(snake.getSnakeHead_Image(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
+    	g.drawImage(snake.getHeadImage(), (int)snake.getSnakeBody().getFirst().getX(), (int)snake.getSnakeBody().getFirst().getY(), this);
     	for(int i=1; i<snake.getBodySize(); i++ ) {
-    		g.drawImage(snake.getSnakeBody_Image(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
+    		g.drawImage(snake.getBodyImage(), (int) snake.getSnakeBody().get(i).getX(), (int) snake.getSnakeBody().get(i).getY(), this);
     	}
 	    
 	    Toolkit.getDefaultToolkit().sync(); 
@@ -91,10 +90,6 @@ public class GamePanel extends JPanel{
 	}
 	public void setFruits(List<FruitSprite> fruitList) {
 		fruits = fruitList;
-	}
-	
-	public void updateScore(int score) {
-		this.score = score;
 	}
 	
 	public void updateHeader(int score, long time) {

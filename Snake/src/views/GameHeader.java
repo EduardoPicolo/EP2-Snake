@@ -58,7 +58,6 @@ public class GameHeader extends JPanel {
 		lblScore.setText("Score: "+score);
 		float seconds = (System.currentTimeMillis()-time)/1000F;
 		lblTime.setText("Time: "+seconds+"s");
-		
 	}
 
 }
