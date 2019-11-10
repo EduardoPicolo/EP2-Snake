@@ -28,16 +28,22 @@ import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class SnakeSelection extends JPanel{
+	private JRadioButton btnClassicSnake;
+	private JRadioButton btnStar;
+	private JRadioButton btnKitty;
+	private JButton btnConfirm;
+	private ButtonGroup group;
+	private JPanel radioPanel;
 	
 	public SnakeSelection(ActionListener listener) {
-		
 		setBackground(Color.BLACK);
 		setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		ButtonGroup group = new ButtonGroup();
-		JPanel radioPanel = new JPanel();
+		
+		group = new ButtonGroup();
+		radioPanel = new JPanel();
 		radioPanel.setBackground(Color.BLACK);
 		
-		JRadioButton btnClassicSnake = new JRadioButton("Classic");
+		btnClassicSnake = new JRadioButton("Classic");
 		btnClassicSnake.setBackground(Color.BLACK);
 		btnClassicSnake.setForeground(Color.WHITE);
 		btnClassicSnake.setHorizontalAlignment(SwingConstants.LEFT);
@@ -50,7 +56,7 @@ public class SnakeSelection extends JPanel{
 		
 		group.add(btnClassicSnake);
 		
-		JRadioButton btnStar = new JRadioButton("Star");
+		btnStar = new JRadioButton("Star");
 		btnStar.setForeground(Color.WHITE);
 		btnStar.setBackground(Color.BLACK);
 		btnStar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,7 +71,7 @@ public class SnakeSelection extends JPanel{
 		group.add(btnStar);
 		add(radioPanel);
 		
-		JRadioButton btnKitty = new JRadioButton("Kitty");
+		btnKitty = new JRadioButton("Kitty");
 		btnKitty.setBackground(Color.BLACK);
 		btnKitty.setForeground(Color.WHITE);
 		btnKitty.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -74,6 +80,7 @@ public class SnakeSelection extends JPanel{
 		btnKitty.setActionCommand("KITTY");
 		btnKitty.addActionListener(listener);
 		group.add(btnKitty);
+		
 		GroupLayout gl_radioPanel = new GroupLayout(radioPanel);
 		gl_radioPanel.setHorizontalGroup(
 			gl_radioPanel.createParallelGroup(Alignment.LEADING)
@@ -101,8 +108,7 @@ public class SnakeSelection extends JPanel{
 		);
 		radioPanel.setLayout(gl_radioPanel);
 		
-		
-		JButton btnConfirm = new JButton("CONFIRM");
+		btnConfirm = new JButton("CONFIRM");	
 		btnConfirm.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnConfirm.setAlignmentX(0.5f);
 		btnConfirm.setActionCommand("CONFIRM");

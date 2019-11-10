@@ -19,19 +19,22 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 @SuppressWarnings("serial")
 public class GameOverPanel extends JPanel{
+	private JLabel lblGameOver;
+	private JButton btnRestart;
+	private JButton btnMenu;
 
 	public GameOverPanel(ActionListener listener) {
 		setPreferredSize(new Dimension(250,200));
 		setBackground(Color.RED);
 		
-		JLabel lblGameOver = new JLabel("GAME OVER");
+		lblGameOver = new JLabel("GAME OVER");
 		lblGameOver.setForeground(Color.BLACK);
 		lblGameOver.setFont(new Font("Lato", Font.BOLD, 25));
 		lblGameOver.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGameOver.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblGameOver.setAlignmentY(Component.CENTER_ALIGNMENT);
 		
-		JButton btnRestart = new JButton("RESTART");
+		btnRestart = new JButton("RESTART");
 		btnRestart.setActionCommand("RESTART");
 		btnRestart.addActionListener(listener);
 		btnRestart.setBackground(Color.WHITE);
@@ -39,7 +42,7 @@ public class GameOverPanel extends JPanel{
 		btnRestart.setFocusPainted(false);
 		btnRestart.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		JButton btnMenu = new JButton("MENU");
+		btnMenu = new JButton("MENU");
 		btnMenu.setActionCommand("MENU");
 		btnMenu.addActionListener(listener);
 		btnMenu.setBackground(Color.white);

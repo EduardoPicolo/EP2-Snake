@@ -22,16 +22,19 @@ import javax.swing.SwingConstants;
 
 @SuppressWarnings("serial")
 public class MainMenu extends JPanel{
+	private JLabel lblTitle;
+	private JButton btnPlay;
+	private JButton btnExit;
 	
 	public MainMenu(ActionListener listener) {
 		setBackground(Color.BLACK);
 		
-		JLabel lblSnake = new JLabel("SNAKE");
-		lblSnake.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSnake.setForeground(UIManager.getColor("text"));
-		lblSnake.setFont(new Font("Dialog", Font.BOLD, 20));
+		lblTitle = new JLabel("SNAKE");
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setForeground(UIManager.getColor("text"));
+		lblTitle.setFont(new Font("Dialog", Font.BOLD, 20));
 		
-		JButton btnPlay = new JButton("PLAY");
+		btnPlay = new JButton("PLAY");
 		btnPlay.addActionListener(listener);
 		btnPlay.setBackground(new Color(0, 255, 0));
 		btnPlay.setActionCommand("PLAY");
@@ -39,7 +42,7 @@ public class MainMenu extends JPanel{
 		btnPlay.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnPlay.setFocusPainted(false);
 		
-		JButton btnExit = new JButton("EXIT");
+		btnExit = new JButton("EXIT");
 		btnExit.addActionListener(listener);
 		btnExit.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnExit.setActionCommand("EXIT");
@@ -58,14 +61,14 @@ public class MainMenu extends JPanel{
 					.addContainerGap())
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(115)
-					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addGap(109))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(52)
-					.addComponent(lblSnake, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+					.addComponent(lblTitle, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
 					.addGap(137)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnPlay)
