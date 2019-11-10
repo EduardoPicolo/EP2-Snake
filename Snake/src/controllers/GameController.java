@@ -56,7 +56,6 @@ public class GameController implements Runnable, KeyListener{
 		running = true;
 		score = 0;
 		direction = null;
-		
 		switch(chosenSnake) {
 			case CLASSIC:
 				snake = new ClassicSnake();
@@ -71,22 +70,7 @@ public class GameController implements Runnable, KeyListener{
 				snake = new ClassicSnake();
 				break;
 		}
-		switch(difficulty) {
-			case EASY:
-				DELAY = 100;
-				break;
-			case NORMAL: 
-				DELAY = 85;
-				addBarrier();
-				break;
-			case HARD:
-				DELAY = 65;
-				addBarrier();
-				break;
-			default:
-				DELAY = 100;
-				break;
-		}
+		setupDifficulty();
 		
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
@@ -94,21 +78,34 @@ public class GameController implements Runnable, KeyListener{
 		new Thread(fruitSpawner).start();
 		loop.start();
 	}
-	
-	public void addBarrier() {
+	public void setupDifficulty() {
 		switch(difficulty) {
-			case NORMAL:
+			case EASY:
+				DELAY = 100;
+				break;
+			case NORMAL: 
+				DELAY = 85;
 				barrierCreator.createHalfBarrier();
-			break;
+				break;
 			case HARD:
+				DELAY = 65;
 				barrierCreator.createFullBarrier();
-			break;
+				break;
 			default:
+				DELAY = 100;
 				break;
 		}
 		for(Rectangle r : barrierCreator.getBarrier()) {
 			occupiedPositions.add(r);
 			barrier.add(r);
+		}
+	}
+	
+	public void checkBarrierCollision() {
+		for(Rectangle r : barrier) {
+			if(snake.getBounds().get(0).intersects(r)) {
+				setGameOver();
+			}
 		}
 	}
 	
@@ -123,13 +120,6 @@ public class GameController implements Runnable, KeyListener{
     	}
 	}
 	
-	public void checkBarrierCollision() {
-		for(Rectangle r : barrier) {
-			if(snake.getBounds().get(0).intersects(r)) {
-				setGameOver();
-			}
-		}
-	}
 
 	@Override
 	public void run() {
@@ -221,7 +211,6 @@ public class GameController implements Runnable, KeyListener{
 	public void setDifficulty(Difficulties dif) {
 		this.difficulty = dif;
 	}
-	
 	
 	public static List<Rectangle> getOccupiedPositions(){
 		return occupiedPositions;
