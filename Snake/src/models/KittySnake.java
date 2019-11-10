@@ -2,8 +2,7 @@ package models;
 
 import javax.swing.ImageIcon;
 
-import views.GamePanel;
-import views.MainFrame;
+import views.Display;
 
 public class KittySnake extends SnakeSprite {
 	public KittySnake() {
@@ -22,17 +21,17 @@ public class KittySnake extends SnakeSprite {
 	@Override
 	public boolean checkCollision() {
 
-        if (getHeadPosition().getY() >= MainFrame.getFrameHeight()) {
+        if (getHeadPosition().getY() >= Display.getFrameHeight()) {
         	setHeadPosition((int)getHeadPosition().getX(), 26);
         }
         else if (getHeadPosition().getY() < 26) {
-        	setHeadPosition((int)getHeadPosition().getX(), MainFrame.getFrameHeight());
+        	setHeadPosition((int)getHeadPosition().getX(), Display.getFrameHeight());
         }
-        else if (getHeadPosition().getX() >= MainFrame.getFrameWidth()) {
+        else if (getHeadPosition().getX() >= Display.getFrameWidth()) {
         	setHeadPosition(0, (int)getHeadPosition().getY());
         }
         else if (getHeadPosition().getX() < 0) {
-        	setHeadPosition(MainFrame.getFrameWidth(), (int)getHeadPosition().getY());    
+        	setHeadPosition(Display.getFrameWidth(), (int)getHeadPosition().getY());    
         }
         
         return false;

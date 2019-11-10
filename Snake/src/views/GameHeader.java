@@ -4,12 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Color;
-import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
@@ -20,7 +17,7 @@ public class GameHeader extends JPanel {
 
 	public GameHeader() {
 		setBackground(Color.YELLOW);
-		setPreferredSize(new Dimension(MainFrame.getFrameWidth(), 26));
+		setPreferredSize(new Dimension(Display.getFrameWidth(), 26));
 	    
 	    lblScore = new JLabel("Score: ");
 	    lblScore.setHorizontalAlignment(SwingConstants.LEFT);

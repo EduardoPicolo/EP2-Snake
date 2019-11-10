@@ -7,8 +7,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Random;
 
 import controllers.GameController;
-import views.GamePanel;
-import views.MainFrame;
+import views.Display;
 
 public abstract class FruitSprite implements SpecialSkill{
 	protected Point position;
@@ -39,8 +38,8 @@ public abstract class FruitSprite implements SpecialSkill{
     	Point[] p = {new Point(0,0)};
     	boolean occupiedPos = false;
     	do {
-    		X = randomInt.nextInt((int)(MainFrame.getFrameWidth()/image_width))*image_width;
-    		Y = randomInt.nextInt((int)((MainFrame.getFrameHeight()-26)/image_height))*image_height;
+    		X = randomInt.nextInt((int)(Display.getFrameWidth()/image_width))*image_width;
+    		Y = randomInt.nextInt((int)((Display.getFrameHeight()-26)/image_height))*image_height;
     		Y += 26;
     		p[0] = new Point(X,Y);
     		try {

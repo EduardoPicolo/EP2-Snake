@@ -2,20 +2,16 @@ package views;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controllers.GameController;
 import controllers.MenuController;
 import models.Menus;
 
 @SuppressWarnings("serial")
-public class MainFrame extends JFrame {
+public class Display extends JFrame {
 	private static final int SCREEN_WIDTH = 377;
 	private static final int SCREEN_HEIGHT = 377;
 	
@@ -26,7 +22,7 @@ public class MainFrame extends JFrame {
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
 		
-	public MainFrame(Menus menu) {
+	public Display(Menus menu) {
 		initFrame();
 		controller = new MenuController(menu);
 		mainMenu = new MainMenu(controller);
@@ -36,7 +32,7 @@ public class MainFrame extends JFrame {
 	}
 	private void initFrame() {
 		setTitle("Snake");
-		setPreferredSize(new Dimension(MainFrame.SCREEN_WIDTH, MainFrame.SCREEN_HEIGHT));
+		setPreferredSize(new Dimension(Display.SCREEN_WIDTH, Display.SCREEN_HEIGHT));
 		setBackground(Color.black);
 		content = new JPanel();
 		content.setOpaque(true);

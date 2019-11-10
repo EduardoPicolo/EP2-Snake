@@ -3,26 +3,17 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.event.KeyListener;
 import java.util.List;
 
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import controllers.GameController;
 import models.FruitSprite;
 import models.SnakeSprite;
-
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class GamePanel extends JPanel{
@@ -30,6 +21,7 @@ public class GamePanel extends JPanel{
     
 	private SnakeSprite snake;
 	private List<FruitSprite> fruits;
+	private List<Rectangle> obstacles;
 	
 	private GameHeader header;
 	
@@ -37,7 +29,7 @@ public class GamePanel extends JPanel{
     	header = new GameHeader();
         setBackground(Color.BLACK);
         setFocusable(true);
-        setPreferredSize(new Dimension(MainFrame.getFrameWidth(), MainFrame.getFrameHeight()));
+        setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
         setLayout(new BorderLayout());
 //	    add(header, BorderLayout.PAGE_START);
     }
@@ -71,11 +63,9 @@ public class GamePanel extends JPanel{
     
     private void doDrawing(Graphics2D g) {
     	g2d.setColor(Color.YELLOW);
-    	g2d.fillRect(247, 143, 13, 39);
-    	g2d.fillRect(208, 130, 52, 13);
-    	
-    	g2d.fillRect(130, 208, 13, 39);
-    	g2d.fillRect(130, 247, 52, 13);
+    	for(Rectangle r : obstacles) {
+    		g2d.fill(r);
+    	}
     	
     	if(!fruits.isEmpty()) {
 	    	for(int i=0; i<fruits.size(); i++) {
@@ -96,6 +86,9 @@ public class GamePanel extends JPanel{
 	}
 	public void setFruits(List<FruitSprite> fruitList) {
 		fruits = fruitList;
+	}
+	public void setObstacles(List<Rectangle> obstacles) {
+		this.obstacles = obstacles;
 	}
 	
 	public void updateHeader(int score, long time) {

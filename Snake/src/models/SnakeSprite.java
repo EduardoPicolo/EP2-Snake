@@ -3,16 +3,13 @@ package models;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Point;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 
-import controllers.GameController;
 import util.Directions;
-import views.GamePanel;
-import views.MainFrame;
+import views.Display;
 
 public abstract class SnakeSprite {
 	protected LinkedList<Point> body;
@@ -69,8 +66,8 @@ public abstract class SnakeSprite {
 			}    		
     	}
     	
-    	if(body.getFirst().getY() >= MainFrame.getFrameHeight() || body.getFirst().getY() < 20 ||
-    			body.getFirst().getX() >= MainFrame.getFrameWidth() || body.getFirst().getX() < 0) {
+    	if(body.getFirst().getY() >= Display.getFrameHeight() || body.getFirst().getY() < 20 ||
+    			body.getFirst().getX() >= Display.getFrameWidth() || body.getFirst().getX() < 0) {
     		return true;
     	}
     	return false;

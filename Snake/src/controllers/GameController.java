@@ -1,7 +1,6 @@
 package controllers;
 
 import java.awt.BorderLayout;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -14,12 +13,14 @@ import models.FruitSprite;
 import models.KittySnake;
 import models.SnakeSprite;
 import models.StarSnake;
+import util.Difficulties;
 import util.Directions;
+import util.Snakes;
 import views.GameOverPanel;
 import views.GamePanel;
 
 public class GameController implements Runnable, KeyListener{
-	private final int DELAY = 90;
+	private static int DELAY = 100;
 	private static boolean running;
 	private int score;
 	
@@ -47,32 +48,40 @@ public class GameController implements Runnable, KeyListener{
 		obstacles = new ArrayList<Rectangle>();
 	}
 	
-	public void initGame(int chosenSnake) {
+	public void initGame(Snakes chosenSnake, Difficulties difficulty) {
 		running = true;
 		score = 0;
 		direction = null;
-		obstacles.add(new Rectangle(247, 143, 13, 39));
-		obstacles.add(new Rectangle(208, 130, 52, 13));
-		obstacles.add(new Rectangle(130, 208, 13, 39));
-		obstacles.add(new Rectangle(130, 247, 52, 13));
 		
 		switch(chosenSnake) {
-			case 1:
+			case CLASSIC:
 				snake = new ClassicSnake();
 				break;
-			case 2:
+			case STAR:
 				snake = new StarSnake();
 				break;
-			case 3:
+			case KITTY:
 				snake = new KittySnake();
 				break;
 			default:
 				snake = new ClassicSnake();
 				break;
 		}
-		
-		for(Rectangle r : obstacles) {
-			occupiedPositions.add(r);
+		switch(difficulty) {
+			case EASY:
+				DELAY = 100;
+				break;
+			case NORMAL: 
+				DELAY = 85;
+				addObstacles();
+				break;
+			case HARD:
+				DELAY = 65;
+				addObstacles();
+				break;
+			default:
+				DELAY = 100;
+				break;
 		}
 		
 		fruitSpawner = new FruitSpawner();
@@ -80,6 +89,16 @@ public class GameController implements Runnable, KeyListener{
 		
 		new Thread(fruitSpawner).start();
 		loop.start();
+	}
+	
+	public void addObstacles() {
+		obstacles.add(new Rectangle(247, 143, 13, 39));
+		obstacles.add(new Rectangle(208, 130, 52, 13));
+		obstacles.add(new Rectangle(130, 208, 13, 39));
+		obstacles.add(new Rectangle(130, 247, 52, 13));
+		for(Rectangle r : obstacles) {
+			occupiedPositions.add(r);
+		}
 	}
 	
 	public void checkAteFruit() {
@@ -107,6 +126,7 @@ public class GameController implements Runnable, KeyListener{
 		this.fruits = fruitSpawner.getFruits();
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
+		gamePanel.setObstacles(obstacles);
 		
 		long loopStartTime, loopElapsedTime, sleep, startTime;
 		startTime = System.currentTimeMillis();
@@ -127,7 +147,7 @@ public class GameController implements Runnable, KeyListener{
 			loopElapsedTime = System.nanoTime() - loopStartTime;
 			sleep = DELAY - loopElapsedTime/1000000L;
 			if(sleep < 0) {
-				sleep = 1;
+				sleep = 0;
 			}
 			
 			try {

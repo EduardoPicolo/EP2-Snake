@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -25,7 +24,7 @@ public class GameOverPanel extends JPanel{
 	private JButton btnMenu;
 
 	public GameOverPanel(ActionListener listener) {
-		setPreferredSize(new Dimension(MainFrame.getFrameWidth(), MainFrame.getFrameHeight()));
+		setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
 		setBackground(Color.RED);
 		
 		lblGameOver = new JLabel("GAME OVER");

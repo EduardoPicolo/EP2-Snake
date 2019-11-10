@@ -4,13 +4,15 @@ import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
 import controllers.GameController;
-import views.MainFrame;
+import util.Difficulties;
+import util.Snakes;
+import views.Display;
 
 public class Menus {
-	private MainFrame frame;
+	private Display frame;
 	
 	public Menus() {
-		this.frame = new MainFrame(this);
+		frame = new Display(this);
 		mainMenu();
 	}
 	
@@ -30,7 +32,7 @@ public class Menus {
 		frame.getContentPane().repaint();
 	}
 	
-	public void gamePanel(int chosenSnake) {
+	public void gamePanel(Snakes chosenSnake, Difficulties chosenDifficulty) {
 		frame.getGamePanel().removeAll();
 		frame.getContentPane().removeAll();
 		((JComponent)frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -38,6 +40,14 @@ public class Menus {
 		frame.getContentPane().add(frame.getGamePanel());
 		frame.getContentPane().validate();
 		frame.getContentPane().repaint();
-		game.initGame(chosenSnake);
+		game.initGame(chosenSnake, chosenDifficulty);
+	}
+	
+	public void clearSelections() {
+		frame.getSnakeSelection().clearSelections();
+	}
+	
+	public Display getDisplay() {
+		return frame;
 	}
 }

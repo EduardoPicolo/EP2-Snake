@@ -3,23 +3,14 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-
 import models.Menus;
-import views.GameHeader;
-import views.GameOverPanel;
-import views.GamePanel;
-import views.MainFrame;
-import views.MainMenu;
+import util.Difficulties;
+import util.Snakes;
 import views.SnakeSelection;
 
 public class MenuController implements ActionListener{
-	private final int CLASSIC = 1;
-	private final int STAR = 2;
-	private final int KITTY = 3;
-	private int chosenSnake;
+	private Snakes chosenSnake;
+	private Difficulties chosenDifficulty;
 	
 	private Menus menu;
 	
@@ -42,22 +33,28 @@ public class MenuController implements ActionListener{
 			
 			case "CLASSIC":
 				System.out.println("CLASSIC");
-				chosenSnake = CLASSIC;
+				if(!(chosenDifficulty == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenSnake = Snakes.CLASSIC;
 			break;
 			
 			case "STAR":
 				System.out.println("STAR");
-				chosenSnake = STAR;
+				if(!(chosenDifficulty == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenSnake = Snakes.STAR;
 			break;
 			
 			case "KITTY":
 				System.out.println("KITTY");
-				chosenSnake = KITTY;
+				if(!(chosenDifficulty == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenSnake = Snakes.KITTY;
 			break;
 			
 			case "CONFIRM":
-				System.out.println("CONFIRM: "+chosenSnake);
-				menu.gamePanel(chosenSnake);
+				System.out.println("CONFIRM: "+chosenSnake+"::"+chosenDifficulty);
+				menu.gamePanel(chosenSnake, chosenDifficulty);
 			break;
 			
 			case "MENU":
@@ -67,12 +64,34 @@ public class MenuController implements ActionListener{
 			
 			case "CHANGE":
 				System.out.println("CHANGE");
+				chosenSnake = null;
+				chosenDifficulty = null;
+				menu.clearSelections();
 				menu.snakeSelection();
 			break;
 			
 			case "RESTART":
 				System.out.println("RESTART");
-				menu.gamePanel(chosenSnake);
+				menu.gamePanel(chosenSnake, chosenDifficulty);
+			break;
+			
+			case "EASY":
+				System.out.println("EASY");
+				if(!(chosenSnake == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenDifficulty = Difficulties.EASY;
+			break;
+			case "NORMAL":
+				System.out.println("NORMAL");
+				if(!(chosenSnake == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenDifficulty = Difficulties.NORMAL;
+			break;
+			case "HARD":
+				System.out.println("HARD");
+				if(!(chosenSnake == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenDifficulty = Difficulties.HARD;
 			break;
 			
 			default:
@@ -80,7 +99,7 @@ public class MenuController implements ActionListener{
 		}
 	}
 	
-	public int getSelectedSnake() {
+	public Snakes getSelectedSnake() {
 		return chosenSnake;
 	}
 }

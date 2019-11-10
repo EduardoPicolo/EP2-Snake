@@ -2,48 +2,41 @@ package views;
 
 import javax.swing.JPanel;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 public class SnakeSelection extends JPanel{
 	private JRadioButton btnClassicSnake;
 	private JRadioButton btnStar;
 	private JRadioButton btnKitty;
+	private JRadioButton btnEasy;
+	private JRadioButton btnNormal;
+	private JRadioButton btnHard;
 	private JButton btnConfirm;
-	private ButtonGroup group;
+	private ButtonGroup snakes;
+	private ButtonGroup difficulties;
 	private JPanel radioPanel;
 	
 	public SnakeSelection(ActionListener listener) {
+		setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
 		setBackground(Color.BLACK);
-		setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		
-		group = new ButtonGroup();
+		snakes = new ButtonGroup();
+		difficulties = new ButtonGroup();
 		radioPanel = new JPanel();
+		radioPanel.setBounds(49, 5, 279, 304);
 		radioPanel.setBackground(Color.BLACK);
 		
-		btnClassicSnake = new JRadioButton("Classic");
+		btnClassicSnake = new JRadioButton("CLASSIC");
 		btnClassicSnake.setBackground(Color.BLACK);
 		btnClassicSnake.setForeground(Color.WHITE);
 		btnClassicSnake.setHorizontalAlignment(SwingConstants.LEFT);
@@ -52,11 +45,21 @@ public class SnakeSelection extends JPanel{
 		btnClassicSnake.setToolTipText("Classic snake");
 		btnClassicSnake.setActionCommand("CLASSIC");
 		btnClassicSnake.addActionListener(listener);
-		btnClassicSnake.setSelected(true);
 		
-		group.add(btnClassicSnake);
+		snakes.add(btnClassicSnake);
+		radioPanel.setLayout(new GridLayout(2, 3, 15, 180));
+		radioPanel.add(btnClassicSnake);
 		
-		btnStar = new JRadioButton("Star");
+		btnKitty = new JRadioButton("KITTY");
+		btnKitty.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnKitty.setBackground(Color.BLACK);
+		btnKitty.setForeground(Color.WHITE);
+		btnKitty.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnKitty.setFocusPainted(false);
+		btnKitty.setActionCommand("KITTY");
+		btnKitty.addActionListener(listener);
+		
+		btnStar = new JRadioButton("STAR");
 		btnStar.setForeground(Color.WHITE);
 		btnStar.setBackground(Color.BLACK);
 		btnStar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -65,50 +68,49 @@ public class SnakeSelection extends JPanel{
 		btnStar.setFocusPainted(false);
 		btnStar.setActionCommand("STAR");
 		btnStar.addActionListener(listener);
-		setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		btnStar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnStar.setToolTipText("Kitty snake");
-		group.add(btnStar);
-		add(radioPanel);
+		snakes.add(btnStar);
+		radioPanel.add(btnStar);
+		snakes.add(btnKitty);
+		radioPanel.add(btnKitty);
 		
-		btnKitty = new JRadioButton("Kitty");
-		btnKitty.setBackground(Color.BLACK);
-		btnKitty.setForeground(Color.WHITE);
-		btnKitty.setHorizontalAlignment(SwingConstants.RIGHT);
-		btnKitty.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnKitty.setFocusPainted(false);
-		btnKitty.setActionCommand("KITTY");
-		btnKitty.addActionListener(listener);
-		group.add(btnKitty);
+		btnHard = new JRadioButton("HARD");
+		btnHard.setHorizontalAlignment(SwingConstants.RIGHT);
+		btnHard.setBackground(Color.BLACK);
+		btnHard.setForeground(Color.WHITE);
+		btnHard.setFocusPainted(false);
+		btnHard.setActionCommand("HARD");
+		btnHard.addActionListener(listener);
 		
-		GroupLayout gl_radioPanel = new GroupLayout(radioPanel);
-		gl_radioPanel.setHorizontalGroup(
-			gl_radioPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_radioPanel.createSequentialGroup()
-					.addComponent(btnClassicSnake, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnStar)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnKitty, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
-		);
-		gl_radioPanel.setVerticalGroup(
-			gl_radioPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_radioPanel.createSequentialGroup()
-					.addGroup(gl_radioPanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_radioPanel.createSequentialGroup()
-							.addContainerGap()
-							.addGroup(gl_radioPanel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnKitty)
-								.addComponent(btnStar)))
-						.addGroup(gl_radioPanel.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnClassicSnake)))
-					.addContainerGap(204, Short.MAX_VALUE))
-		);
-		radioPanel.setLayout(gl_radioPanel);
+		btnEasy = new JRadioButton("EASY");
+		btnEasy.setHorizontalAlignment(SwingConstants.LEFT);
+		btnEasy.setBackground(Color.BLACK);
+		btnEasy.setForeground(Color.WHITE);
+		btnEasy.setFocusPainted(false);
+		btnEasy.setActionCommand("EASY");
+		btnEasy.addActionListener(listener);
+		btnEasy.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
-		btnConfirm = new JButton("CONFIRM");	
+		difficulties.add(btnEasy);
+		radioPanel.add(btnEasy);
+		
+		btnNormal = new JRadioButton("NORMAL");
+		btnNormal.setHorizontalAlignment(SwingConstants.CENTER);
+		btnNormal.setBackground(Color.BLACK);
+		btnNormal.setForeground(Color.WHITE);
+		btnNormal.setFocusPainted(false);
+		btnNormal.setActionCommand("NORMAL");
+		btnNormal.addActionListener(listener);
+		btnNormal.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		difficulties.add(btnNormal);
+		radioPanel.add(btnNormal);
+		btnHard.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		difficulties.add(btnHard);
+		radioPanel.add(btnHard);
+		
+		btnConfirm = new JButton("CONFIRM");
+		btnConfirm.setBounds(143, 340, 96, 25);
 		btnConfirm.setVerticalAlignment(SwingConstants.BOTTOM);
 		btnConfirm.setAlignmentX(0.5f);
 		btnConfirm.setActionCommand("CONFIRM");
@@ -116,7 +118,20 @@ public class SnakeSelection extends JPanel{
 		btnConfirm.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnConfirm.setBackground(new Color(0, 255, 0));
 		btnConfirm.setForeground(Color.black);
-		add(btnConfirm);		
+		btnConfirm.setEnabled(false);
+		
+		setLayout(null);
+		add(radioPanel);
+		add(btnConfirm);
+	}
+	
+	public void clearSelections() {
+		snakes.clearSelection();
+		difficulties.clearSelection();
+		btnConfirm.setEnabled(false);
+	}
+	public void enableButton() {
+		btnConfirm.setEnabled(true);
 	}
 	
 }
