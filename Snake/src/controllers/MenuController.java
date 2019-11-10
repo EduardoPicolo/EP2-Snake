@@ -34,6 +34,7 @@ public class MenuController implements ActionListener{
 				System.out.println("PLAY");
 				menu.snakeSelection();
 			break;
+			
 			case "EXIT":
 				System.out.println("EXIT");
 				System.exit(0);
@@ -63,6 +64,12 @@ public class MenuController implements ActionListener{
 				System.out.println("MENU");
 				menu.mainMenu();
 			break;
+			
+			case "CHANGE":
+				System.out.println("CHANGE");
+				menu.snakeSelection();
+			break;
+			
 			case "RESTART":
 				System.out.println("RESTART");
 				menu.gamePanel(chosenSnake);

@@ -21,10 +21,11 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 public class GameOverPanel extends JPanel{
 	private JLabel lblGameOver;
 	private JButton btnRestart;
+	private JButton btnChangeSnake;
 	private JButton btnMenu;
 
 	public GameOverPanel(ActionListener listener) {
-		setPreferredSize(new Dimension(250,200));
+		setPreferredSize(new Dimension(MainFrame.getFrameWidth(), MainFrame.getFrameHeight()));
 		setBackground(Color.RED);
 		
 		lblGameOver = new JLabel("GAME OVER");
@@ -50,17 +51,29 @@ public class GameOverPanel extends JPanel{
 		btnMenu.setFocusPainted(false);
 		btnMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
+		btnChangeSnake = new JButton("CHANGE SNAKE");
+		btnChangeSnake.setActionCommand("CHANGE");
+		btnChangeSnake.addActionListener(listener);
+		btnChangeSnake.setBackground(Color.WHITE);
+		btnChangeSnake.setForeground(Color.BLACK);
+		btnChangeSnake.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnChangeSnake.setFocusPainted(false);
+		
+//		JButton btnChangeSnake = new JButton("CHANGE SNAKE");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(60)
-					.addComponent(lblGameOver, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(lblGameOver, GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
 					.addGap(60))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnMenu, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnChangeSnake)
+					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
 					.addComponent(btnRestart, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -68,14 +81,14 @@ public class GameOverPanel extends JPanel{
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(70)
-					.addComponent(lblGameOver, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+					.addComponent(lblGameOver, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
 					.addGap(69)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnRestart)
-						.addComponent(btnMenu))
+						.addComponent(btnMenu)
+						.addComponent(btnChangeSnake))
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
 	}
-	
 }
