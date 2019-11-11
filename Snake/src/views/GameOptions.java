@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -39,12 +40,13 @@ public class GameOptions extends JPanel{
 		snakes = new ButtonGroup();
 		difficulties = new ButtonGroup();
 		radioPanel = new JPanel();
-		radioPanel.setBounds(31, 43, 315, 41);
+		radioPanel.setBounds(12, 43, 353, 41);
 		radioPanel.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 0), null));
 		radioPanel.setBackground(Color.BLACK);
-		radioPanel.setLayout(new GridLayout(0, 3, 30, 180));
+		radioPanel.setLayout(new GridLayout(0, 3, 20, 180));
 		
-		btnKitty = new JRadioButton("KITTY");
+		btnKitty = new JRadioButton("KITTY", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnKitty.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		btnKitty.setHorizontalAlignment(SwingConstants.RIGHT);
 		btnKitty.setBackground(Color.BLACK);
 		btnKitty.setForeground(Color.WHITE);
@@ -54,7 +56,8 @@ public class GameOptions extends JPanel{
 		btnKitty.setActionCommand("KITTY");
 		btnKitty.addActionListener(listener);
 		
-		btnStar = new JRadioButton("STAR");
+		btnStar = new JRadioButton("STAR", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnStar.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		btnStar.setForeground(Color.WHITE);
 		btnStar.setBackground(Color.BLACK);
 		btnStar.setHorizontalAlignment(SwingConstants.CENTER);
@@ -64,7 +67,8 @@ public class GameOptions extends JPanel{
 		btnStar.setActionCommand("STAR");
 		btnStar.addActionListener(listener);
 		
-		btnClassicSnake = new JRadioButton("CLASSIC");
+		btnClassicSnake = new JRadioButton("CLASSIC", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnClassicSnake.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		btnClassicSnake.setBackground(Color.BLACK);
 		btnClassicSnake.setForeground(Color.WHITE);
 		btnClassicSnake.setHorizontalAlignment(SwingConstants.LEFT);
@@ -101,9 +105,10 @@ public class GameOptions extends JPanel{
 		difficultiesPanel.setBackground(new Color(0, 0, 0));
 		difficultiesPanel.setBounds(12, 259, 353, 41);
 		add(difficultiesPanel);
-		difficultiesPanel.setLayout(new GridLayout(0, 4, 5, 0));
+		difficultiesPanel.setLayout(new GridLayout(0, 4, 0, 0));
 		
-		btnEasy = new JRadioButton("EASY");
+		btnEasy = new JRadioButton("EASY", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnEasy.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		difficultiesPanel.add(btnEasy);
 		btnEasy.setHorizontalAlignment(SwingConstants.LEFT);
 		btnEasy.setBackground(Color.BLACK);
@@ -115,7 +120,8 @@ public class GameOptions extends JPanel{
 		
 		difficulties.add(btnEasy);
 		
-		btnNormal = new JRadioButton("NORMAL");
+		btnNormal = new JRadioButton("NORMAL", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnNormal.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		difficultiesPanel.add(btnNormal);
 		btnNormal.setHorizontalAlignment(SwingConstants.CENTER);
 		btnNormal.setBackground(Color.BLACK);
@@ -126,7 +132,8 @@ public class GameOptions extends JPanel{
 		btnNormal.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		difficulties.add(btnNormal);
 		
-		btnHard = new JRadioButton("HARD");
+		btnHard = new JRadioButton("HARD", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnHard.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		btnHard.setHorizontalAlignment(SwingConstants.CENTER);
 		difficultiesPanel.add(btnHard);
 		btnHard.setBackground(Color.BLACK);
@@ -137,7 +144,8 @@ public class GameOptions extends JPanel{
 		btnHard.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		difficulties.add(btnHard);
 		
-		btnInsane = new JRadioButton("INSANE");
+		btnInsane = new JRadioButton("INSANE", new ImageIcon("./src/assets/YellowCircle15px.png"));
+		btnInsane.setSelectedIcon(new ImageIcon("./src/assets/SelectedIcon15px.png"));
 		btnInsane.setHorizontalAlignment(SwingConstants.RIGHT);
 		difficultiesPanel.add(btnInsane);
 		btnInsane.setBackground(Color.BLACK);

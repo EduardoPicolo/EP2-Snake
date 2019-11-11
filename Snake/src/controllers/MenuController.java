@@ -58,6 +58,10 @@ public class MenuController implements ActionListener{
 			
 			case "MENU":
 				System.out.println("MENU");
+				chosenSnake = null;
+				chosenDifficulty = null;
+				menu.clearSelections();
+				menu.snakeSelection();
 				menu.mainMenu();
 			break;
 			
