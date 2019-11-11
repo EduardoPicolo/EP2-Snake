@@ -86,7 +86,7 @@ public class GameController implements Runnable, KeyListener{
 				DELAY = 100;
 				break;
 			case NORMAL: 
-				DELAY = 80;
+				DELAY = 85;
 				barrierCreator.createHalfBarrier();
 				break;
 			case HARD:
@@ -139,10 +139,22 @@ public class GameController implements Runnable, KeyListener{
 		startTime = System.currentTimeMillis();
 		
 		while(running) {
+			synchronized (pauseLock) { if(!running) break;
+	            if(paused) {
+	                try {
+	                    synchronized (pauseLock) {
+	                    	pauseLock.wait(); 
+	                    }
+	                } catch (InterruptedException e) {
+	                    break;
+	                }
+	                if(!running) break;
+	            }
+			}
 			loopStartTime = System.nanoTime();
-			
-			occupiedPositions.addAll(snake.getBounds());
+			snake.setDirection(direction);
 			snake.move();
+			occupiedPositions.addAll(snake.getBounds());
 			if(snake.checkCollision())
 				setGameOver();
 			if(!(snake instanceof KittySnake)) {
@@ -151,30 +163,17 @@ public class GameController implements Runnable, KeyListener{
 			checkAteFruit();
 			gamePanel.updateHeader(score, startTime);
 			gamePanel.repaint();
-			
-			synchronized (pauseLock) { if(!running) break;
-                if(paused) {
-                    try {
-                        synchronized (pauseLock) {
-                        	pauseLock.wait(); 
-                        }
-                    } catch (InterruptedException e) {
-                        break;
-                    }
-                    if(!running) break;
-                }
-            }
-			
+	
+			occupiedPositions.removeAll(snake.getBounds());
+		
 			loopElapsedTime = System.nanoTime() - loopStartTime;
 			sleep = DELAY - loopElapsedTime/1000000;
-			if(sleep < 0) sleep = 0;
+			if(sleep < 0) {sleep = 1;}
 			try {
 				Thread.sleep(sleep);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			occupiedPositions.removeAll(snake.getBounds());
-			snake.setDirection(direction);
 		}
 		gamePanel.add(gameOverPanel, BorderLayout.CENTER);
 		gamePanel.validate();
