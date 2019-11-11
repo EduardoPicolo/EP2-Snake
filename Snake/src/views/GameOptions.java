@@ -7,7 +7,11 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JRadioButton;
@@ -16,6 +20,8 @@ import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.BorderLayout;
+import javax.swing.border.MatteBorder;
 
 @SuppressWarnings("serial")
 public class GameOptions extends JPanel{
@@ -32,10 +38,24 @@ public class GameOptions extends JPanel{
 	private JPanel radioPanel;
 	private JLabel lblTitle;
 	private JLabel lblDifficulties;
+	private JPanel panel;
+	private JLabel lblSnakeimage;
+	private BufferedImage classicSnake;
+	private BufferedImage starSnake;
+	private BufferedImage kittySnake;
 	
 	public GameOptions(ActionListener listener) {
 		setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
 		setBackground(Color.BLACK);
+		
+		try {
+			classicSnake = ImageIO.read(new File("./src/assets/96x100.jpeg"));
+			starSnake = ImageIO.read(new File("./src/assets/explosion13px.png"));
+			kittySnake = ImageIO.read(new File("./src/assets/96x100.jpeg"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		snakes = new ButtonGroup();
 		difficulties = new ButtonGroup();
@@ -172,6 +192,35 @@ public class GameOptions extends JPanel{
 		lblDifficulties.setBounds(12, 232, 353, 19);
 		add(lblDifficulties);
 		
+		panel = new JPanel();
+		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) Color.YELLOW));
+		panel.setBackground(Color.DARK_GRAY);
+		panel.setBounds(144, 108, 96, 100);
+		add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		lblSnakeimage = new JLabel("?");
+		lblSnakeimage.setFont(new Font("DialogInput", Font.BOLD, 45));
+		lblSnakeimage.setHorizontalAlignment(SwingConstants.CENTER);
+		panel.add(lblSnakeimage);
+		
+	}
+	
+	public void setLblImage() {
+		lblSnakeimage.setText("");
+		switch(snakes.getSelection().getActionCommand()) {
+			case "CLASSIC":
+				lblSnakeimage.setIcon(new ImageIcon(classicSnake));
+			break;
+			case "STAR":
+				lblSnakeimage.setIcon(new ImageIcon(starSnake));
+			break;
+			case "KITTY":
+				lblSnakeimage.setIcon(new ImageIcon(kittySnake));
+			break;
+			default:
+				break;
+		}
 	}
 	
 	public void clearSelections() {

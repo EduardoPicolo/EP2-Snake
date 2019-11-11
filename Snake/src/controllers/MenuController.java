@@ -35,6 +35,7 @@ public class MenuController implements ActionListener{
 				if(!(chosenDifficulty == null))
 					menu.getDisplay().getSnakeSelection().enableButton();
 				chosenSnake = Snakes.CLASSIC;
+				menu.getDisplay().getSnakeSelection().setLblImage();
 			break;
 			
 			case "STAR":
@@ -42,6 +43,7 @@ public class MenuController implements ActionListener{
 				if(!(chosenDifficulty == null))
 					menu.getDisplay().getSnakeSelection().enableButton();
 				chosenSnake = Snakes.STAR;
+				menu.getDisplay().getSnakeSelection().setLblImage();
 			break;
 			
 			case "KITTY":
@@ -49,6 +51,7 @@ public class MenuController implements ActionListener{
 				if(!(chosenDifficulty == null))
 					menu.getDisplay().getSnakeSelection().enableButton();
 				chosenSnake = Snakes.KITTY;
+				menu.getDisplay().getSnakeSelection().setLblImage();
 			break;
 			
 			case "CONFIRM":

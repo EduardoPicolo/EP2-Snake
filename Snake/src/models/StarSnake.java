@@ -12,10 +12,10 @@ public class StarSnake extends SnakeSprite {
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/head13px.png");
+        ImageIcon iid = new ImageIcon("./src/assets/StarBody13px.png");
         body_image = iid.getImage();
 
-        ImageIcon iih = new ImageIcon("./src/assets/head13px.png");
+        ImageIcon iih = new ImageIcon("./src/assets/StarHead13px.png");
         head_image = iih.getImage();
     }
 	

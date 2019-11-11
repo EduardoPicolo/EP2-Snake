@@ -11,10 +11,10 @@ public class KittySnake extends SnakeSprite {
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/KittyGreenBody13px.png");
+        ImageIcon iid = new ImageIcon("./src/assets/KittyBody13px.png");
         body_image = iid.getImage();
 
-        ImageIcon iih = new ImageIcon("./src/assets/GreenHead13px.png");
+        ImageIcon iih = new ImageIcon("./src/assets/KittyHead13px.png");
         head_image = iih.getImage();
     }
 		
