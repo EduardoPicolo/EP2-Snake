@@ -145,7 +145,7 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="views.SnakeSelection" project="Snake" file="/Snake/src/views/SnakeSelection.java" 
+  <class id="17" language="java" name="views.GameOptions" project="Snake" file="/Snake/src/views/GameOptions.java" 
     binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1384" y="501"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -337,24 +337,12 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="62">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="63" name="controller">        
+    <bendpoint x="334" y="392"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="63" name="snake">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="64" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="65">    
-    <bendpoint x="334" y="392"/>    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="66" name="snake">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="67" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    

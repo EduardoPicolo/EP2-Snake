@@ -92,6 +92,12 @@ public class MenuController implements ActionListener{
 					menu.getDisplay().getSnakeSelection().enableButton();
 				chosenDifficulty = Difficulties.HARD;
 			break;
+			case "INSANE":
+				System.out.println("INSANE");
+				if(!(chosenSnake == null))
+					menu.getDisplay().getSnakeSelection().enableButton();
+				chosenDifficulty = Difficulties.INSANE;
+			break;
 			
 			default:
 				break;

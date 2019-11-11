@@ -6,21 +6,25 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import controllers.GameController;
+import util.Difficulties;
 
 public class FruitSpawner implements Runnable{
 	private final int SPECIAL_FRUIT_TIME = 10000;
 	
 	private LinkedList<FruitSprite> fruits;
+	private Difficulties difficulty;
 	private Timer specialTimer;
 	private Random random;
 	
-	public FruitSpawner() {
+	public FruitSpawner(Difficulties difficulty) {
 		fruits = new LinkedList<>();
 		specialTimer = new Timer();
 		random = new Random();
-		
+		this.difficulty = difficulty;
 		fruits.addFirst(new SimpleFruit());
+		GameController.addOccupiedPosition(fruits.getFirst().getBounds());
 	}
+	
 	
 	@Override
 	public void run() {
@@ -56,11 +60,13 @@ public class FruitSpawner implements Runnable{
 				GameController.addOccupiedPosition(fruits.getFirst().getBounds());
 			}
 			
-//			fruits.addLast(new SimpleFruit());
-//			GameController.addOccupiedPosition(fruits.getLast().getBounds());
+			if(difficulty.equals(Difficulties.INSANE)) {
+				fruits.addLast(new BombFruit());
+				GameController.addOccupiedPosition(fruits.getLast().getBounds());
+			}
 			
 			try {
-				Thread.sleep(250);
+				Thread.sleep(300);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,6 +77,9 @@ public class FruitSpawner implements Runnable{
 	
 	public LinkedList<FruitSprite> getFruits() {
 		return fruits;
+	}
+	public void setDifficulty(Difficulties d) {
+		this.difficulty = d;
 	}
 	
 }

@@ -48,7 +48,6 @@ public class GameController implements Runnable, KeyListener{
 		barrierCreator = new BarrierCreator();
 		barrier = new ArrayList<Rectangle>();
 		occupiedPositions = new ArrayList<Rectangle>();
-		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
 	}
 	
@@ -76,7 +75,7 @@ public class GameController implements Runnable, KeyListener{
 		}
 		setupDifficulty();
 		
-		fruitSpawner = new FruitSpawner();
+		fruitSpawner = new FruitSpawner(difficulty);
 		loop = new Thread(this);
 		new Thread(fruitSpawner).start();
 		loop.start();
@@ -93,6 +92,10 @@ public class GameController implements Runnable, KeyListener{
 			case HARD:
 				DELAY = 65;
 				barrierCreator.createFullBarrier();
+				break;
+			case INSANE:
+				DELAY = 75;
+//				barrierCreator.createFullBarrier();
 				break;
 			default:
 				DELAY = 100;
@@ -138,6 +141,7 @@ public class GameController implements Runnable, KeyListener{
 		while(running) {
 			loopStartTime = System.nanoTime();
 			
+			occupiedPositions.addAll(snake.getBounds());
 			snake.move();
 			if(snake.checkCollision())
 				setGameOver();
@@ -148,14 +152,13 @@ public class GameController implements Runnable, KeyListener{
 			gamePanel.updateHeader(score, startTime);
 			gamePanel.repaint();
 			
-			synchronized (pauseLock) {
-                if(!running) break;
-                if (paused) {
+			synchronized (pauseLock) { if(!running) break;
+                if(paused) {
                     try {
                         synchronized (pauseLock) {
-                            pauseLock.wait(); 
+                        	pauseLock.wait(); 
                         }
-                    } catch (InterruptedException ex) {
+                    } catch (InterruptedException e) {
                         break;
                     }
                     if(!running) break;
@@ -170,6 +173,7 @@ public class GameController implements Runnable, KeyListener{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			occupiedPositions.removeAll(snake.getBounds());
 			snake.setDirection(direction);
 		}
 		gamePanel.add(gameOverPanel, BorderLayout.CENTER);

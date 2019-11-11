@@ -4,4 +4,5 @@ public enum Difficulties {
 	EASY,
 	NORMAL,
 	HARD,
+	INSANE,
 }
