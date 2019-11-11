@@ -13,6 +13,8 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.border.EtchedBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class GameOptions extends JPanel{
@@ -27,6 +29,8 @@ public class GameOptions extends JPanel{
 	private ButtonGroup snakes;
 	private ButtonGroup difficulties;
 	private JPanel radioPanel;
+	private JLabel lblTitle;
+	private JLabel lblDifficulties;
 	
 	public GameOptions(ActionListener listener) {
 		setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
@@ -35,7 +39,7 @@ public class GameOptions extends JPanel{
 		snakes = new ButtonGroup();
 		difficulties = new ButtonGroup();
 		radioPanel = new JPanel();
-		radioPanel.setBounds(31, 12, 315, 41);
+		radioPanel.setBounds(31, 43, 315, 41);
 		radioPanel.setBorder(new EtchedBorder(EtchedBorder.RAISED, new Color(255, 255, 0), null));
 		radioPanel.setBackground(Color.BLACK);
 		radioPanel.setLayout(new GridLayout(0, 3, 30, 180));
@@ -45,6 +49,7 @@ public class GameOptions extends JPanel{
 		btnKitty.setBackground(Color.BLACK);
 		btnKitty.setForeground(Color.WHITE);
 		btnKitty.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnKitty.setToolTipText("Kitty snake");
 		btnKitty.setFocusPainted(false);
 		btnKitty.setActionCommand("KITTY");
 		btnKitty.addActionListener(listener);
@@ -71,8 +76,6 @@ public class GameOptions extends JPanel{
 		
 		snakes.add(btnClassicSnake);
 		radioPanel.add(btnClassicSnake);
-		btnStar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		btnStar.setToolTipText("Kitty snake");
 		snakes.add(btnStar);
 		radioPanel.add(btnStar);
 		snakes.add(btnKitty);
@@ -144,6 +147,22 @@ public class GameOptions extends JPanel{
 		btnInsane.addActionListener(listener);
 		btnInsane.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		difficulties.add(btnInsane);
+		
+		lblTitle = new JLabel("Choose your Snake");
+		lblTitle.setFont(new Font("DialogInput", Font.BOLD, 18));
+		lblTitle.setForeground(new Color(255, 255, 0));
+		lblTitle.setBackground(new Color(0, 0, 0));
+		lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitle.setBounds(12, 12, 353, 19);
+		add(lblTitle);
+		
+		lblDifficulties = new JLabel("Select Difficulty");
+		lblDifficulties.setFont(new Font("DialogInput", Font.BOLD, 18));
+		lblDifficulties.setForeground(new Color(255, 255, 0));
+		lblDifficulties.setBackground(new Color(0, 0, 0));
+		lblDifficulties.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDifficulties.setBounds(12, 232, 353, 19);
+		add(lblDifficulties);
 		
 	}
 	
