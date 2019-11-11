@@ -1,34 +1,43 @@
 package views;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controllers.GameController;
 import controllers.MenuController;
-import models.Menus;
+import models.Menu;
 
 @SuppressWarnings("serial")
 public class Display extends JFrame {
 	private static final int SCREEN_WIDTH = 377;
 	private static final int SCREEN_HEIGHT = 377;
 	
-	private MenuController controller;
+	private Menu menu;
+	private MenuController menuController;
+	private GameController gameController;
 	private MainMenu mainMenu;
 	private SnakeSelection snakeSelection;
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
 	private JComponent content;
 		
-	public Display(Menus menu) {
+	public Display() {
 		initFrame();
-		controller = new MenuController(menu);
-		mainMenu = new MainMenu(controller);
-		snakeSelection = new SnakeSelection(controller);
+		menu = new Menu(this);
+		menuController = new MenuController(menu);
+		mainMenu = new MainMenu(menuController);
+		snakeSelection = new SnakeSelection(menuController);
 		gamePanel = new GamePanel();
-		gameOverPanel = new GameOverPanel(controller);
+		gameOverPanel = new GameOverPanel(menuController);
+		gameController = new GameController(gamePanel, gameOverPanel);
+		menu.mainMenu();
 	}
 	private void initFrame() {
 		setTitle("Snake");
@@ -64,6 +73,12 @@ public class Display extends JFrame {
 	}
 	public GameOverPanel getGameOverPanel() {
 		return gameOverPanel;
+	}
+	public GameController getGameController() {
+		return gameController;
+	}
+	public MenuController getMenuController() {
+		return menuController;
 	}
 
 }

@@ -2,7 +2,8 @@ package util;
 
 import java.awt.EventQueue;
 
-import models.Menus;
+import models.Menu;
+import views.Display;
 
 public class Launcher {
 
@@ -10,7 +11,8 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					new Menus();
+					Display display = new Display();
+//					display.getMenuController().m
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

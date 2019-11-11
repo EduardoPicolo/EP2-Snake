@@ -23,7 +23,7 @@ import views.GamePanel;
 public class GameController implements Runnable, KeyListener{
 	private static int DELAY = 100;
 	private static boolean running;
-	private boolean isPaused;
+	private static boolean paused;
 	
 	private int score;
 	private SnakeSprite snake;
@@ -52,10 +52,14 @@ public class GameController implements Runnable, KeyListener{
 	}
 	
 	public void initGame(Snakes chosenSnake) {
+		loop.interrupt();
 		running = true;
-		isPaused = false;
+		paused = false;
 		score = 0;
 		direction = null;
+		barrierCreator.clearBarrier();
+		barrier.clear();
+		occupiedPositions.clear();
 		switch(chosenSnake) {
 			case CLASSIC:
 				snake = new ClassicSnake();
@@ -123,7 +127,7 @@ public class GameController implements Runnable, KeyListener{
 
 	@Override
 	public void run() {
-		this.fruits = fruitSpawner.getFruits();
+		fruits = fruitSpawner.getFruits();
 		gamePanel.setSnake(snake);
 		gamePanel.setFruits(fruits);
 		gamePanel.setBarrier(barrier);
@@ -148,12 +152,12 @@ public class GameController implements Runnable, KeyListener{
 			loopElapsedTime = System.nanoTime() - loopStartTime;
 			sleep = DELAY - loopElapsedTime/1000000L;
 			if(sleep < 0) sleep = 0;
-			
 			try {
 				Thread.sleep(sleep);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			snake.setDirection(direction);
 		}
 		gamePanel.add(gameOverPanel, BorderLayout.CENTER);
 		gamePanel.validate();
@@ -166,36 +170,35 @@ public class GameController implements Runnable, KeyListener{
 			case KeyEvent.VK_RIGHT:
 				if(direction != Directions.LEFT) {
 					direction = Directions.RIGHT;
-					snake.setDirection(direction);
 				}
 			break;
 			case KeyEvent.VK_LEFT:
 				if(direction != Directions.RIGHT) {
 					direction = Directions.LEFT;
-					snake.setDirection(direction);
 				}
 			break;
 			case KeyEvent.VK_UP:
 				if(direction != Directions.DOWN) {
 					direction = Directions.UP;
-					snake.setDirection(direction);
 				}
 			break;
 			case KeyEvent.VK_DOWN:
 				if(direction != Directions.UP) {
 					direction = Directions.DOWN;
-					snake.setDirection(direction);
 				}
 			break;
 			case KeyEvent.VK_P:
-				System.out.println("OKOK");
-				if(isPaused) {
+				if(paused) {
+					System.out.println("RUN");
 					loop.resume();
-					isPaused = false;
+					paused = false;
+					gamePanel.removePause();
 				}
 				else {
+					System.out.println("PAUSE");
 					loop.suspend();
-					isPaused = true;
+					paused = true;
+					gamePanel.setPause();
 				}
 				break;
 			default:
@@ -215,6 +218,9 @@ public class GameController implements Runnable, KeyListener{
 	
 	public static boolean isRunning() {
 		return running;
+	}
+	public static boolean isPause() {
+		return paused;
 	}
 	public static void setGameOver() {
 		running = false;

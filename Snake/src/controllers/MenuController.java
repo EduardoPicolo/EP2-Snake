@@ -3,7 +3,7 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import models.Menus;
+import models.Menu;
 import util.Difficulties;
 import util.Snakes;
 import views.SnakeSelection;
@@ -12,9 +12,9 @@ public class MenuController implements ActionListener{
 	private Snakes chosenSnake;
 	private Difficulties chosenDifficulty;
 	
-	private Menus menu;
+	private Menu menu;
 	
-	public MenuController(Menus menu) {
+	public MenuController(Menu menu) {
 		this.menu = menu;
 	}
 

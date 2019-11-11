@@ -29,4 +29,7 @@ public class BarrierCreator {
 	public List<Rectangle> getBarrier(){
 		return barrier;
 	}
+	public void clearBarrier() {
+		barrier.clear();
+	}
 }

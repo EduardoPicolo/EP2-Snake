@@ -1,16 +1,26 @@
 package views;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.Border;
+
 import controllers.GameController;
 import models.FruitSprite;
 import models.SnakeSprite;
@@ -24,14 +34,26 @@ public class GamePanel extends JPanel{
 	private List<Rectangle> barrier;
 	
 	private GameHeader header;
+	private JLabel pause;
 	
     public GamePanel() {
+    	setLayout(new BorderLayout());
+    	
+    	barrier = new ArrayList<Rectangle>();
+    	fruits = new ArrayList<FruitSprite>();
+    	
     	header = new GameHeader();
+    	
         setBackground(Color.BLACK);
         setFocusable(true);
         setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
-        setLayout(new BorderLayout());
-//	    add(header, BorderLayout.PAGE_START);
+        
+        pause = new JLabel("PAUSED");
+		pause.setFont(new Font("Dialog", Font.BOLD, 40));
+		pause.setHorizontalAlignment(SwingConstants.CENTER);
+		pause.setAlignmentX(CENTER_ALIGNMENT);
+		pause.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(1f), Color.YELLOW));
+		pause.setForeground(Color.BLUE);
     }
     
     @Override
@@ -56,7 +78,7 @@ public class GamePanel extends JPanel{
         	}
         }catch(NullPointerException e) {
         	System.out.println("Failed to load/draw image!");
-        	e.printStackTrace();
+//        	e.printStackTrace();
         }
         
     }
@@ -89,6 +111,18 @@ public class GamePanel extends JPanel{
 	}
 	public void setBarrier(List<Rectangle> barrier) {
 		this.barrier = barrier;
+	}
+	
+	public void setPause() {
+		add(pause, BorderLayout.CENTER);
+		pause.setVisible(true);
+		validate();
+		repaint();
+	}
+	public void removePause() {
+		remove(pause);
+		validate();
+		repaint();
 	}
 	
 	public void updateHeader(int score, long time) {
