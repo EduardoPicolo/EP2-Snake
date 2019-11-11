@@ -22,8 +22,9 @@ import views.GamePanel;
 
 public class GameController implements Runnable, KeyListener{
 	private static int DELAY = 100;
-	private static boolean running;
-	private static boolean paused;
+	private volatile static boolean running;
+	private volatile boolean paused;
+	private final Object pauseLock = new Object();
 	
 	private int score;
 	private SnakeSprite snake;
@@ -52,7 +53,6 @@ public class GameController implements Runnable, KeyListener{
 	}
 	
 	public void initGame(Snakes chosenSnake) {
-		loop.interrupt();
 		running = true;
 		paused = false;
 		score = 0;
@@ -78,7 +78,6 @@ public class GameController implements Runnable, KeyListener{
 		
 		fruitSpawner = new FruitSpawner();
 		loop = new Thread(this);
-		
 		new Thread(fruitSpawner).start();
 		loop.start();
 	}
@@ -149,6 +148,20 @@ public class GameController implements Runnable, KeyListener{
 			gamePanel.updateHeader(score, startTime);
 			gamePanel.repaint();
 			
+			synchronized (pauseLock) {
+                if(!running) break;
+                if (paused) {
+                    try {
+                        synchronized (pauseLock) {
+                            pauseLock.wait(); 
+                        }
+                    } catch (InterruptedException ex) {
+                        break;
+                    }
+                    if(!running) break;
+                }
+            }
+			
 			loopElapsedTime = System.nanoTime() - loopStartTime;
 			sleep = DELAY - loopElapsedTime/1000000L;
 			if(sleep < 0) sleep = 0;
@@ -190,13 +203,14 @@ public class GameController implements Runnable, KeyListener{
 			case KeyEvent.VK_P:
 				if(paused) {
 					System.out.println("RUN");
-					loop.resume();
-					paused = false;
+					synchronized (pauseLock) {
+			            paused = false;
+			            pauseLock.notifyAll();
+			        }
 					gamePanel.removePause();
 				}
 				else {
 					System.out.println("PAUSE");
-					loop.suspend();
 					paused = true;
 					gamePanel.setPause();
 				}
@@ -219,9 +233,7 @@ public class GameController implements Runnable, KeyListener{
 	public static boolean isRunning() {
 		return running;
 	}
-	public static boolean isPause() {
-		return paused;
-	}
+	
 	public static void setGameOver() {
 		running = false;
 	}

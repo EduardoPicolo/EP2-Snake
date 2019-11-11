@@ -7,9 +7,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.SwingConstants;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 @SuppressWarnings("serial")

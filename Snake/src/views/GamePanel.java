@@ -3,12 +3,10 @@ package views;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
@@ -19,8 +17,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-
 import controllers.GameController;
 import models.FruitSprite;
 import models.SnakeSprite;
@@ -53,7 +49,7 @@ public class GamePanel extends JPanel{
 		pause.setHorizontalAlignment(SwingConstants.CENTER);
 		pause.setAlignmentX(CENTER_ALIGNMENT);
 		pause.setBorder(BorderFactory.createStrokeBorder(new BasicStroke(1f), Color.YELLOW));
-		pause.setForeground(Color.BLUE);
+		pause.setForeground(new Color(112, 128, 144));
     }
     
     @Override
@@ -77,8 +73,8 @@ public class GamePanel extends JPanel{
         		System.out.println("GAMEOVER");
         	}
         }catch(NullPointerException e) {
-        	System.out.println("Failed to load/draw image!");
-//        	e.printStackTrace();
+//        	System.out.println("Failed to load/draw image!");
+        	e.printStackTrace();
         }
         
     }

@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import models.Menu;
 import util.Difficulties;
 import util.Snakes;
-import views.SnakeSelection;
 
 public class MenuController implements ActionListener{
 	private Snakes chosenSnake;

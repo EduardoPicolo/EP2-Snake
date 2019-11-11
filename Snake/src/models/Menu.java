@@ -6,7 +6,6 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 
-import controllers.GameController;
 import util.Difficulties;
 import util.Snakes;
 import views.Display;
