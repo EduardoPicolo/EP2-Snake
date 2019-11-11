@@ -49,9 +49,9 @@ public class GameOptions extends JPanel{
 		setBackground(Color.BLACK);
 		
 		try {
-			classicSnake = ImageIO.read(new File("./src/assets/96x100.jpeg"));
-			starSnake = ImageIO.read(new File("./src/assets/explosion13px.png"));
-			kittySnake = ImageIO.read(new File("./src/assets/96x100.jpeg"));
+			classicSnake = ImageIO.read(new File("./src/assets/ClassicSprite.png"));
+			starSnake = ImageIO.read(new File("./src/assets/StarSprite.png"));
+			kittySnake = ImageIO.read(new File("./src/assets/KittySprite.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,8 +200,10 @@ public class GameOptions extends JPanel{
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		lblSnakeimage = new JLabel("?");
+		lblSnakeimage.setBackground(Color.BLACK);
 		lblSnakeimage.setFont(new Font("DialogInput", Font.BOLD, 45));
 		lblSnakeimage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSnakeimage.setOpaque(true);
 		panel.add(lblSnakeimage);
 		
 	}
