@@ -86,15 +86,15 @@ public class GameController implements Runnable, KeyListener{
 				DELAY = 100;
 				break;
 			case NORMAL: 
-				DELAY = 85;
+				DELAY = 80;
 				barrierCreator.createHalfBarrier();
 				break;
 			case HARD:
-				DELAY = 65;
+				DELAY = 70;
 				barrierCreator.createFullBarrier();
 				break;
 			case INSANE:
-				DELAY = 75;
+				DELAY = 70;
 //				barrierCreator.createFullBarrier();
 				break;
 			default:
@@ -166,7 +166,7 @@ public class GameController implements Runnable, KeyListener{
             }
 			
 			loopElapsedTime = System.nanoTime() - loopStartTime;
-			sleep = DELAY - loopElapsedTime/1000000L;
+			sleep = DELAY - loopElapsedTime/1000000;
 			if(sleep < 0) sleep = 0;
 			try {
 				Thread.sleep(sleep);

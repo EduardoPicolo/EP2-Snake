@@ -1,22 +1,27 @@
 package models;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class StarSnake extends SnakeSprite {
 	public StarSnake() {
 		super();
 		score_multiplier = 2;
+		setDimensions();
 	}
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/StarBody13px.png");
-        body_image = iid.getImage();
-
-        ImageIcon iih = new ImageIcon("./src/assets/StarHead13px.png");
-        head_image = iih.getImage();
+        try {
+			head_image = ImageIO.read(new File("./src/assets/StarHead13px.png"));
+			body_image = ImageIO.read(new File("./src/assets/StarBody13px.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 	
 	@Override

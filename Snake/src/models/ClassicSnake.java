@@ -1,18 +1,25 @@
 package models;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class ClassicSnake extends SnakeSprite {
 	public ClassicSnake() {
 		super();
+		score_multiplier = 1;
+		setDimensions();
 	}
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/GreenBody13px.png");
-        body_image = iid.getImage();
-
-        ImageIcon iih = new ImageIcon("./src/assets/GreenHead13px.png");
-        head_image = iih.getImage();
+		try {
+			head_image = ImageIO.read(new File("./src/assets/GreenHead13px.png"));
+			body_image = ImageIO.read(new File("./src/assets/GreenBody13px.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 }

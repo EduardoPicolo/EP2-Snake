@@ -1,5 +1,9 @@
 package models;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import views.Display;
@@ -7,15 +11,18 @@ import views.Display;
 public class KittySnake extends SnakeSprite {
 	public KittySnake() {
 		super();
+		score_multiplier = 1;
+		setDimensions();
 	}
 	
 	@Override
     protected void loadImages() {
-        ImageIcon iid = new ImageIcon("./src/assets/KittyBody13px.png");
-        body_image = iid.getImage();
-
-        ImageIcon iih = new ImageIcon("./src/assets/KittyHead13px.png");
-        head_image = iih.getImage();
+		try {
+			head_image = ImageIO.read(new File("./src/assets/KittyHead13px.png"));
+			body_image = ImageIO.read(new File("./src/assets/KittyBody13px.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 		
 	@Override

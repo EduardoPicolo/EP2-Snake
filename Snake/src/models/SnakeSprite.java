@@ -2,6 +2,7 @@ package models;
 
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,17 +18,15 @@ public abstract class SnakeSprite {
     protected int score_multiplier;
     protected Directions direction;
     
-    protected Image head_image;
-    protected Image body_image;
+    protected BufferedImage head_image;
+    protected BufferedImage body_image;
     protected int snake_width;
     protected int snake_height;
     
     public SnakeSprite() {
     	loadImages();
-    	setDimensions();
     	body = new LinkedList<Point>();
-    	body.add(new Point(130, 104));
-    	score_multiplier = 1;
+    	body.add(new Point(182, 195));
 //    	direction = Directions.RIGHT;
     }
     
@@ -82,8 +81,8 @@ public abstract class SnakeSprite {
     }
     
 	public void setDimensions() {
-		snake_width = head_image.getWidth(null);
-		snake_height = head_image.getHeight(null);
+		snake_width = head_image.getWidth();
+		snake_height = head_image.getHeight();
 	}
     
     public Image getHeadImage() {
