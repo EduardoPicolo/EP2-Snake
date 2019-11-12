@@ -1,5 +1,11 @@
 # EP2 - OO 2019.2 (UnB - Gama)
 
+<p align="center">
+  <img src="https://gitlab.com/EduardoNunes/ep2/raw/master/Snake/src/assets/EXEMPLE.png" width="300" height="280" alt="InGame Image"/>
+</p>
+
+***
+
 ## Execução
 Abra o terminal no diretório ```Snake/bin``` e execute o seguinte comando:
 
