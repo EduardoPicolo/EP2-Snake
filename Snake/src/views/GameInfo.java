@@ -6,10 +6,15 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
@@ -20,11 +25,25 @@ import javax.swing.border.BevelBorder;
 
 @SuppressWarnings("serial")
 public class GameInfo extends JPanel {
+	private BufferedImage simple;
+	private BufferedImage big;
+	private BufferedImage decrease;
+	private BufferedImage bomb;
 
 	public GameInfo(ActionListener listener) {
 		setPreferredSize(new Dimension(Display.getFrameWidth(), Display.getFrameHeight()));
 		setBackground(Color.BLACK);
 		setLayout(null);
+		
+		try {
+			 simple = ImageIO.read(new File("./src/assets/SimpleFruit13px.png"));
+			 big = ImageIO.read(new File("./src/assets/BigFruit13px.png"));
+			 decrease = ImageIO.read(new File("./src/assets/DecreaseFruit13px.png"));
+			 bomb = ImageIO.read(new File("./src/assets/Bomb13px.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		JPanel snakesPanel = new JPanel();
 		snakesPanel.setForeground(Color.GREEN);
@@ -138,7 +157,8 @@ public class GameInfo extends JPanel {
 		lblFruitInfo.setAlignmentX(0.5f);
 		fruitsInfoPanel.add(lblFruitInfo, BorderLayout.CENTER);
 		
-		JLabel lblSimple = new JLabel("SIMPLE");
+		JLabel lblSimple = new JLabel();
+		lblSimple.setIcon(new ImageIcon(simple));
 		panel_1.add(lblSimple);
 		lblSimple.setFont(new Font("DialogInput", Font.BOLD, 14));
 		lblSimple.setForeground(Color.WHITE);
@@ -147,7 +167,7 @@ public class GameInfo extends JPanel {
 		lblSimple.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("BIG INFO");
+				System.out.println("SIMPLE INFO");
 				lblFruitInfo.setForeground(Color.WHITE);
 				lblFruitInfo.setText("<html>>Score Value: <FONT COLOR=YELLOW>1</FONT><br/>"
 						+ ">Life Time: <FONT COLOR=YELLOW> Until it's eaten</FONT> <br/>"
@@ -155,7 +175,8 @@ public class GameInfo extends JPanel {
 			}
 		});
 		
-		JLabel lblBig = new JLabel("BIG");
+		JLabel lblBig = new JLabel();
+		lblBig.setIcon(new ImageIcon(big));
 		panel_1.add(lblBig);
 		lblBig.setFont(new Font("DialogInput", Font.BOLD, 14));
 		lblBig.setForeground(Color.WHITE);
@@ -172,7 +193,8 @@ public class GameInfo extends JPanel {
 			}
 		});
 		
-		JLabel lblDecrease = new JLabel("DECREASE");
+		JLabel lblDecrease = new JLabel();
+		lblDecrease.setIcon(new ImageIcon(decrease));
 		panel_1.add(lblDecrease);
 		lblDecrease.setFont(new Font("DialogInput", Font.BOLD, 14));
 		lblDecrease.setForeground(Color.WHITE);
@@ -181,7 +203,7 @@ public class GameInfo extends JPanel {
 		lblDecrease.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("BIG INFO");
+				System.out.println("DECREASE INFO");
 				lblFruitInfo.setForeground(Color.WHITE);
 				lblFruitInfo.setText("<html>>Score Value: <FONT COLOR=YELLOW>0</FONT><br/>"
 						+ ">Life Time: <FONT COLOR=YELLOW>10 seconds</FONT> <br/>"
@@ -189,7 +211,8 @@ public class GameInfo extends JPanel {
 			}
 		});
 		
-		JLabel lblBomb = new JLabel("BOMB");
+		JLabel lblBomb = new JLabel();
+		lblBomb.setIcon(new ImageIcon(bomb));
 		panel_1.add(lblBomb);
 		lblBomb.setFont(new Font("DialogInput", Font.BOLD, 14));
 		lblBomb.setForeground(Color.WHITE);
@@ -198,7 +221,7 @@ public class GameInfo extends JPanel {
 		lblBomb.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("BIG INFO");
+				System.out.println("BOMB INFO");
 				lblFruitInfo.setForeground(Color.WHITE);
 				lblFruitInfo.setText("<html>>Score Value: <FONT COLOR=YELLOW>0</FONT><br/>"
 						+ ">Life Time: <FONT COLOR=YELLOW>10 seconds</FONT> <br/>"
