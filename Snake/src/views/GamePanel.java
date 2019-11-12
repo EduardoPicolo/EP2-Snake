@@ -73,7 +73,7 @@ public class GamePanel extends JPanel{
         		System.out.println("GAMEOVER");
         	}
         }catch(NullPointerException e) {
-//        	System.out.println("Failed to load/draw image!");
+        	System.out.println("Failed to load/draw image!");
         	e.printStackTrace();
         }
         

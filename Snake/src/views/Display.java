@@ -21,6 +21,7 @@ public class Display extends JFrame {
 	private MenuController menuController;
 	private GameController gameController;
 	private MainMenu mainMenu;
+	private GameInfo gameInfo;
 	private GameOptions gameOptions;
 	private GamePanel gamePanel;
 	private GameOverPanel gameOverPanel;
@@ -31,6 +32,7 @@ public class Display extends JFrame {
 		menu = new Menu(this);
 		menuController = new MenuController(menu);
 		mainMenu = new MainMenu(menuController);
+		gameInfo = new GameInfo(menuController);
 		gameOptions = new GameOptions(menuController);
 		gamePanel = new GamePanel();
 		gameOverPanel = new GameOverPanel(menuController);
@@ -62,6 +64,9 @@ public class Display extends JFrame {
 	
 	public MainMenu getMainMenu() {
 		return mainMenu;
+	}
+	public GameInfo getGameInfo() {
+		return gameInfo;
 	}
 	public GameOptions getSnakeSelection() {
 		return gameOptions;

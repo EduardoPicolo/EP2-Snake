@@ -25,6 +25,15 @@ public class MenuController implements ActionListener{
 				menu.snakeSelection();
 			break;
 			
+			case "HELP":
+				System.out.println("HELP");
+				menu.gameInfo();
+			break;
+			case "BACK":
+				System.out.println("BACK");
+				menu.mainMenu();
+			break;
+			
 			case "EXIT":
 				System.out.println("EXIT");
 				System.exit(0);

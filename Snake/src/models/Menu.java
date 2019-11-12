@@ -44,6 +44,14 @@ public class Menu {
 		display.getContentPane().repaint();
 	}
 	
+	public void gameInfo() {
+		display.getContentPane().removeAll();
+		((JComponent)display.getContentPane()).setBorder(BorderFactory.createStrokeBorder(new BasicStroke(0.75f), Color.white));
+		display.getContentPane().add(display.getGameInfo());
+		display.getContentPane().validate();
+		display.getContentPane().repaint();
+	}
+	
 	public void clearSelections() {
 		display.getSnakeSelection().clearSelections();
 	}

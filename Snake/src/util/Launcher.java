@@ -9,7 +9,7 @@ public class Launcher {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Display display = new Display();
+					 new Display();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
