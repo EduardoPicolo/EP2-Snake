@@ -25,6 +25,11 @@ public class KittySnake extends SnakeSprite {
 		
 	@Override
 	public boolean checkCollision() {
+		for(int i=1 ; i<this.getBounds().size() ;i++) {
+    		if(this.getBounds().get(i).intersects(this.getBounds().get(0))) {
+				return true;
+			}    		
+    	}
 
         if (getHeadPosition().getY() >= Display.getFrameHeight()) {
         	setHeadPosition((int)getHeadPosition().getX(), 26);
