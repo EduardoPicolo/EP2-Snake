@@ -17,7 +17,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import controllers.GameController;
+import controllers.GameEngine;
 import models.FruitSprite;
 import models.SnakeSprite;
 
@@ -66,11 +66,8 @@ public class GamePanel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
         try {
-        	if(GameController.isRunning()) {
+        	if(GameEngine.isRunning()) {
         		doDrawing(g2d);
-        	}
-        	else {
-        		System.out.println("GAMEOVER");
         	}
         }catch(NullPointerException e) {
         	System.out.println("Failed to load/draw image!");

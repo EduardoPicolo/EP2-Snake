@@ -25,7 +25,7 @@ public class Menu {
 		display.getContentPane().repaint();
 	}
 	
-	public void snakeSelection() {
+	public void gameOptions() {
 		display.getContentPane().removeAll();
 		((JComponent)display.getContentPane()).setBorder(BorderFactory.createStrokeBorder(new BasicStroke(0.75f), Color.white));
 		display.getContentPane().add(display.getSnakeSelection());
@@ -37,8 +37,8 @@ public class Menu {
 		display.getGamePanel().removeAll();
 		display.getContentPane().removeAll();
 		((JComponent)display.getContentPane()).setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
-		display.getGameController().setDifficulty(chosenDifficulty);
-		display.getGameController().initGame(chosenSnake);
+		display.getGameEngine().setDifficulty(chosenDifficulty);
+		display.getGameEngine().initGame(chosenSnake);
 		display.getContentPane().add(display.getGamePanel());
 		display.getContentPane().validate();
 		display.getContentPane().repaint();

@@ -6,7 +6,7 @@ import java.awt.Rectangle;
 import java.util.ConcurrentModificationException;
 import java.util.Random;
 
-import controllers.GameController;
+import controllers.GameEngine;
 import views.Display;
 
 public abstract class FruitSprite implements SpecialSkill{
@@ -43,7 +43,7 @@ public abstract class FruitSprite implements SpecialSkill{
     		Y += 26;
     		p[0] = new Point(X,Y);
     		try {
-	    		if(GameController.getOccupiedPositions().stream()
+	    		if(GameEngine.getOccupiedPositions().stream()
     				.anyMatch(rect -> rect.intersects(new Rectangle((int)p[0].getX(), (int)p[0].getY(), image_width, image_height))))
 	    			occupiedPos = true;
 	    		else 

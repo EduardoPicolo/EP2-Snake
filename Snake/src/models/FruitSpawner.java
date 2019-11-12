@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import controllers.GameController;
+import controllers.GameEngine;
 import util.Difficulties;
 
 public class FruitSpawner implements Runnable{
@@ -22,7 +22,7 @@ public class FruitSpawner implements Runnable{
 		random = new Random();
 		this.difficulty = difficulty;
 		fruits.addFirst(new SimpleFruit());
-		GameController.addOccupiedPosition(fruits.getFirst().getBounds());
+		GameEngine.addOccupiedPosition(fruits.getFirst().getBounds());
 	}
 	
 	
@@ -31,7 +31,7 @@ public class FruitSpawner implements Runnable{
 		specialTimer.scheduleAtFixedRate(new TimerTask(){
 			public void run() {
 				if(fruits.size() > 1) {
-					GameController.removeOccupiedPosition(fruits.getLast().getBounds());
+					GameEngine.removeOccupiedPosition(fruits.getLast().getBounds());
 					fruits.removeLast();
 				}
 				else {
@@ -48,21 +48,21 @@ public class FruitSpawner implements Runnable{
 						default:
 							break;
 					}
-					GameController.addOccupiedPosition(fruits.getLast().getBounds());
+					GameEngine.addOccupiedPosition(fruits.getLast().getBounds());
 				}
 			}
 		}, 15000, SPECIAL_FRUIT_TIME);
 		
-		while(GameController.isRunning()) {
+		while(GameEngine.isRunning()) {
 			
 			if(!(fruits.stream().anyMatch(x -> x instanceof SimpleFruit))) {
 				fruits.addFirst(new SimpleFruit());
-				GameController.addOccupiedPosition(fruits.getFirst().getBounds());
+				GameEngine.addOccupiedPosition(fruits.getFirst().getBounds());
 			}
 			
 			if(difficulty.equals(Difficulties.INSANE)) {
 				fruits.addLast(new BombFruit());
-				GameController.addOccupiedPosition(fruits.getLast().getBounds());
+				GameEngine.addOccupiedPosition(fruits.getLast().getBounds());
 			}
 			
 			try {

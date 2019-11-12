@@ -22,7 +22,7 @@ public class MenuController implements ActionListener{
 		switch(e.getActionCommand()) {
 			case "PLAY":
 				System.out.println("PLAY");
-				menu.snakeSelection();
+				menu.gameOptions();
 			break;
 			
 			case "HELP":
@@ -73,7 +73,7 @@ public class MenuController implements ActionListener{
 				chosenSnake = null;
 				chosenDifficulty = null;
 				menu.clearSelections();
-				menu.snakeSelection();
+				menu.gameOptions();
 				menu.mainMenu();
 			break;
 			
@@ -82,7 +82,7 @@ public class MenuController implements ActionListener{
 				chosenSnake = null;
 				chosenDifficulty = null;
 				menu.clearSelections();
-				menu.snakeSelection();
+				menu.gameOptions();
 			break;
 			
 			case "RESTART":
@@ -118,9 +118,5 @@ public class MenuController implements ActionListener{
 			default:
 				break;
 		}
-	}
-	
-	public Snakes getSelectedSnake() {
-		return chosenSnake;
 	}
 }

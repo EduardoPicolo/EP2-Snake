@@ -8,7 +8,7 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import controllers.GameController;
+import controllers.GameEngine;
 import controllers.MenuController;
 import models.Menu;
 
@@ -19,7 +19,7 @@ public class Display extends JFrame {
 	
 	private Menu menu;
 	private MenuController menuController;
-	private GameController gameController;
+	private GameEngine gameEngine;
 	private MainMenu mainMenu;
 	private GameInfo gameInfo;
 	private GameOptions gameOptions;
@@ -36,7 +36,7 @@ public class Display extends JFrame {
 		gameOptions = new GameOptions(menuController);
 		gamePanel = new GamePanel();
 		gameOverPanel = new GameOverPanel(menuController);
-		gameController = new GameController(gamePanel, gameOverPanel);
+		gameEngine = new GameEngine(gamePanel, gameOverPanel);
 		menu.mainMenu();
 	}
 	private void initFrame() {
@@ -77,8 +77,8 @@ public class Display extends JFrame {
 	public GameOverPanel getGameOverPanel() {
 		return gameOverPanel;
 	}
-	public GameController getGameController() {
-		return gameController;
+	public GameEngine getGameEngine() {
+		return gameEngine;
 	}
 	public MenuController getMenuController() {
 		return menuController;

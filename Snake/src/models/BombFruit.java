@@ -2,7 +2,7 @@ package models;
 
 import javax.swing.ImageIcon;
 
-import controllers.GameController;
+import controllers.GameEngine;
 
 public class BombFruit extends FruitSprite {
 	public BombFruit() {
@@ -14,7 +14,7 @@ public class BombFruit extends FruitSprite {
 	public void skill(SnakeSprite snake) {
 		ImageIcon iia = new ImageIcon("./src/assets/explosion13px.png");
         image = iia.getImage();
-		GameController.setGameOver();
+		GameEngine.setGameOver();
 	}
 	
 	@Override

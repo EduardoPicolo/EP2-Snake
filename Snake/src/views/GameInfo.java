@@ -15,7 +15,6 @@ import java.awt.Font;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.border.BevelBorder;
 

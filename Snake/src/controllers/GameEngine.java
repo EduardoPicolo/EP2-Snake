@@ -20,7 +20,7 @@ import util.Snakes;
 import views.GameOverPanel;
 import views.GamePanel;
 
-public class GameController implements Runnable, KeyListener{
+public class GameEngine implements Runnable, KeyListener{
 	private static int DELAY = 100;
 	private volatile static boolean running;
 	private volatile boolean paused;
@@ -39,7 +39,7 @@ public class GameController implements Runnable, KeyListener{
 	private GameOverPanel gameOverPanel;
 	private Thread loop;
 	
-	public GameController(GamePanel panel, GameOverPanel gameOverPanel) {
+	public GameEngine(GamePanel panel, GameOverPanel gameOverPanel) {
 		this.gamePanel = panel;
 		this.gameOverPanel = gameOverPanel;
 		gamePanel.addKeyListener(this);
@@ -175,6 +175,7 @@ public class GameController implements Runnable, KeyListener{
 				e.printStackTrace();
 			}
 		}
+		System.out.println("GAME OVER");
 		gamePanel.add(gameOverPanel, BorderLayout.CENTER);
 		gamePanel.validate();
 		gamePanel.repaint();
