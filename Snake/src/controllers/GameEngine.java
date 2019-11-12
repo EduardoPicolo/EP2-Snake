@@ -184,21 +184,25 @@ public class GameEngine implements Runnable, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch(e.getKeyCode()) {
+			case KeyEvent.VK_D:	
 			case KeyEvent.VK_RIGHT:
 				if(direction != Directions.LEFT) {
 					direction = Directions.RIGHT;
 				}
 			break;
+			case KeyEvent.VK_A:	
 			case KeyEvent.VK_LEFT:
 				if(direction != Directions.RIGHT) {
 					direction = Directions.LEFT;
 				}
 			break;
+			case KeyEvent.VK_W:	
 			case KeyEvent.VK_UP:
 				if(direction != Directions.DOWN) {
 					direction = Directions.UP;
 				}
 			break;
+			case KeyEvent.VK_S:	
 			case KeyEvent.VK_DOWN:
 				if(direction != Directions.UP) {
 					direction = Directions.DOWN;
