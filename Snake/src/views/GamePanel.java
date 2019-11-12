@@ -61,6 +61,7 @@ public class GamePanel extends JPanel{
     
     @Override
     public void paintComponent(Graphics g) {
+	    Toolkit.getDefaultToolkit().sync(); 
         super.paintComponent(g);
         g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -70,7 +71,7 @@ public class GamePanel extends JPanel{
         		doDrawing(g2d);
         	}
         }catch(NullPointerException e) {
-        	System.out.println("Failed to load/draw image!");
+        	System.out.println("Failed to get/draw image!");
         	e.printStackTrace();
         }
         

@@ -94,7 +94,7 @@ public class GameEngine implements Runnable, KeyListener{
 				barrierCreator.createFullBarrier();
 				break;
 			case INSANE:
-				DELAY = 70;
+				DELAY = 80;
 //				barrierCreator.createFullBarrier();
 				break;
 			default:

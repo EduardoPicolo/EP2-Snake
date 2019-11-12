@@ -19,6 +19,7 @@ public class KittySnake extends SnakeSprite {
 			head_image = ImageIO.read(new File("./src/assets/KittyHead13px.png"));
 			body_image = ImageIO.read(new File("./src/assets/KittyBody13px.png"));
 		} catch (IOException e) {
+			System.out.println("Failed to load KittySnake Image");
 			e.printStackTrace();
 		}
     }

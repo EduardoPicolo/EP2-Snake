@@ -1,6 +1,5 @@
 package models;
 
-import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.Point;
@@ -85,11 +84,11 @@ public abstract class SnakeSprite {
 		snake_height = head_image.getHeight();
 	}
     
-    public Image getHeadImage() {
+    public BufferedImage getHeadImage() {
     	return head_image;
     }
     
-    public Image getBodyImage() {
+    public BufferedImage getBodyImage() {
     	return body_image;
     }
     

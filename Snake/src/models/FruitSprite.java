@@ -1,8 +1,8 @@
 package models;
 
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 import java.util.ConcurrentModificationException;
 import java.util.Random;
 
@@ -13,7 +13,7 @@ public abstract class FruitSprite implements SpecialSkill{
 	protected Point position;
 	protected int scoreValue;
 	
-	protected Image image;
+	protected BufferedImage image;
 	protected int image_width;
 	protected int image_height;
 	
@@ -28,8 +28,8 @@ public abstract class FruitSprite implements SpecialSkill{
 	protected abstract void loadImage();
 	
 	protected void setDimension() {
-		image_width = image.getWidth(null);
-		image_height = image.getHeight(null);
+		image_width = image.getWidth();
+		image_height = image.getHeight();
 	}
 	
     public void generateLocation() {
@@ -64,7 +64,7 @@ public abstract class FruitSprite implements SpecialSkill{
     	return scoreValue;
     }
     
-    public Image getFruitImage() {
+    public BufferedImage getFruitImage() {
     	return image;
     }
     

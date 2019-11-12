@@ -1,6 +1,9 @@
 package models;
 
-import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class BigFruit extends FruitSprite {
 	public BigFruit() {
@@ -15,7 +18,11 @@ public class BigFruit extends FruitSprite {
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/BigFruit13px.png");
-        image = iia.getImage();
+		try {
+			image = ImageIO.read(new File("./src/assets/BigFruit13px.png"));
+		} catch (IOException e) {
+			System.out.println("Failed to load BigFruit Image");
+			e.printStackTrace();
+		}
 	}
 }

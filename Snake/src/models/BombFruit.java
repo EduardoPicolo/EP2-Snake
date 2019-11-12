@@ -1,7 +1,9 @@
 package models;
 
-import javax.swing.ImageIcon;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import controllers.GameEngine;
 
 public class BombFruit extends FruitSprite {
@@ -12,14 +14,16 @@ public class BombFruit extends FruitSprite {
 	
 	@Override
 	public void skill(SnakeSprite snake) {
-		ImageIcon iia = new ImageIcon("./src/assets/explosion13px.png");
-        image = iia.getImage();
 		GameEngine.setGameOver();
 	}
 	
 	@Override
 	protected void loadImage() {
-        ImageIcon iia = new ImageIcon("./src/assets/Bomb13px.png");
-        image = iia.getImage();
+		try {
+			image = ImageIO.read(new File("./src/assets/Bomb13px.png"));
+		} catch (IOException e) {
+			System.out.println("Failed to load BombFruit Image");
+			e.printStackTrace();
+		}
 	}
 }
